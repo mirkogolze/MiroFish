@@ -1,7 +1,4 @@
-"""
-LLM-Client-Wrapper
-Einheitliche Verwendung der OpenAI-Formatierung für Aufrufe.
-"""
+"""LLM-Client-Wrapper mit integriertem Usage-Tracking."""
 
 import json
 import re
@@ -12,25 +9,46 @@ from ..config import Config
 
 
 class LLMClient:
-    """LLM-Client"""
-    
+    """OpenAI-kompatibler Chat-Client mit integriertem Usage-Tracking."""
     def __init__(
         self,
         api_key: Optional[str] = None,
         base_url: Optional[str] = None,
-        model: Optional[str] = None
+        model: Optional[str] = None,
+        simulation_id: Optional[str] = None,
     ):
         self.api_key = api_key or Config.LLM_API_KEY
         self.base_url = base_url or Config.LLM_BASE_URL
         self.model = model or Config.LLM_MODEL_NAME
-        
+        # Optional: tag every request from this client with a
+        # simulation_id so per-simulation totals are accurate.
+        self.simulation_id = simulation_id
+
         if not self.api_key:
             raise ValueError("LLM_API_KEY nicht konfiguriert")
-        
+
         self.client = OpenAI(
             api_key=self.api_key,
-            base_url=self.base_url
+            base_url=self.base_url,
         )
+
+    def bind_simulation(self, simulation_id: Optional[str]) -> None:
+        """Attach (or clear) a simulation id for usage attribution."""
+        self.simulation_id = simulation_id
+
+    def _record_usage(self, response: Any) -> None:
+        """Best-effort hook into the usage tracker. Never raises."""
+        try:
+            from ..services.usage_tracker import get_usage_tracker
+
+            get_usage_tracker().record_from_openai_response(
+                response,
+                simulation_id=self.simulation_id,
+                model=self.model,
+            )
+        except Exception:  # noqa: BLE001
+            # Tracking is observational; never break a real call for it.
+            pass
     
     def chat(
         self,
@@ -60,10 +78,15 @@ class LLMClient:
         
         if response_format:
             kwargs["response_format"] = response_format
-        
+
         response = self.client.chat.completions.create(**kwargs)
+        # Record usage before any parsing so transient parse errors
+        # do not lose cost attribution.
+        self._record_usage(response)
+
         content = response.choices[0].message.content
-        # Einige Modelle (z.B. MiniMax M2.5) enthalten <think>-Denkinhalt im content, der entfernt werden muss
+    # Einige Modelle kapseln Reasoning in <think>…</think>.
+    # Das wird entfernt, damit Aufrufer nur die eigentliche Antwort erhalten.
         content = re.sub(r'<think>[\s\S]*?</think>', '', content).strip()
         return content
     

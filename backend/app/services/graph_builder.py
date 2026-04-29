@@ -1,6 +1,10 @@
 """
-Dienst zur Erstellung von Graphen
-API 2: Verwendung der Zep API zum Erstellen eines Standalone-Graphs.
+图谱构建服务
+Builds the standalone knowledge graph through the abstract memory backend.
+
+Backend selection (Zep Cloud / self-hosted Graphiti) happens via the
+``MEMORY_BACKEND`` environment variable; this service does not care
+which one is active.
 """
 
 import os
@@ -10,19 +14,21 @@ import threading
 from typing import Dict, Any, List, Optional, Callable
 from dataclasses import dataclass
 
-from zep_cloud.client import Zep
-from zep_cloud import EpisodeData, EntityEdgeSourceTarget
-
 from ..config import Config
 from ..models.task import TaskManager, TaskStatus
-from ..utils.zep_paging import fetch_all_nodes, fetch_all_edges
-from .text_processor import TextProcessor
 from ..utils.locale import t, get_locale, set_locale
+from .memory import (
+    EpisodeInput,
+    MemoryBackend,
+    OntologySpec,
+    get_memory_backend,
+)
+from .text_processor import TextProcessor
 
 
 @dataclass
 class GraphInfo:
-    """Grapheninformationen"""
+    """图谱信息"""
     graph_id: str
     node_count: int
     edge_count: int
@@ -39,16 +45,18 @@ class GraphInfo:
 
 class GraphBuilderService:
     """
-Dienst zur Erstellung von Graphen
-Verantwortlich für die Verwendung der Zep API zum Erstellen eines Wissensgraphen.
-"""
+    图谱构建服务
+    负责调用Zep API构建知识图谱
+    """
     
-    def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or Config.ZEP_API_KEY
-        if not self.api_key:
-            raise ValueError("ZEP_API_KEY nicht konfiguriert")
-        
-        self.client = Zep(api_key=self.api_key)
+    def __init__(self, backend: Optional[MemoryBackend] = None):
+        # Backwards compatible: legacy callers passed ``api_key`` as the
+        # first positional arg. Accept that for one release while
+        # callers migrate to the abstract backend.
+        if isinstance(backend, str):  # type: ignore[unreachable]
+            os.environ.setdefault("ZEP_API_KEY", backend)
+            backend = None
+        self.backend: MemoryBackend = backend or get_memory_backend()
         self.task_manager = TaskManager()
     
     def build_graph_async(
@@ -61,20 +69,20 @@ Verantwortlich für die Verwendung der Zep API zum Erstellen eines Wissensgraphe
         batch_size: int = 3
     ) -> str:
         """
-Erstellt den Graphen asynchron
-
-Args:
-text: Eingabetext
-ontology: Ontologie-Definition (Ausgabe von API 1)
-graph_name: Name des Graphs
-chunk_size: Größe der Textblöcke
-chunk_overlap: Überlappung der Blöcke
-batch_size: Anzahl der Blöcke pro Batch
-
-Returns:
-eine Task-ID
-"""
-        # Erstelle Aufgabe
+        异步构建图谱
+        
+        Args:
+            text: 输入文本
+            ontology: 本体定义（来自接口1的输出）
+            graph_name: 图谱名称
+            chunk_size: 文本块大小
+            chunk_overlap: 块重叠大小
+            batch_size: 每批发送的块数量
+            
+        Returns:
+            任务ID
+        """
+        # 创建任务
         task_id = self.task_manager.create_task(
             task_type="graph_build",
             metadata={
@@ -87,7 +95,7 @@ eine Task-ID
         # Capture locale before spawning background thread
         current_locale = get_locale()
 
-        # Führe Erstellung im Hintergrund durch
+        # 在后台线程中执行构建
         thread = threading.Thread(
             target=self._build_graph_worker,
             args=(task_id, text, ontology, graph_name, chunk_size, chunk_overlap, batch_size, current_locale)
@@ -108,7 +116,7 @@ eine Task-ID
         batch_size: int,
         locale: str = 'zh'
     ):
-        """Arbeitsdienstleiter für Graphenbau"""
+        """图谱构建工作线程"""
         set_locale(locale)
         try:
             self.task_manager.update_task(
@@ -118,7 +126,7 @@ eine Task-ID
                 message=t('progress.startBuildingGraph')
             )
             
-            # 1. Erstelle Grafik
+            # 1. 创建图谱
             graph_id = self.create_graph(graph_name)
             self.task_manager.update_task(
                 task_id,
@@ -126,7 +134,7 @@ eine Task-ID
                 message=t('progress.graphCreated', graphId=graph_id)
             )
             
-            # 2. Setze Ontologie
+            # 2. 设置本体
             self.set_ontology(graph_id, ontology)
             self.task_manager.update_task(
                 task_id,
@@ -134,7 +142,7 @@ eine Task-ID
                 message=t('progress.ontologySet')
             )
             
-            # 3. Text in Blöcke aufteilen
+            # 3. 文本分块
             chunks = TextProcessor.split_text(text, chunk_size, chunk_overlap)
             total_chunks = len(chunks)
             self.task_manager.update_task(
@@ -143,7 +151,7 @@ eine Task-ID
                 message=t('progress.textSplit', count=total_chunks)
             )
             
-            # 4. Sendiere Daten in Batches
+            # 4. 分批发送数据
             episode_uuids = self.add_text_batches(
                 graph_id, chunks, batch_size,
                 lambda msg, prog: self.task_manager.update_task(
@@ -153,7 +161,7 @@ eine Task-ID
                 )
             )
             
-            # 5. Warte auf Abschluss der Verarbeitung durch Zep
+            # 5. 等待Zep处理完成
             self.task_manager.update_task(
                 task_id,
                 progress=60,
@@ -169,7 +177,7 @@ eine Task-ID
                 )
             )
             
-            # 6. Holte Grafikinformationen
+            # 6. 获取图谱信息
             self.task_manager.update_task(
                 task_id,
                 progress=90,
@@ -178,7 +186,7 @@ eine Task-ID
             
             graph_info = self._get_graph_info(graph_id)
             
-            # Fertig
+            # 完成
             self.task_manager.complete_task(task_id, {
                 "graph_id": graph_id,
                 "graph_info": graph_info.to_dict(),
@@ -191,105 +199,26 @@ eine Task-ID
             self.task_manager.fail_task(task_id, error_msg)
     
     def create_graph(self, name: str) -> str:
-        """Erstellen eines Zep-Graphen (öffentliche Methode)"""
+        """Create a new memory graph and return its id."""
         graph_id = f"mirofish_{uuid.uuid4().hex[:16]}"
-        
-        self.client.graph.create(
-            graph_id=graph_id,
-            name=name,
-            description="MiroFish Social Simulation Graph"
+        self.backend.create_graph(
+            graph_id,
+            display_name=name,
+            description="MiroFish Social Simulation Graph",
         )
-        
         return graph_id
     
     def set_ontology(self, graph_id: str, ontology: Dict[str, Any]):
-        """Setzen des Graphenontologie (öffentliche Methode)"""
-        import warnings
-        from typing import Optional
-        from pydantic import Field
-        from zep_cloud.external_clients.ontology import EntityModel, EntityText, EdgeModel
-        
-        # Unterdrücke Pydantic v2 Warnungen über Field(default=None)
-        # Dies ist die Verwendung, die das Zep SDK erfordert. Die Warnung kommt von dynamischen Klassen und kann sicher ignoriert werden
-        warnings.filterwarnings('ignore', category=UserWarning, module='pydantic')
-        
-        # Zep behält Namen vor, können nicht als Eigenschaftsnamen verwendet werden
-        RESERVED_NAMES = {'uuid', 'name', 'group_id', 'name_embedding', 'summary', 'created_at'}
-        
-        def safe_attr_name(attr_name: str) -> str:
-            """Konvertieren von behaltenen Namen in sichere Namen"""
-            if attr_name.lower() in RESERVED_NAMES:
-                return f"entity_{attr_name}"
-            return attr_name
-        
-        # Dynamische Erstellung von Entitätstypen
-        entity_types = {}
-        for entity_def in ontology.get("entity_types", []):
-            name = entity_def["name"]
-            description = entity_def.get("description", f"A {name} entity.")
-            
-            # Erstelle Eigenschaftsdict und Typanmerkungen (Pydantic v2 benötigt)
-            attrs = {"__doc__": description}
-            annotations = {}
-            
-            for attr_def in entity_def.get("attributes", []):
-                attr_name = safe_attr_name(attr_def["name"])  # Verwende sichere Namen
-                attr_desc = attr_def.get("description", attr_name)
-                # Zep API benötigt Field description, ist notwendig
-                attrs[attr_name] = Field(description=attr_desc, default=None)
-                annotations[attr_name] = Optional[EntityText]  # Typanmerkungen
-            
-            attrs["__annotations__"] = annotations
-            
-            # Dynamische Erstellung von Klassen
-            entity_class = type(name, (EntityModel,), attrs)
-            entity_class.__doc__ = description
-            entity_types[name] = entity_class
-        
-        # Dynamische Erstellung von Kanten-Typen
-        edge_definitions = {}
-        for edge_def in ontology.get("edge_types", []):
-            name = edge_def["name"]
-            description = edge_def.get("description", f"A {name} relationship.")
-            
-            # Erstelle Eigenschaftsdict und Typanmerkungen
-            attrs = {"__doc__": description}
-            annotations = {}
-            
-            for attr_def in edge_def.get("attributes", []):
-                attr_name = safe_attr_name(attr_def["name"])  # Verwende sichere Namen
-                attr_desc = attr_def.get("description", attr_name)
-                # Zep API benötigt Field description, ist notwendig
-                attrs[attr_name] = Field(description=attr_desc, default=None)
-                annotations[attr_name] = Optional[str]  # Kanten-Eigenschaften als String-Typ
-            
-            attrs["__annotations__"] = annotations
-            
-            # Dynamische Erstellung von Klassen
-            class_name = ''.join(word.capitalize() for word in name.split('_'))
-            edge_class = type(class_name, (EdgeModel,), attrs)
-            edge_class.__doc__ = description
-            
-            # Erzeuge source_targets
-            source_targets = []
-            for st in edge_def.get("source_targets", []):
-                source_targets.append(
-                    EntityEdgeSourceTarget(
-                        source=st.get("source", "Entity"),
-                        target=st.get("target", "Entity")
-                    )
-                )
-            
-            if source_targets:
-                edge_definitions[name] = (edge_class, source_targets)
-        
-        # Rufe Zep API auf, um Ontologie zu setzen
-        if entity_types or edge_definitions:
-            self.client.graph.set_ontology(
-                graph_ids=[graph_id],
-                entities=entity_types if entity_types else None,
-                edges=edge_definitions if edge_definitions else None,
-            )
+        """Set the entity / edge type schema for ``graph_id``.
+
+        The dynamic Pydantic class construction that used to live here
+        moved into the backend implementations, so this service stays
+        free of any provider-specific concerns.
+        """
+        spec = OntologySpec.from_dict(ontology)
+        if not spec.entity_types and not spec.edge_types:
+            return
+        self.backend.set_ontology(graph_id, spec)
     
     def add_text_batches(
         self,
@@ -298,7 +227,7 @@ eine Task-ID
         batch_size: int = 3,
         progress_callback: Optional[Callable] = None
     ) -> List[str]:
-        """Text in Batches zu Graph hinzufügen, UUID-Liste aller Episoden zurückgeben"""
+        """分批添加文本到图谱，返回所有 episode 的 uuid 列表"""
         episode_uuids = []
         total_chunks = len(chunks)
         
@@ -314,29 +243,25 @@ eine Task-ID
                     progress
                 )
             
-            # Erzeuge episode-Daten
+            # Build provider-neutral episode payload
             episodes = [
-                EpisodeData(data=chunk, type="text")
+                EpisodeInput(content=chunk, episode_type="text")
                 for chunk in batch_chunks
             ]
-            
-            # Senden an Zep
+
             try:
-                batch_result = self.client.graph.add_batch(
+                batch_result = self.backend.add_episodes_bulk(
                     graph_id=graph_id,
-                    episodes=episodes
+                    episodes=episodes,
                 )
-                
-                # Sammle zurückgegebene episode-UUIDs
-                if batch_result and isinstance(batch_result, list):
-                    for ep in batch_result:
-                        ep_uuid = getattr(ep, 'uuid_', None) or getattr(ep, 'uuid', None)
-                        if ep_uuid:
-                            episode_uuids.append(ep_uuid)
-                
-                # Verhindere zu schnelle Anfragen
+
+                for ep in batch_result:
+                    if ep.uuid:
+                        episode_uuids.append(ep.uuid)
+
+                # Friendly throttle for cloud backends with low rate limits.
                 time.sleep(1)
-                
+
             except Exception as e:
                 if progress_callback:
                     progress_callback(t('progress.batchFailed', batch=batch_num, error=str(e)), 0)
@@ -350,7 +275,7 @@ eine Task-ID
         progress_callback: Optional[Callable] = None,
         timeout: int = 600
     ):
-        """Warten auf Abschluss der Verarbeitung aller Episoden (durch Abfrage des Verarbeitungsstatus)"""
+        """等待所有 episode 处理完成（通过查询每个 episode 的 processed 状态）"""
         if not episode_uuids:
             if progress_callback:
                 progress_callback(t('progress.noEpisodesWait'), 1.0)
@@ -373,18 +298,16 @@ eine Task-ID
                     )
                 break
             
-            # Überprüfe den Verarbeitungsstatus jedes episodes
+            # Poll each pending episode for processing completion.
             for ep_uuid in list(pending_episodes):
                 try:
-                    episode = self.client.graph.episode.get(uuid_=ep_uuid)
-                    is_processed = getattr(episode, 'processed', False)
-                    
-                    if is_processed:
+                    episode = self.backend.get_episode(ep_uuid)
+                    if episode is not None and episode.processed:
                         pending_episodes.remove(ep_uuid)
                         completed_count += 1
-                        
-                except Exception as e:
-                    # Ignoriere einzelne Abfrage-Fehler, fortsetzen
+                except Exception:
+                    # Per-episode lookup failures are expected during
+                    # transient rate limiting; carry on.
                     pass
             
             elapsed = int(time.time() - start_time)
@@ -395,103 +318,43 @@ eine Task-ID
                 )
             
             if pending_episodes:
-                time.sleep(3)  # Prüfe alle 3 Sekunden
+                time.sleep(3)  # 每3秒检查一次
         
         if progress_callback:
             progress_callback(t('progress.processingComplete', completed=completed_count, total=total_episodes), 1.0)
     
     def _get_graph_info(self, graph_id: str) -> GraphInfo:
-        """Grapheninformationen erhalten"""
-        # Holte Knoten (seitliche Anfrage)
-        nodes = fetch_all_nodes(self.client, graph_id)
+        """Summarise a graph's node count, edge count and entity types."""
+        nodes = self.backend.get_all_nodes(graph_id)
+        edges = self.backend.get_all_edges(graph_id)
 
-        # Holte Kanten (seitliche Anfrage)
-        edges = fetch_all_edges(self.client, graph_id)
-
-        # Zähle Entitätstypen
-        entity_types = set()
+        entity_types: set[str] = set()
         for node in nodes:
-            if node.labels:
-                for label in node.labels:
-                    if label not in ["Entity", "Node"]:
-                        entity_types.add(label)
+            entity_types.update(node.custom_labels())
 
         return GraphInfo(
             graph_id=graph_id,
             node_count=len(nodes),
             edge_count=len(edges),
-            entity_types=list(entity_types)
+            entity_types=list(entity_types),
         )
     
     def get_graph_data(self, graph_id: str) -> Dict[str, Any]:
-        """
-Holt die vollständigen Daten des Graphen (inklusive detaillierter Informationen)
+        """Return the full graph contents in the JSON shape the UI expects."""
+        nodes = self.backend.get_all_nodes(graph_id)
+        edges = self.backend.get_all_edges(graph_id)
 
-Args:
-graph_id: ID des Graphs
+        node_map: Dict[str, str] = {n.uuid: n.name or "" for n in nodes}
 
-Returns:
-ein Dictionary mit Knoten und Kanten, einschließlich Zeitinformationen, Eigenschaften usw.
-"""
-        nodes = fetch_all_nodes(self.client, graph_id)
-        edges = fetch_all_edges(self.client, graph_id)
+        nodes_data = [n.to_dict() for n in nodes]
 
-        # Erzeuge Knoten-Abbildung zur Holung von Knotennamen
-        node_map = {}
-        for node in nodes:
-            node_map[node.uuid_] = node.name or ""
-        
-        nodes_data = []
-        for node in nodes:
-            # Holte Erstellungszeit
-            created_at = getattr(node, 'created_at', None)
-            if created_at:
-                created_at = str(created_at)
-            
-            nodes_data.append({
-                "uuid": node.uuid_,
-                "name": node.name,
-                "labels": node.labels or [],
-                "summary": node.summary or "",
-                "attributes": node.attributes or {},
-                "created_at": created_at,
-            })
-        
         edges_data = []
         for edge in edges:
-            # Holte Zeitinformationen
-            created_at = getattr(edge, 'created_at', None)
-            valid_at = getattr(edge, 'valid_at', None)
-            invalid_at = getattr(edge, 'invalid_at', None)
-            expired_at = getattr(edge, 'expired_at', None)
-            
-            # Holte episodes
-            episodes = getattr(edge, 'episodes', None) or getattr(edge, 'episode_ids', None)
-            if episodes and not isinstance(episodes, list):
-                episodes = [str(episodes)]
-            elif episodes:
-                episodes = [str(e) for e in episodes]
-            
-            # Holte fact_type
-            fact_type = getattr(edge, 'fact_type', None) or edge.name or ""
-            
-            edges_data.append({
-                "uuid": edge.uuid_,
-                "name": edge.name or "",
-                "fact": edge.fact or "",
-                "fact_type": fact_type,
-                "source_node_uuid": edge.source_node_uuid,
-                "target_node_uuid": edge.target_node_uuid,
-                "source_node_name": node_map.get(edge.source_node_uuid, ""),
-                "target_node_name": node_map.get(edge.target_node_uuid, ""),
-                "attributes": edge.attributes or {},
-                "created_at": str(created_at) if created_at else None,
-                "valid_at": str(valid_at) if valid_at else None,
-                "invalid_at": str(invalid_at) if invalid_at else None,
-                "expired_at": str(expired_at) if expired_at else None,
-                "episodes": episodes or [],
-            })
-        
+            edge_dict = edge.to_dict()
+            edge_dict["source_node_name"] = node_map.get(edge.source_node_uuid, "")
+            edge_dict["target_node_name"] = node_map.get(edge.target_node_uuid, "")
+            edges_data.append(edge_dict)
+
         return {
             "graph_id": graph_id,
             "nodes": nodes_data,
@@ -499,8 +362,8 @@ ein Dictionary mit Knoten und Kanten, einschließlich Zeitinformationen, Eigensc
             "node_count": len(nodes_data),
             "edge_count": len(edges_data),
         }
-    
+
     def delete_graph(self, graph_id: str):
-        """Löschen des Graphen"""
-        self.client.graph.delete(graph_id=graph_id)
+        """Delete the graph and every entity / edge / episode under it."""
+        self.backend.delete_graph(graph_id)
 

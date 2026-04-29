@@ -798,5 +798,17 @@
     "pymuPdfRequired": "PyMuPDF needs to be installed",
     "documentLabel": "Document {i}: {filename}",
     "extractionFailed": "Extraction failed"
+  },
+  "emergency": {
+    "stopAll": "STOP ALL",
+    "stopping": "STOPPING…",
+    "tooltip": "Force-kill every running simulation on this host"
+  },
+  "usage": {
+    "totalCostTooltip": "Total LLM spend on this run",
+    "requests": "reqs",
+    "tokens": "tokens",
+    "capLabel": "cap",
+    "overCap": "Cost cap exceeded — stop the simulation now"
   }
 }
