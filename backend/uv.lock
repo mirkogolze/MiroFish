@@ -603,7 +603,7 @@ wheels = [
 
 [[package]]
 name = "graphiti-core"
-version = "0.9.4"
+version = "0.11.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "diskcache" },
@@ -614,9 +614,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "tenacity" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d0/a7/521e3316d3e01e6a42e212890304d194f018d7f4698be35a988060fb4b57/graphiti_core-0.9.4.tar.gz", hash = "sha256:f9fbf21fceb470ba0a8585f19b7de8ce9bda95eec83bb643c78c824f917cd79d", size = 62667, upload-time = "2025-04-09T15:50:28.578Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/30/94/3f84400e5f02ea8e9dc79784202de4173cbc16f4b3ad1bd4302da888e4d8/graphiti_core-0.11.6.tar.gz", hash = "sha256:31d26621834d7d4b8865059ab749feb18af15937b59c69598a640a5dfabea331", size = 71928, upload-time = "2025-05-15T17:58:02.304Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/85/e5/531de1a4bfe174b9b51d542cb7aa6c47f6adb35a83ee0742510b5abcd309/graphiti_core-0.9.4-py3-none-any.whl", hash = "sha256:44948931335ecaa95fa3a7cf4a98fee1bda7d6edec27f3ca5bb7ce31222bae1e", size = 99805, upload-time = "2025-04-09T15:50:26.774Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/2e/c8f22f01585bf173d1c82f6d4615511aebc75aeda764c69aa394446fa93c/graphiti_core-0.11.6-py3-none-any.whl", hash = "sha256:6ec4807a884f5ea88b942d0c8b7bcd2e107c7358ab4f98ef2a2092c229929707", size = 111001, upload-time = "2025-05-15T17:58:00.542Z" },
 ]
 
 [[package]]
@@ -1304,7 +1304,7 @@ requires-dist = [
     { name = "charset-normalizer", specifier = ">=3.0.0" },
     { name = "flask", specifier = ">=3.0.0" },
     { name = "flask-cors", specifier = ">=6.0.0" },
-    { name = "graphiti-core", specifier = ">=0.9.0,<0.9.5" },
+    { name = "graphiti-core", specifier = ">=0.11.6,<0.12" },
     { name = "openai", specifier = ">=1.0.0" },
     { name = "pipreqs", marker = "extra == 'dev'", specifier = ">=0.5.0" },
     { name = "pydantic", specifier = ">=2.0.0" },
