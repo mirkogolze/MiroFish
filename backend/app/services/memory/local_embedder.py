@@ -105,3 +105,23 @@ class LocalSentenceTransformerEmbedder(EmbedderClient):
         # Truncate / pad to the configured dim — Graphiti stores fixed-
         # length vectors so the similarity index keeps working.
         return [float(x) for x in first[: self.config.embedding_dim]]
+
+    async def create_batch(self, input_data_list: list[str]) -> list[list[float]]:
+        """Encode all strings in one shot (single model.encode call).
+
+        Graphiti calls this to embed edge facts in bulk; the default
+        base-class implementation raises NotImplementedError.
+        """
+        if not input_data_list:
+            return []
+
+        model = self._get_model()
+        vectors = await asyncio.to_thread(
+            model.encode,
+            input_data_list,
+            convert_to_numpy=True,
+            normalize_embeddings=True,
+            show_progress_bar=False,
+        )
+        dim = self.config.embedding_dim
+        return [[float(x) for x in row[:dim]] for row in vectors]
