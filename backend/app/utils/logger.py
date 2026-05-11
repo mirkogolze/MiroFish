@@ -74,12 +74,20 @@ def setup_logger(name: str = 'mirofish', level: int = logging.DEBUG) -> logging.
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(detailed_formatter)
     
-    # 2. Konsolen-Handler - Kurze Log-Einträge (INFO und höher)
-    # Stelle sicher, dass auf Windows UTF-8-Encoding verwendet wird, um das Verschmelzen von Chinesisch zu vermeiden.
+    # 2. Konsolen-Handler - Kurze Log-Einträge.
+    # Level: DEBUG bei GRAPHITI_LOG_LEVEL=DEBUG (oder LOG_LEVEL=DEBUG), sonst INFO.
+    _env_level_str = (
+        os.environ.get("GRAPHITI_LOG_LEVEL")
+        or os.environ.get("LOG_LEVEL")
+        or "INFO"
+    ).upper()
+    _console_level = getattr(logging, _env_level_str, logging.INFO)
+
+    # Unter Windows UTF-8 für stdout/stderr erzwingen.
     _ensure_utf8_stdout()
     console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(simple_formatter)
+    console_handler.setLevel(_console_level)
+    console_handler.setFormatter(simple_formatter if _console_level >= logging.INFO else detailed_formatter)
     
     # Füge Prozessor hinzu
     logger.addHandler(file_handler)

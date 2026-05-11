@@ -60,6 +60,86 @@ _DEFAULT_LOCAL_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 # --------------------------------------------------------------------------
+# LLM call interceptor
+# --------------------------------------------------------------------------
+
+
+class _LoggingLLMClient:
+    """Thin wrapper around any graphiti LLMClient that logs every request/response.
+
+    Set the environment variable ``GRAPHITI_LLM_DEBUG=1`` to enable.
+    Uses logger level DEBUG so it only appears when the root logger is
+    configured accordingly, which avoids log spam in production.
+    """
+
+    def __init__(self, inner: Any) -> None:
+        self._inner = inner
+        self._log = get_logger("mirofish.memory.graphiti.llm")
+
+    # Forward everything to the inner client.
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._inner, name)
+
+    async def generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
+        import json as _json
+
+        if self._log.isEnabledFor(10):  # DEBUG
+            try:
+                msgs_serialised = _json.dumps(
+                    [m.model_dump() if hasattr(m, "model_dump") else str(m) for m in messages],
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                schema = (
+                    _json.dumps(response_model.model_json_schema(), indent=2)
+                    if response_model is not None
+                    else "None"
+                )
+                self._log.debug(
+                    "LLM REQUEST — response_model=%s\nMessages:\n%s",
+                    getattr(response_model, "__name__", str(response_model)),
+                    msgs_serialised,
+                )
+            except Exception:  # noqa: BLE001
+                self._log.debug("LLM REQUEST (could not serialise messages)")
+
+        try:
+            result = await self._inner.generate_response(messages, response_model, **kwargs)
+        except Exception as exc:
+            self._log.error(
+                "LLM ERROR — %s: %s", type(exc).__name__, exc, exc_info=True
+            )
+            raise
+
+        if self._log.isEnabledFor(10):  # DEBUG
+            try:
+                self._log.debug(
+                    "LLM RESPONSE — %s",
+                    _json.dumps(result, ensure_ascii=False, indent=2, default=str),
+                )
+            except Exception:  # noqa: BLE001
+                self._log.debug("LLM RESPONSE — %r", result)
+
+        # Always log at WARNING when a dict/list sneaks through as a top-level value
+        # (this is the trigger for the Neo4j TypeError we're hunting)
+        if isinstance(result, dict):
+            for k, v in result.items():
+                if isinstance(v, (dict, list)):
+                    self._log.warning(
+                        "LLM returned non-primitive value for key=%r: %r — "
+                        "this will be caught by the graphiti-nodes patch",
+                        k, v,
+                    )
+
+        return result
+
+    async def _generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
+        # graphiti calls _generate_response_with_retry → _generate_response directly.
+        # Delegate to inner; logging happens in generate_response above.
+        return await self._inner._generate_response(messages, response_model, **kwargs)
+
+
+# --------------------------------------------------------------------------
 # Async-to-sync adapter
 # --------------------------------------------------------------------------
 
@@ -188,6 +268,11 @@ class GraphitiBackend(MemoryBackend):
         self._ontology_cache = {}
 
         llm_client, embedder, cross_encoder = self._build_llm_clients()
+
+        # Wrap with logging interceptor when GRAPHITI_LLM_DEBUG=1.
+        if llm_client is not None and os.environ.get("GRAPHITI_LLM_DEBUG", "").strip() == "1":
+            llm_client = _LoggingLLMClient(llm_client)
+            logger.info("GRAPHITI_LLM_DEBUG=1 — LLM call logging enabled (level DEBUG)")
 
         try:
             self._graphiti = Graphiti(
@@ -424,7 +509,13 @@ class GraphitiBackend(MemoryBackend):
         try:
             result = self._loop.run(_ingest())
         except Exception as e:  # noqa: BLE001
-            raise MemoryBackendUnavailable(f"add_episode failed: {e}") from e
+            logger.error(
+                "add_episode failed — type=%s repr=%r",
+                type(e).__name__,
+                e,
+                exc_info=True,
+            )
+            raise MemoryBackendUnavailable(f"add_episode failed: {type(e).__name__}: {e}") from e
 
         ep_node = getattr(result, "episode", None) or result
         ep_uuid = getattr(ep_node, "uuid", "") or ""
