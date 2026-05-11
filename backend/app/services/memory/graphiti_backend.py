@@ -64,79 +64,94 @@ _DEFAULT_LOCAL_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 # --------------------------------------------------------------------------
 
 
-class _LoggingLLMClient:
-    """Thin wrapper around any graphiti LLMClient that logs every request/response.
+def _make_logging_llm_client(inner: Any) -> Any:
+    """Return a LLMClient subclass that wraps *inner* with debug logging.
 
-    Set the environment variable ``GRAPHITI_LLM_DEBUG=1`` to enable.
-    Uses logger level DEBUG so it only appears when the root logger is
-    configured accordingly, which avoids log spam in production.
+    Importing LLMClient at module level would fail when graphiti-core is not
+    installed, so we build the class lazily inside this factory function.
     """
+    from graphiti_core.llm_client.client import LLMClient  # noqa: PLC0415
+    from graphiti_core.llm_client.config import ModelSize  # noqa: PLC0415
 
-    def __init__(self, inner: Any) -> None:
-        self._inner = inner
-        self._log = get_logger("mirofish.memory.graphiti.llm")
+    class _LoggingLLMClient(LLMClient):
+        """Thin wrapper around any graphiti LLMClient that logs every request/response.
 
-    # Forward everything to the inner client.
-    def __getattr__(self, name: str) -> Any:
-        return getattr(self._inner, name)
+        Set the environment variable ``GRAPHITI_LLM_DEBUG=1`` to enable.
+        Uses logger level DEBUG so it only appears when the root logger is
+        configured accordingly, which avoids log spam in production.
+        """
 
-    async def generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
-        import json as _json
+        def __init__(self, _inner: Any) -> None:
+            # Do NOT call super().__init__() — LLMConfig is already set on _inner.
+            self._inner = _inner
+            self._log = get_logger("mirofish.memory.graphiti.llm")
+            # Expose attributes that Graphiti reads directly from the client object.
+            self.config = _inner.config
+            self.model = _inner.model
+            self.small_model = _inner.small_model
+            self.temperature = _inner.temperature
+            self.max_tokens = _inner.max_tokens
+            self.cache_enabled = _inner.cache_enabled
+            self.cache_dir = _inner.cache_dir
 
-        if self._log.isEnabledFor(10):  # DEBUG
-            try:
-                msgs_serialised = _json.dumps(
-                    [m.model_dump() if hasattr(m, "model_dump") else str(m) for m in messages],
-                    ensure_ascii=False,
-                    indent=2,
-                )
-                schema = (
-                    _json.dumps(response_model.model_json_schema(), indent=2)
-                    if response_model is not None
-                    else "None"
-                )
-                self._log.debug(
-                    "LLM REQUEST — response_model=%s\nMessages:\n%s",
-                    getattr(response_model, "__name__", str(response_model)),
-                    msgs_serialised,
-                )
-            except Exception:  # noqa: BLE001
-                self._log.debug("LLM REQUEST (could not serialise messages)")
+        async def _generate_response(
+            self,
+            messages: Any,
+            response_model: Any = None,
+            max_tokens: int = 4096,
+            model_size: ModelSize = ModelSize.medium,
+        ) -> Any:
+            return await self._inner._generate_response(messages, response_model, max_tokens, model_size)
 
-        try:
-            result = await self._inner.generate_response(messages, response_model, **kwargs)
-        except Exception as exc:
-            self._log.error(
-                "LLM ERROR — %s: %s", type(exc).__name__, exc, exc_info=True
-            )
-            raise
+        async def generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
+            import json as _json
 
-        if self._log.isEnabledFor(10):  # DEBUG
-            try:
-                self._log.debug(
-                    "LLM RESPONSE — %s",
-                    _json.dumps(result, ensure_ascii=False, indent=2, default=str),
-                )
-            except Exception:  # noqa: BLE001
-                self._log.debug("LLM RESPONSE — %r", result)
-
-        # Always log at WARNING when a dict/list sneaks through as a top-level value
-        # (this is the trigger for the Neo4j TypeError we're hunting)
-        if isinstance(result, dict):
-            for k, v in result.items():
-                if isinstance(v, (dict, list)):
-                    self._log.warning(
-                        "LLM returned non-primitive value for key=%r: %r — "
-                        "this will be caught by the graphiti-nodes patch",
-                        k, v,
+            if self._log.isEnabledFor(10):  # DEBUG
+                try:
+                    msgs_serialised = _json.dumps(
+                        [m.model_dump() if hasattr(m, "model_dump") else str(m) for m in messages],
+                        ensure_ascii=False,
+                        indent=2,
                     )
+                    self._log.debug(
+                        "LLM REQUEST — response_model=%s\nMessages:\n%s",
+                        getattr(response_model, "__name__", str(response_model)),
+                        msgs_serialised,
+                    )
+                except Exception:  # noqa: BLE001
+                    self._log.debug("LLM REQUEST (could not serialise messages)")
 
-        return result
+            try:
+                result = await self._inner.generate_response(messages, response_model, **kwargs)
+            except Exception as exc:
+                self._log.error(
+                    "LLM ERROR — %s: %s", type(exc).__name__, exc, exc_info=True
+                )
+                raise
 
-    async def _generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
-        # graphiti calls _generate_response_with_retry → _generate_response directly.
-        # Delegate to inner; logging happens in generate_response above.
-        return await self._inner._generate_response(messages, response_model, **kwargs)
+            if self._log.isEnabledFor(10):  # DEBUG
+                try:
+                    self._log.debug(
+                        "LLM RESPONSE — %s",
+                        _json.dumps(result, ensure_ascii=False, indent=2, default=str),
+                    )
+                except Exception:  # noqa: BLE001
+                    self._log.debug("LLM RESPONSE — %r", result)
+
+            # Always log at WARNING when a dict/list sneaks through as a top-level value
+            # (this is the trigger for the Neo4j TypeError we're hunting)
+            if isinstance(result, dict):
+                for k, v in result.items():
+                    if isinstance(v, (dict, list)):
+                        self._log.warning(
+                            "LLM returned non-primitive value for key=%r: %r — "
+                            "this will be caught by the graphiti-nodes patch",
+                            k, v,
+                        )
+
+            return result
+
+    return _LoggingLLMClient(inner)
 
 
 # --------------------------------------------------------------------------
@@ -271,7 +286,7 @@ class GraphitiBackend(MemoryBackend):
 
         # Wrap with logging interceptor when GRAPHITI_LLM_DEBUG=1.
         if llm_client is not None and os.environ.get("GRAPHITI_LLM_DEBUG", "").strip() == "1":
-            llm_client = _LoggingLLMClient(llm_client)
+            llm_client = _make_logging_llm_client(llm_client)
             logger.info("GRAPHITI_LLM_DEBUG=1 — LLM call logging enabled (level DEBUG)")
 
         try:
