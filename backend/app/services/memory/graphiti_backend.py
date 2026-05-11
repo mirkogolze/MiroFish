@@ -108,27 +108,50 @@ def _make_llm_client_wrapper(inner: Any, *, debug: bool = False) -> Any:
 
         @staticmethod
         def _sanitize(result: Any, response_model: Any) -> Any:
-            """Drop schema-metadata keys; coerce dict/list values to JSON strings.
+            """Drop schema-metadata keys; coerce scalar fields that LLM returned as dicts.
 
             When an LLM echoes back the JSON Schema definition instead of an
-            instance (e.g. returns ``{"summary": {"title": "Summary",
-            "type": "string"}}`` instead of ``{"summary": "actual text"}``),
-            graphiti-core stores the dict in ``node.summary`` / ``node.attributes``
-            and Neo4j raises a CypherTypeError.  Keeping only known model fields
-            and converting any remaining dict/list to a JSON string prevents this.
+            instance (e.g. returns ``{"summary": {"title": "Summary", "type": "string"}}``
+            instead of ``{"summary": "actual text"}``), graphiti-core stores the dict
+            in ``node.summary`` and Neo4j raises a CypherTypeError.
+
+            Only coerce a value to a JSON string when the field's annotation is a
+            scalar type (str/int/float/bool) but the LLM returned a dict/list.
+            Fields annotated as ``list[...]`` or ``dict[...]`` (e.g.
+            ``extracted_entities: list[ExtractedEntity]``) are kept as-is so that
+            graphiti-core can iterate and unpack them normally.
             """
             if not isinstance(result, dict) or response_model is None:
                 return result
             try:
                 import json as _j
+                import typing as _typing
+                _SCALARS = (str, int, float, bool)
                 known = set(response_model.model_fields.keys())
                 sanitized: dict[str, Any] = {}
                 for k, v in result.items():
                     if k not in known:
-                        continue  # discard: properties, required, type, title, …
+                        continue  # discard: $defs, properties, required, type, title, …
                     if isinstance(v, (dict, list)):
-                        v = _j.dumps(v, ensure_ascii=False, default=str)
-                    sanitized[k] = v
+                        # Determine the declared annotation for this field.
+                        annotation = response_model.model_fields[k].annotation
+                        # Unwrap Optional[X] (Union[X, None]) → X
+                        origin = getattr(annotation, "__origin__", None)
+                        if origin is _typing.Union:
+                            annotation = next(
+                                (a for a in annotation.__args__ if a is not type(None)),
+                                annotation,
+                            )
+                            origin = getattr(annotation, "__origin__", None)
+                        # If field expects a container (list/dict), keep the value intact.
+                        if origin in (list, dict):
+                            sanitized[k] = v
+                        else:
+                            # Field expects a scalar but LLM returned a dict/list —
+                            # most likely JSON Schema metadata; coerce to a JSON string.
+                            sanitized[k] = _j.dumps(v, ensure_ascii=False, default=str)
+                    else:
+                        sanitized[k] = v
                 return sanitized
             except Exception:  # noqa: BLE001
                 return result
