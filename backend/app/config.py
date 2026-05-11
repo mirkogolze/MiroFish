@@ -69,7 +69,8 @@ class Config:
         errors = []
         if not cls.LLM_API_KEY:
             errors.append("LLM_API_KEY 未配置")
-        if not cls.ZEP_API_KEY:
+        backend = (os.environ.get('MEMORY_BACKEND') or 'zep').lower()
+        if backend in ('zep', 'zep_cloud') and not cls.ZEP_API_KEY:
             errors.append("ZEP_API_KEY 未配置")
         return errors
 
