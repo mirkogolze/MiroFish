@@ -115,40 +115,46 @@ def _make_llm_client_wrapper(inner: Any, *, debug: bool = False) -> Any:
             instead of ``{"summary": "actual text"}``), graphiti-core stores the dict
             in ``node.summary`` and Neo4j raises a CypherTypeError.
 
-            Only coerce a value to a JSON string when the field's annotation is a
-            scalar type (str/int/float/bool) but the LLM returned a dict/list.
-            Fields annotated as ``list[...]`` or ``dict[...]`` (e.g.
-            ``extracted_entities: list[ExtractedEntity]``) are kept as-is so that
-            graphiti-core can iterate and unpack them normally.
+            Uses ``model_json_schema()`` to decide whether a field expects a container
+            type (array/object) — those are kept as-is so graphiti-core can iterate
+            and unpack them.  Scalar fields (str/int/…) whose value is a dict/list
+            are coerced to a JSON string.
+
+            Relies on ``model_json_schema()`` rather than ``FieldInfo.annotation``
+            because pydantic v2 does not always populate ``.annotation`` reliably
+            for dynamically created models.
             """
             if not isinstance(result, dict) or response_model is None:
                 return result
             try:
                 import json as _j
-                import typing as _typing
-                _SCALARS = (str, int, float, bool)
                 known = set(response_model.model_fields.keys())
+                # model_json_schema() is the authoritative pydantic v2 API for
+                # inspecting field types.
+                try:
+                    schema_props = response_model.model_json_schema().get("properties", {})
+                except Exception:  # noqa: BLE001
+                    schema_props = {}
                 sanitized: dict[str, Any] = {}
                 for k, v in result.items():
                     if k not in known:
                         continue  # discard: $defs, properties, required, type, title, …
                     if isinstance(v, (dict, list)):
-                        # Determine the declared annotation for this field.
-                        annotation = response_model.model_fields[k].annotation
-                        # Unwrap Optional[X] (Union[X, None]) → X
-                        origin = getattr(annotation, "__origin__", None)
-                        if origin is _typing.Union:
-                            annotation = next(
-                                (a for a in annotation.__args__ if a is not type(None)),
-                                annotation,
-                            )
-                            origin = getattr(annotation, "__origin__", None)
-                        # If field expects a container (list/dict), keep the value intact.
-                        if origin in (list, dict):
+                        field_schema = schema_props.get(k, {})
+                        # "type": "array" / "object", "items" key, "$ref", "anyOf",
+                        # "allOf" all indicate a container or complex field → keep intact.
+                        is_container_field = (
+                            field_schema.get("type") in ("array", "object")
+                            or "items" in field_schema
+                            or "$ref" in field_schema
+                            or "anyOf" in field_schema
+                            or "allOf" in field_schema
+                        )
+                        if is_container_field:
                             sanitized[k] = v
                         else:
-                            # Field expects a scalar but LLM returned a dict/list —
-                            # most likely JSON Schema metadata; coerce to a JSON string.
+                            # Scalar field (str/int/…) but LLM returned dict/list —
+                            # most likely JSON Schema metadata echoed back; coerce.
                             sanitized[k] = _j.dumps(v, ensure_ascii=False, default=str)
                     else:
                         sanitized[k] = v
