@@ -108,54 +108,54 @@ def _make_llm_client_wrapper(inner: Any, *, debug: bool = False) -> Any:
 
         @staticmethod
         def _sanitize(result: Any, response_model: Any) -> Any:
-            """Drop schema-metadata keys; coerce scalar fields that LLM returned as dicts.
+            """Drop schema-metadata keys; coerce echoed-schema dict values to JSON strings.
 
-            When an LLM echoes back the JSON Schema definition instead of an
-            instance (e.g. returns ``{"summary": {"title": "Summary", "type": "string"}}``
-            instead of ``{"summary": "actual text"}``), graphiti-core stores the dict
-            in ``node.summary`` and Neo4j raises a CypherTypeError.
+            When an LLM echoes back the JSON Schema definition mixed into the response
+            (e.g. ``{"summary": {"title": "Summary", "type": "string"}}`` instead of
+            ``{"summary": "actual text"}``), graphiti-core stores the dict in
+            ``node.summary`` and Neo4j raises a CypherTypeError.
 
-            Uses ``model_json_schema()`` to decide whether a field expects a container
-            type (array/object) — those are kept as-is so graphiti-core can iterate
-            and unpack them.  Scalar fields (str/int/…) whose value is a dict/list
-            are coerced to a JSON string.
+            Strategy:
+            - Only keep keys declared in ``response_model.model_fields``.
+            - **list values are always data** — never JSON Schema echoing; keep as-is.
+            - **dict values** are compared against JSON Schema fingerprints:
+              if the dict has ``"type"`` as a string AND contains at least one
+              canonical JSON Schema key (``title``, ``description``, ``properties``,
+              ``items``, ``$ref``, ``$defs``, ``required``), treat it as echoed schema
+              and coerce to a JSON string; otherwise keep as-is.
 
-            Relies on ``model_json_schema()`` rather than ``FieldInfo.annotation``
-            because pydantic v2 does not always populate ``.annotation`` reliably
-            for dynamically created models.
+            This avoids inspecting pydantic FieldInfo/annotations (unreliable for
+            dynamically created models) and avoids calls to model_json_schema() whose
+            output may be cached in a stale container image.
             """
             if not isinstance(result, dict) or response_model is None:
                 return result
             try:
                 import json as _j
+                _SCHEMA_INDICATOR_KEYS = frozenset({
+                    "title", "description", "properties", "items",
+                    "$ref", "$defs", "required", "allOf", "anyOf", "oneOf",
+                })
                 known = set(response_model.model_fields.keys())
-                # model_json_schema() is the authoritative pydantic v2 API for
-                # inspecting field types.
-                try:
-                    schema_props = response_model.model_json_schema().get("properties", {})
-                except Exception:  # noqa: BLE001
-                    schema_props = {}
                 sanitized: dict[str, Any] = {}
                 for k, v in result.items():
                     if k not in known:
                         continue  # discard: $defs, properties, required, type, title, …
-                    if isinstance(v, (dict, list)):
-                        field_schema = schema_props.get(k, {})
-                        # "type": "array" / "object", "items" key, "$ref", "anyOf",
-                        # "allOf" all indicate a container or complex field → keep intact.
-                        is_container_field = (
-                            field_schema.get("type") in ("array", "object")
-                            or "items" in field_schema
-                            or "$ref" in field_schema
-                            or "anyOf" in field_schema
-                            or "allOf" in field_schema
+                    if isinstance(v, list):
+                        # Lists are never JSON Schema metadata — always real data.
+                        sanitized[k] = v
+                    elif isinstance(v, dict):
+                        # Echoed JSON Schema dicts always have "type" as a string
+                        # ("string", "object", "array", …) AND at least one schema key.
+                        is_echoed_schema = (
+                            isinstance(v.get("type"), str)
+                            and bool(_SCHEMA_INDICATOR_KEYS & v.keys())
                         )
-                        if is_container_field:
-                            sanitized[k] = v
-                        else:
-                            # Scalar field (str/int/…) but LLM returned dict/list —
-                            # most likely JSON Schema metadata echoed back; coerce.
-                            sanitized[k] = _j.dumps(v, ensure_ascii=False, default=str)
+                        sanitized[k] = (
+                            _j.dumps(v, ensure_ascii=False, default=str)
+                            if is_echoed_schema
+                            else v
+                        )
                     else:
                         sanitized[k] = v
                 return sanitized
