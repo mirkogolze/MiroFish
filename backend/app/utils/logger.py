@@ -74,12 +74,20 @@ def setup_logger(name: str = 'mirofish', level: int = logging.DEBUG) -> logging.
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(detailed_formatter)
     
-    # 2. 控制台处理器 - 简洁日志（INFO及以上）
+    # 2. 控制台处理器 - 简洁日志
+    # Level: DEBUG when GRAPHITI_LOG_LEVEL=DEBUG (or LOG_LEVEL=DEBUG), else INFO
+    _env_level_str = (
+        os.environ.get("GRAPHITI_LOG_LEVEL")
+        or os.environ.get("LOG_LEVEL")
+        or "INFO"
+    ).upper()
+    _console_level = getattr(logging, _env_level_str, logging.INFO)
+
     # 确保 Windows 下使用 UTF-8 编码，避免中文乱码
     _ensure_utf8_stdout()
     console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(simple_formatter)
+    console_handler.setLevel(_console_level)
+    console_handler.setFormatter(simple_formatter if _console_level >= logging.INFO else detailed_formatter)
     
     # 添加处理器
     logger.addHandler(file_handler)
