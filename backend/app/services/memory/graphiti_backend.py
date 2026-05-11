@@ -64,8 +64,16 @@ _DEFAULT_LOCAL_EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 # --------------------------------------------------------------------------
 
 
-def _make_logging_llm_client(inner: Any) -> Any:
-    """Return a LLMClient subclass that wraps *inner* with debug logging.
+def _make_llm_client_wrapper(inner: Any, *, debug: bool = False) -> Any:
+    """Return a LLMClient subclass wrapping *inner* with response sanitization.
+
+    Always active (not just in debug mode) to guard against LLM responses that
+    contain JSON Schema metadata instead of actual field values.  The sanitizer
+    keeps only fields declared in ``response_model`` and JSON-serialises any
+    dict/list values so Neo4j never receives non-primitive properties.
+
+    Set ``GRAPHITI_LLM_DEBUG=1`` to additionally log every request/response at
+    DEBUG level.
 
     Importing LLMClient at module level would fail when graphiti-core is not
     installed, so we build the class lazily inside this factory function.
@@ -73,14 +81,9 @@ def _make_logging_llm_client(inner: Any) -> Any:
     from graphiti_core.llm_client.client import LLMClient  # noqa: PLC0415
     from graphiti_core.llm_client.config import ModelSize  # noqa: PLC0415
 
-    class _LoggingLLMClient(LLMClient):
-        """Thin wrapper around any graphiti LLMClient that logs every request/response.
+    _debug = debug
 
-        Set the environment variable ``GRAPHITI_LLM_DEBUG=1`` to enable.
-        Uses logger level DEBUG so it only appears when the root logger is
-        configured accordingly, which avoids log spam in production.
-        """
-
+    class _WrappedLLMClient(LLMClient):
         def __init__(self, _inner: Any) -> None:
             # Do NOT call super().__init__() — LLMConfig is already set on _inner.
             self._inner = _inner
@@ -103,10 +106,37 @@ def _make_logging_llm_client(inner: Any) -> Any:
         ) -> Any:
             return await self._inner._generate_response(messages, response_model, max_tokens, model_size)
 
+        @staticmethod
+        def _sanitize(result: Any, response_model: Any) -> Any:
+            """Drop schema-metadata keys; coerce dict/list values to JSON strings.
+
+            When an LLM echoes back the JSON Schema definition instead of an
+            instance (e.g. returns ``{"summary": {"title": "Summary",
+            "type": "string"}}`` instead of ``{"summary": "actual text"}``),
+            graphiti-core stores the dict in ``node.summary`` / ``node.attributes``
+            and Neo4j raises a CypherTypeError.  Keeping only known model fields
+            and converting any remaining dict/list to a JSON string prevents this.
+            """
+            if not isinstance(result, dict) or response_model is None:
+                return result
+            try:
+                import json as _j
+                known = set(response_model.model_fields.keys())
+                sanitized: dict[str, Any] = {}
+                for k, v in result.items():
+                    if k not in known:
+                        continue  # discard: properties, required, type, title, …
+                    if isinstance(v, (dict, list)):
+                        v = _j.dumps(v, ensure_ascii=False, default=str)
+                    sanitized[k] = v
+                return sanitized
+            except Exception:  # noqa: BLE001
+                return result
+
         async def generate_response(self, messages: Any, response_model: Any = None, **kwargs: Any) -> Any:
             import json as _json
 
-            if self._log.isEnabledFor(10):  # DEBUG
+            if _debug and self._log.isEnabledFor(10):  # DEBUG
                 try:
                     msgs_serialised = _json.dumps(
                         [m.model_dump() if hasattr(m, "model_dump") else str(m) for m in messages],
@@ -129,29 +159,29 @@ def _make_logging_llm_client(inner: Any) -> Any:
                 )
                 raise
 
-            if self._log.isEnabledFor(10):  # DEBUG
+            if _debug and self._log.isEnabledFor(10):  # DEBUG
                 try:
                     self._log.debug(
-                        "LLM RESPONSE — %s",
+                        "LLM RESPONSE (raw) — %s",
                         _json.dumps(result, ensure_ascii=False, indent=2, default=str),
                     )
                 except Exception:  # noqa: BLE001
-                    self._log.debug("LLM RESPONSE — %r", result)
+                    self._log.debug("LLM RESPONSE (raw) — %r", result)
 
-            # Always log at WARNING when a dict/list sneaks through as a top-level value
-            # (this is the trigger for the Neo4j TypeError we're hunting)
-            if isinstance(result, dict):
-                for k, v in result.items():
-                    if isinstance(v, (dict, list)):
-                        self._log.warning(
-                            "LLM returned non-primitive value for key=%r: %r — "
-                            "this will be caught by the graphiti-nodes patch",
-                            k, v,
-                        )
+            result = self._sanitize(result, response_model)
+
+            if _debug and self._log.isEnabledFor(10):  # DEBUG
+                try:
+                    self._log.debug(
+                        "LLM RESPONSE (sanitized) — %s",
+                        _json.dumps(result, ensure_ascii=False, indent=2, default=str),
+                    )
+                except Exception:  # noqa: BLE001
+                    self._log.debug("LLM RESPONSE (sanitized) — %r", result)
 
             return result
 
-    return _LoggingLLMClient(inner)
+    return _WrappedLLMClient(inner)
 
 
 # --------------------------------------------------------------------------
@@ -284,10 +314,14 @@ class GraphitiBackend(MemoryBackend):
 
         llm_client, embedder, cross_encoder = self._build_llm_clients()
 
-        # Wrap with logging interceptor when GRAPHITI_LLM_DEBUG=1.
-        if llm_client is not None and os.environ.get("GRAPHITI_LLM_DEBUG", "").strip() == "1":
-            llm_client = _make_logging_llm_client(llm_client)
-            logger.info("GRAPHITI_LLM_DEBUG=1 — LLM call logging enabled (level DEBUG)")
+        # Always wrap the LLM client to sanitize malformed responses (strip JSON
+        # Schema metadata keys, coerce dict/list field values to JSON strings).
+        # Additionally enable request/response logging when GRAPHITI_LLM_DEBUG=1.
+        if llm_client is not None:
+            _llm_debug = os.environ.get("GRAPHITI_LLM_DEBUG", "").strip() == "1"
+            llm_client = _make_llm_client_wrapper(llm_client, debug=_llm_debug)
+            if _llm_debug:
+                logger.info("GRAPHITI_LLM_DEBUG=1 — LLM call logging enabled (level DEBUG)")
 
         try:
             self._graphiti = Graphiti(
