@@ -9,6 +9,10 @@ Problem:
   `summary`.  graphiti-core merges those into entity_data and passes them straight
   to Neo4j which rejects non-primitive property values with a TypeError.
 
+  Tested against graphiti-core 0.9.x and 0.11.x. The bug is NOT fixed upstream
+  in these versions (0.12+ changes the architecture to database-per-group which
+  is incompatible with Neo4j Community Edition).
+
 Fix:
   Wrap EntityNode.save so that any dict/list value in entity_data is JSON-serialised
   to a string before the Neo4j write.  Adds WARNING-level log lines for each
