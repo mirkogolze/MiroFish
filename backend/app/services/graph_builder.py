@@ -49,13 +49,15 @@ class GraphBuilderService:
     负责调用Zep API构建知识图谱
     """
     
-    def __init__(self, backend: Optional[MemoryBackend] = None):
-        # Backwards compatible: legacy callers passed ``api_key`` as the
-        # first positional arg. Accept that for one release while
-        # callers migrate to the abstract backend.
+    def __init__(self, backend: Optional[MemoryBackend] = None, api_key: Optional[str] = None):
+        # Backwards compatible: legacy callers passed ``api_key`` as keyword
+        # or ``backend`` as a positional string. Both are ignored when
+        # MEMORY_BACKEND=graphiti; get_memory_backend() handles selection.
         if isinstance(backend, str):  # type: ignore[unreachable]
             os.environ.setdefault("ZEP_API_KEY", backend)
             backend = None
+        if api_key is not None:
+            os.environ.setdefault("ZEP_API_KEY", api_key)
         self.backend: MemoryBackend = backend or get_memory_backend()
         self.task_manager = TaskManager()
     

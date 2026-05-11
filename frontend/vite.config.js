@@ -12,8 +12,11 @@ export default defineConfig({
     }
   },
   server: {
+    host: '0.0.0.0',
     port: 3000,
-    open: true,
+    open: false,
+    hmr: false,
+    allowedHosts: ['q4deumsy14x.mms-at-work.de', 'mms-ai-bot.mms-at-work.de', 'mirofish'],
     proxy: {
       '/api': {
         target: 'http://localhost:5001',
