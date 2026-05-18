@@ -2,7 +2,9 @@
 
 import json
 import re
-from typing import Optional, Dict, Any, List
+import threading
+from contextlib import contextmanager
+from typing import Optional, Dict, Any, Iterator, List
 from openai import OpenAI
 
 from ..config import Config
@@ -10,6 +12,10 @@ from ..config import Config
 
 class LLMClient:
     """OpenAI-kompatibler Chat-Client mit integriertem Usage-Tracking."""
+
+    _request_semaphore: Optional[threading.BoundedSemaphore] = None
+    _request_semaphore_limit: Optional[int] = None
+    _request_semaphore_lock = threading.Lock()
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -31,6 +37,34 @@ class LLMClient:
             api_key=self.api_key,
             base_url=self.base_url,
         )
+
+    @classmethod
+    def _get_request_semaphore(cls) -> Optional[threading.BoundedSemaphore]:
+        """Return a process-wide semaphore when LLM concurrency limiting is enabled."""
+        limit = Config.LLM_MAX_PARALLEL_REQUESTS
+        if limit <= 0:
+            return None
+
+        with cls._request_semaphore_lock:
+            if cls._request_semaphore is None or cls._request_semaphore_limit != limit:
+                cls._request_semaphore = threading.BoundedSemaphore(limit)
+                cls._request_semaphore_limit = limit
+            return cls._request_semaphore
+
+    @classmethod
+    @contextmanager
+    def _request_slot(cls) -> Iterator[None]:
+        """Throttle outbound LLM requests inside this backend process."""
+        semaphore = cls._get_request_semaphore()
+        if semaphore is None:
+            yield
+            return
+
+        semaphore.acquire()
+        try:
+            yield
+        finally:
+            semaphore.release()
 
     def bind_simulation(self, simulation_id: Optional[str]) -> None:
         """Attach (or clear) a simulation id for usage attribution."""
@@ -79,14 +113,15 @@ class LLMClient:
         if response_format:
             kwargs["response_format"] = response_format
 
-        response = self.client.chat.completions.create(**kwargs)
+        with self._request_slot():
+            response = self.client.chat.completions.create(**kwargs)
         # Record usage before any parsing so transient parse errors
         # do not lose cost attribution.
         self._record_usage(response)
 
         content = response.choices[0].message.content
-    # Einige Modelle kapseln Reasoning in <think>…</think>.
-    # Das wird entfernt, damit Aufrufer nur die eigentliche Antwort erhalten.
+        # Einige Modelle kapseln Reasoning in <think>…</think>.
+        # Das wird entfernt, damit Aufrufer nur die eigentliche Antwort erhalten.
         content = re.sub(r'<think>[\s\S]*?</think>', '', content).strip()
         return content
     
