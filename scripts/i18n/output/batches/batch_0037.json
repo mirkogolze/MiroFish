@@ -1,0 +1,175 @@
+{
+  "batch_id": "batch_0037",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/api/report.py:390:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "列出报告失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:436:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "下载报告失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:462:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "删除报告失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:559:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "对话失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:602:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取报告进度失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:653:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取章节列表失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:697:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取章节内容失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:748:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "检查报告状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:809:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取Agent日志失败: ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:891:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取控制台日志失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:975:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "图谱搜索失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:1015:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取图谱统计失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:70:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取图谱实体: graph_id=",
+      "context": "enrich = request.args.get('enrich', 'true').lower() == 'true'"
+    },
+    {
+      "id": "backend/app/api/simulation.py:85:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取图谱实体失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:118:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取实体详情失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:155:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取实体失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:232:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "创建模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:301:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "检测模拟准备状态: ",
+      "context": "# 详细日志"
+    },
+    {
+      "id": "backend/app/api/simulation.py:331:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "自动更新模拟状态: ",
+      "context": "with open(state_file, 'w', encoding='utf-8') as f:\n                        json.dump(state_data, f, ensure_ascii=False, indent=2)"
+    },
+    {
+      "id": "backend/app/api/simulation.py:334:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "自动更新状态失败: ",
+      "context": "status = \"ready\"\n                except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:336:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟 ",
+      "context": "logger.warning(f\"自动更新状态失败: {e}\")"
+    },
+    {
+      "id": "backend/app/api/simulation.py:336:44:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 检测结果: 已准备完成 (status=",
+      "context": "logger.warning(f\"自动更新状态失败: {e}\")"
+    },
+    {
+      "id": "backend/app/api/simulation.py:348:47:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 检测结果: 未准备完成 (status=",
+      "context": "}\n        else:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:350:28:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "状态不在已准备列表中或config_generated为false: status=",
+      "protected_terms": [
+        "config"
+      ],
+      "context": "logger.warning(f\"模拟 {simulation_id} 检测结果: 未准备完成 (status={status}, config_generated={config_generated})\")\n            return False, {"
+    },
+    {
+      "id": "backend/app/api/simulation.py:356:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取状态文件失败: ",
+      "context": "except Exception as e:"
+    }
+  ]
+}

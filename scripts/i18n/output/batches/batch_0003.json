@@ -1,0 +1,231 @@
+{
+  "batch_id": "batch_0003",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:265:4:COMMENT",
+      "kind": "comment",
+      "source_text": "必要文件列表（不包括脚本，脚本位于 backend/scripts/）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:273:4:COMMENT",
+      "kind": "comment",
+      "source_text": "检查文件是否存在"
+    },
+    {
+      "id": "backend/app/api/simulation.py:290:4:COMMENT",
+      "kind": "comment",
+      "source_text": "检查state.json中的状态"
+    },
+    {
+      "id": "backend/app/api/simulation.py:300:8:COMMENT",
+      "kind": "comment",
+      "source_text": "详细日志"
+    },
+    {
+      "id": "backend/app/api/simulation.py:303:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果 config_generated=True 且文件存在，认为准备完成",
+      "protected_terms": [
+        "config"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:304:8:COMMENT",
+      "kind": "comment",
+      "source_text": "以下状态都说明准备工作已完成："
+    },
+    {
+      "id": "backend/app/api/simulation.py:305:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- ready: 准备完成，可以运行"
+    },
+    {
+      "id": "backend/app/api/simulation.py:306:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- preparing: 如果 config_generated=True 说明已完成",
+      "protected_terms": [
+        "config"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:307:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- running: 正在运行，说明准备早就完成了"
+    },
+    {
+      "id": "backend/app/api/simulation.py:308:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- completed: 运行完成，说明准备早就完成了"
+    },
+    {
+      "id": "backend/app/api/simulation.py:309:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- stopped: 已停止，说明准备早就完成了"
+    },
+    {
+      "id": "backend/app/api/simulation.py:310:8:COMMENT",
+      "kind": "comment",
+      "source_text": "- failed: 运行失败（但准备是完成的）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:313:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取文件统计信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:323:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果状态是preparing但文件已完成，自动更新状态为ready"
+    },
+    {
+      "id": "backend/app/api/simulation.py:424:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否强制重新生成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:428:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否已经准备完成（避免重复生成）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:448:8:COMMENT",
+      "kind": "comment",
+      "source_text": "从项目获取必要信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:456:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取模拟需求"
+    },
+    {
+      "id": "backend/app/api/simulation.py:464:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取文档文本"
+    },
+    {
+      "id": "backend/app/api/simulation.py:471:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 同步获取实体数量（在后台任务启动前） =========="
+    },
+    {
+      "id": "backend/app/api/simulation.py:472:8:COMMENT",
+      "kind": "comment",
+      "source_text": "这样前端在调用prepare后立即就能获取到预期Agent总数",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:476:12:COMMENT",
+      "kind": "comment",
+      "source_text": "快速读取实体（不需要边信息，只统计数量）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:480:41:COMMENT",
+      "kind": "comment",
+      "source_text": "不获取边信息，加快速度"
+    },
+    {
+      "id": "backend/app/api/simulation.py:482:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存实体数量到状态（供前端立即获取）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:488:12:COMMENT",
+      "kind": "comment",
+      "source_text": "失败不影响后续流程，后台任务会重新获取"
+    },
+    {
+      "id": "backend/app/api/simulation.py:500:8:COMMENT",
+      "kind": "comment",
+      "source_text": "更新模拟状态（包含预先获取的实体数量）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:518:16:COMMENT",
+      "kind": "comment",
+      "source_text": "准备模拟（带进度回调）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:519:16:COMMENT",
+      "kind": "comment",
+      "source_text": "存储阶段进度详情"
+    },
+    {
+      "id": "backend/app/api/simulation.py:523:20:COMMENT",
+      "kind": "comment",
+      "source_text": "计算总进度"
+    },
+    {
+      "id": "backend/app/api/simulation.py:534:20:COMMENT",
+      "kind": "comment",
+      "source_text": "构建详细进度信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:545:20:COMMENT",
+      "kind": "comment",
+      "source_text": "更新阶段详情"
+    },
+    {
+      "id": "backend/app/api/simulation.py:567:20:COMMENT",
+      "kind": "comment",
+      "source_text": "构建简洁消息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:593:16:COMMENT",
+      "kind": "comment",
+      "source_text": "任务完成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:603:16:COMMENT",
+      "kind": "comment",
+      "source_text": "更新模拟状态为失败"
+    },
+    {
+      "id": "backend/app/api/simulation.py:622:66:COMMENT",
+      "kind": "comment",
+      "source_text": "预期的Agent总数",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:623:52:COMMENT",
+      "kind": "comment",
+      "source_text": "实体类型列表"
+    },
+    {
+      "id": "backend/app/api/simulation.py:678:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果提供了simulation_id，先检查是否已准备完成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:694:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果没有task_id，返回错误"
+    },
+    {
+      "id": "backend/app/api/simulation.py:697:16:COMMENT",
+      "kind": "comment",
+      "source_text": "有simulation_id但未准备完成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:717:12:COMMENT",
+      "kind": "comment",
+      "source_text": "任务不存在，但如果有simulation_id，检查是否已准备完成"
+    }
+  ]
+}

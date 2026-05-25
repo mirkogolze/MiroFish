@@ -1,0 +1,135 @@
+{
+  "batch_id": "batch_0062",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 17,
+  "items": [
+    {
+      "id": "backend/scripts/action_logger.py:81:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录轮次结束"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:93:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录模拟开始"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:106:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录模拟结束"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:141:8:STRING",
+      "kind": "string_constant",
+      "source_text": "设置主模拟日志"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:170:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取 Twitter 平台日志记录器",
+      "protected_terms": [
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/scripts/action_logger.py:176:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取 Reddit 平台日志记录器",
+      "protected_terms": [
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/scripts/action_logger.py:182:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录主日志"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:296:4:STRING",
+      "kind": "string_constant",
+      "source_text": "获取全局日志实例（兼容旧接口）"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:21:4:STRING",
+      "kind": "string_constant",
+      "source_text": "测试Profile格式"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:23:10:STRING",
+      "kind": "string_constant",
+      "source_text": "OASIS Profile格式测试",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:72:14:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n1. 测试Twitter Profile (CSV格式)",
+      "protected_terms": [
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:98:14:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n2. 测试Reddit Profile (JSON详细格式)",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:126:10:STRING",
+      "kind": "string_constant",
+      "source_text": "测试完成!"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:131:4:STRING",
+      "kind": "string_constant",
+      "source_text": "显示OASIS期望的格式",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:133:10:STRING",
+      "kind": "string_constant",
+      "source_text": "OASIS 期望的Profile格式参考",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:136:10:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n1. Twitter Profile (CSV格式)",
+      "protected_terms": [
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:143:10:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n2. Reddit Profile (JSON详细格式)",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "Reddit"
+      ]
+    }
+  ]
+}

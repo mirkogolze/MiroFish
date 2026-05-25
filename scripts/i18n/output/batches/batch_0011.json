@@ -1,0 +1,232 @@
+{
+  "batch_id": "batch_0011",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:2056:24:COMMENT",
+      "kind": "comment",
+      "source_text": "跳过解析失败的行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2116:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建章节Markdown内容 - 清理可能存在的重复标题",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2159:12:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否是Markdown标题行",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2166:16:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否是与章节标题重复的标题（跳过前5行内的重复）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2172:16:COMMENT",
+      "kind": "comment",
+      "source_text": "将所有级别的标题（#, ##, ###, ####等）转换为粗体"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2173:16:COMMENT",
+      "kind": "comment",
+      "source_text": "因为章节标题由系统添加，内容中不应有任何标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2175:42:COMMENT",
+      "kind": "comment",
+      "source_text": "添加空行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2178:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果上一行是被跳过的标题，且当前行为空，也跳过"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2186:8:COMMENT",
+      "kind": "comment",
+      "source_text": "移除开头的空行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2190:8:COMMENT",
+      "kind": "comment",
+      "source_text": "移除开头的分隔线"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2193:12:COMMENT",
+      "kind": "comment",
+      "source_text": "同时移除分隔线后的空行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2258:16:COMMENT",
+      "kind": "comment",
+      "source_text": "从文件名解析章节索引"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2279:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建报告头部"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2284:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按顺序读取所有章节文件"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2289:8:COMMENT",
+      "kind": "comment",
+      "source_text": "后处理：清理整个报告的标题问题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2292:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存完整报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2322:8:COMMENT",
+      "kind": "comment",
+      "source_text": "收集大纲中的所有章节标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2332:12:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否是标题行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2339:16:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否是重复标题（在连续5行内出现相同内容的标题）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2351:20:COMMENT",
+      "kind": "comment",
+      "source_text": "跳过重复标题及其后的空行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2357:16:COMMENT",
+      "kind": "comment",
+      "source_text": "标题层级处理："
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2358:16:COMMENT",
+      "kind": "comment",
+      "source_text": "- # (level=1) 只保留报告主标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2359:16:COMMENT",
+      "kind": "comment",
+      "source_text": "- ## (level=2) 保留章节标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2360:16:COMMENT",
+      "kind": "comment",
+      "source_text": "- ### 及以下 (level>=3) 转换为粗体文本"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2364:24:COMMENT",
+      "kind": "comment",
+      "source_text": "保留报告主标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2368:24:COMMENT",
+      "kind": "comment",
+      "source_text": "章节标题错误使用了#，修正为##"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2372:24:COMMENT",
+      "kind": "comment",
+      "source_text": "其他一级标题转为粗体"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2378:24:COMMENT",
+      "kind": "comment",
+      "source_text": "保留章节标题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2382:24:COMMENT",
+      "kind": "comment",
+      "source_text": "非章节的二级标题转为粗体"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2387:20:COMMENT",
+      "kind": "comment",
+      "source_text": "### 及以下级别的标题转换为粗体文本"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2396:16:COMMENT",
+      "kind": "comment",
+      "source_text": "跳过标题后紧跟的分隔线"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2401:16:COMMENT",
+      "kind": "comment",
+      "source_text": "标题后只保留一个空行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2412:8:COMMENT",
+      "kind": "comment",
+      "source_text": "清理连续的多个空行（保留最多2个）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2431:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存元信息JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2435:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存大纲"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2439:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存完整Markdown报告",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2452:12:COMMENT",
+      "kind": "comment",
+      "source_text": "兼容旧格式：检查直接存储在reports目录下的文件"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2462:8:COMMENT",
+      "kind": "comment",
+      "source_text": "重建Report对象"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2478:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果markdown_content为空，尝试从full_report.md读取"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2506:12:COMMENT",
+      "kind": "comment",
+      "source_text": "新格式：文件夹"
+    }
+  ]
+}

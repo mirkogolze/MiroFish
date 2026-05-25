@@ -1,0 +1,156 @@
+{
+  "batch_id": "batch_0027",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/models/project.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n项目上下文管理\n用于在服务端持久化项目状态，避免前端在接口间传递大量数据\n"
+    },
+    {
+      "id": "backend/app/models/project.py:134:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        创建新项目\n        \n        Args:\n            name: 项目名称\n            \n        Returns:\n            新创建的Project对象\n        ",
+      "context": "@classmethod\n    def create_project(cls, name: str = \"Unnamed Project\") -> Project:"
+    },
+    {
+      "id": "backend/app/models/project.py:178:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取项目\n        \n        Args:\n            project_id: 项目ID\n            \n        Returns:\n            Project对象，如果不存在返回None\n        ",
+      "context": "@classmethod\n    def get_project(cls, project_id: str) -> Optional[Project]:"
+    },
+    {
+      "id": "backend/app/models/project.py:199:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        列出所有项目\n        \n        Args:\n            limit: 返回数量限制\n            \n        Returns:\n            项目列表，按创建时间倒序\n        ",
+      "context": "@classmethod\n    def list_projects(cls, limit: int = 50) -> List[Project]:"
+    },
+    {
+      "id": "backend/app/models/project.py:223:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        删除项目及其所有文件\n        \n        Args:\n            project_id: 项目ID\n            \n        Returns:\n            是否删除成功\n        ",
+      "context": "@classmethod\n    def delete_project(cls, project_id: str) -> bool:"
+    },
+    {
+      "id": "backend/app/models/project.py:242:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        保存上传的文件到项目目录\n        \n        Args:\n            project_id: 项目ID\n            file_storage: Flask的FileStorage对象\n            original_filename: 原始文件名\n            \n        Returns:\n            文件信息字典 {filename, path, size}\n        ",
+      "placeholders": [
+        "{filename, path, size}"
+      ],
+      "protected_terms": [
+        "Flask"
+      ],
+      "context": "@classmethod\n    def save_file_to_project(cls, project_id: str, file_storage, original_filename: str) -> Dict[str, str]:"
+    },
+    {
+      "id": "backend/app/models/task.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n任务状态管理\n用于跟踪长时间运行的任务（如图谱构建）\n"
+    },
+    {
+      "id": "backend/app/models/task.py:57:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    任务管理器\n    线程安全的任务状态管理\n    ",
+      "context": "class TaskManager:"
+    },
+    {
+      "id": "backend/app/models/task.py:76:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        创建新任务\n        \n        Args:\n            task_type: 任务类型\n            metadata: 额外元数据\n            \n        Returns:\n            任务ID\n        ",
+      "context": "def create_task(self, task_type: str, metadata: Optional[Dict] = None) -> str:"
+    },
+    {
+      "id": "backend/app/models/task.py:118:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        更新任务状态\n        \n        Args:\n            task_id: 任务ID\n            status: 新状态\n            progress: 进度\n            message: 消息\n            result: 结果\n            error: 错误信息\n            progress_detail: 详细进度信息\n        ",
+      "context": "progress_detail: Optional[Dict] = None\n    ):"
+    },
+    {
+      "id": "backend/app/services/__init__.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n业务服务模块\n"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n图谱构建服务\n接口2：使用Zep API构建Standalone Graph\n",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:41:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    图谱构建服务\n    负责调用Zep API构建知识图谱\n    ",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ],
+      "context": "class GraphBuilderService:"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:63:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        异步构建图谱\n        \n        Args:\n            text: 输入文本\n            ontology: 本体定义（来自接口1的输出）\n            graph_name: 图谱名称\n            chunk_size: 文本块大小\n            chunk_overlap: 块重叠大小\n            batch_size: 每批发送的块数量\n            \n        Returns:\n            任务ID\n        ",
+      "context": "batch_size: int = 3\n    ) -> str:"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:427:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取完整图谱数据（包含详细信息）\n        \n        Args:\n            graph_id: 图谱ID\n            \n        Returns:\n            包含nodes和edges的字典，包括时间信息、属性等详细数据\n        ",
+      "context": "def get_graph_data(self, graph_id: str) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n本体生成服务\n接口1：分析文本内容，生成适合社会模拟的实体和关系类型定义\n"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:177:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    本体生成器\n    分析文本内容，生成实体和关系类型定义\n    ",
+      "context": "class OntologyGenerator:"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:191:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        生成本体定义\n        \n        Args:\n            document_texts: 文档文本列表\n            simulation_requirement: 模拟需求描述\n            additional_context: 额外上下文\n            \n        Returns:\n            本体定义（entity_types, edge_types等）\n        ",
+      "context": "additional_context: Optional[str] = None\n    ) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:401:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        将本体定义转换为Python代码（类似ontology.py）\n        \n        Args:\n            ontology: 本体定义\n            \n        Returns:\n            Python代码字符串\n        ",
+      "protected_terms": [
+        "Python"
+      ],
+      "context": "def generate_python_code(self, ontology: Dict[str, Any]) -> str:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nReport Agent服务\n使用LangChain + Zep实现ReACT模式的模拟报告生成\n\n功能：\n1. 根据模拟需求和Zep图谱信息生成报告\n2. 先规划目录结构，然后分段生成\n3. 每段采用ReACT多轮思考与反思模式\n4. 支持与用户对话，在对话中自主调用检索工具\n",
+      "protected_terms": [
+        "Agent",
+        "LangChain",
+        "ReACT",
+        "Zep"
+      ]
+    }
+  ]
+}

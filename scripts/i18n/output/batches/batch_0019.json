@@ -1,0 +1,233 @@
+{
+  "batch_id": "batch_0019",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_runner.py:1339:16:COMMENT",
+      "kind": "comment",
+      "source_text": "如果原处理器不可调用（如 SIG_DFL），则使用默认行为"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1342:8:COMMENT",
+      "kind": "comment",
+      "source_text": "注册 atexit 处理器（作为备用）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1345:8:COMMENT",
+      "kind": "comment",
+      "source_text": "注册信号处理器（仅在主线程中）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1347:12:COMMENT",
+      "kind": "comment",
+      "source_text": "SIGTERM: kill 命令默认信号"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1351:12:COMMENT",
+      "kind": "comment",
+      "source_text": "SIGHUP: 终端关闭（仅 Unix 系统）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1355:12:COMMENT",
+      "kind": "comment",
+      "source_text": "不在主线程中，只能使用 atexit"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1371:4:COMMENT",
+      "kind": "comment",
+      "source_text": "============== Interview 功能 =============="
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1579:8:COMMENT",
+      "kind": "comment",
+      "source_text": "从配置文件获取所有Agent信息",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1591:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建批量采访列表"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1652:12:COMMENT",
+      "kind": "comment",
+      "source_text": "超时可能是因为环境正在关闭"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1743:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确定要查询的平台"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1747:12:COMMENT",
+      "kind": "comment",
+      "source_text": "不指定platform时，查询两个平台"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1760:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按时间降序排序"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1763:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果查询了多个平台，限制总数"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:51:8:COMMENT",
+      "kind": "comment",
+      "source_text": "标准化换行"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:54:8:COMMENT",
+      "kind": "comment",
+      "source_text": "移除连续空行（保留最多两个换行）"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:57:8:COMMENT",
+      "kind": "comment",
+      "source_text": "移除行首行尾空白"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:18:0:COMMENT",
+      "kind": "comment",
+      "source_text": "用于泛型返回类型"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:30:4:COMMENT",
+      "kind": "comment",
+      "source_text": "相关的边信息"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:32:4:COMMENT",
+      "kind": "comment",
+      "source_text": "相关的其他节点信息"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:121:32:COMMENT",
+      "kind": "comment",
+      "source_text": "指数退避"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:193:12:COMMENT",
+      "kind": "comment",
+      "source_text": "使用重试机制调用Zep API",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:238:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取所有节点"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:242:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取所有边（用于后续关联查找）"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:245:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建节点UUID到节点数据的映射",
+      "protected_terms": [
+        "UUID"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:248:8:COMMENT",
+      "kind": "comment",
+      "source_text": "筛选符合条件的实体"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:255:12:COMMENT",
+      "kind": "comment",
+      "source_text": "筛选逻辑：Labels必须包含除\"Entity\"和\"Node\"之外的标签",
+      "protected_terms": [
+        "Entity",
+        "Node"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:259:16:COMMENT",
+      "kind": "comment",
+      "source_text": "只有默认标签，跳过"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:262:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果指定了预定义类型，检查是否匹配"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:273:12:COMMENT",
+      "kind": "comment",
+      "source_text": "创建实体节点对象"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:282:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取相关边和节点"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:307:16:COMMENT",
+      "kind": "comment",
+      "source_text": "获取关联节点的基本信息"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:349:12:COMMENT",
+      "kind": "comment",
+      "source_text": "使用重试机制获取节点"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:358:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取节点的边"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:361:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取所有节点用于关联查找"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:365:12:COMMENT",
+      "kind": "comment",
+      "source_text": "处理相关边和节点"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:387:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取关联节点信息"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:91:4:COMMENT",
+      "kind": "comment",
+      "source_text": "时间信息"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:148:4:COMMENT",
+      "kind": "comment",
+      "source_text": "各维度检索结果"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:149:61:COMMENT",
+      "kind": "comment",
+      "source_text": "语义搜索结果"
+    }
+  ]
+}

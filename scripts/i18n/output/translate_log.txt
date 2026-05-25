@@ -1,0 +1,91 @@
+Resume mode: 160 segments already translated
+Processing 62 batch files...
+API: http://localhost:1234/v1
+Model: qwen2.5-14b-instruct
+
+  batch_0005 (comment): 40 items... ✓ 40
+  batch_0006 (comment): 40 items... ✓ 40
+  batch_0007 (comment): 40 items... ✓ 40
+  batch_0008 (comment): 40 items... ✓ 40
+  batch_0009 (comment): 40 items... ✓ 40
+  batch_0010 (comment): 40 items... ✓ 40
+  batch_0011 (comment): 40 items... ✓ 40
+  batch_0012 (comment): 40 items... ✓ 40
+  batch_0013 (comment): 40 items... ✓ 40
+  batch_0014 (comment): 40 items... ✓ 40
+  batch_0015 (comment): 40 items... ✓ 40
+  batch_0016 (comment): 40 items... ✓ 40
+  batch_0017 (comment): 40 items... ✓ 40
+  batch_0018 (comment): 40 items... ✓ 40
+  batch_0019 (comment): 40 items... ✓ 40
+  batch_0020 (comment): 40 items... ✓ 40
+  batch_0021 (comment): 40 items... ✓ 40
+  batch_0022 (comment): 40 items... ✓ 40
+  batch_0023 (comment): 39 items...     ERROR: Could not parse LLM response
+✗ FAILED
+  batch_0024 (docstring): 20 items... ✓ 20
+  batch_0025 (docstring): 20 items...     Timeout (attempt 1/3)
+    Timeout (attempt 2/3)
+    Timeout (attempt 3/3)
+    ERROR: No response from LLM
+✗ FAILED
+  batch_0026 (docstring): 20 items...     Timeout (attempt 1/3)
+    Timeout (attempt 2/3)
+    Timeout (attempt 3/3)
+    ERROR: No response from LLM
+✗ FAILED
+  batch_0027 (docstring): 20 items... ✓ 20
+  batch_0028 (docstring): 20 items...     Timeout (attempt 1/3)
+    Timeout (attempt 2/3)
+    Timeout (attempt 3/3)
+    ERROR: No response from LLM
+✗ FAILED
+  batch_0029 (docstring): 20 items... ✓ 20
+  batch_0030 (docstring): 20 items... ✓ 20
+  batch_0031 (docstring): 20 items... ✓ 20
+  batch_0032 (docstring): 20 items... ✓ 20
+  batch_0033 (docstring): 20 items... ✓ 20
+  batch_0034 (docstring): 13 items... ✓ 12/13 (missed 1)
+  batch_0035 (error_message): 3 items... ✓ 3
+  batch_0036 (fstring_text): 25 items... ✓ 25
+  batch_0037 (fstring_text): 25 items... ✓ 25
+  batch_0038 (fstring_text): 25 items... ✓ 25
+  batch_0039 (fstring_text): 25 items... ✓ 25
+  batch_0040 (fstring_text): 25 items... ✓ 25
+  batch_0041 (fstring_text): 25 items...     ERROR: Could not parse LLM response
+✗ FAILED
+  batch_0042 (fstring_text): 25 items... ✓ 25
+  batch_0043 (fstring_text): 25 items... ✓ 25
+  batch_0044 (fstring_text): 25 items... ✓ 25
+  batch_0045 (fstring_text): 25 items... ✓ 24/25 (missed 1)
+  batch_0046 (fstring_text): 25 items... ✓ 24/25 (missed 1)
+  batch_0047 (fstring_text): 25 items... ✓ 24/25 (missed 1)
+  batch_0048 (fstring_text): 25 items... ✓ 25
+  batch_0049 (fstring_text): 8 items... ✓ 8
+  batch_0050 (llm_prompt): 5 items...     Timeout (attempt 1/3)
+    Timeout (attempt 2/3)
+    Timeout (attempt 3/3)
+    ERROR: No response from LLM
+✗ FAILED
+  batch_0051 (llm_prompt): 5 items...     Timeout (attempt 1/3)
+    Timeout (attempt 2/3)
+    Timeout (attempt 3/3)
+    ERROR: No response from LLM
+✗ FAILED
+  batch_0052 (llm_prompt): 3 items... ✓ 3
+  batch_0053 (string_constant): 30 items... ✓ 30
+  batch_0054 (string_constant): 30 items... ✓ 30
+  batch_0055 (string_constant): 30 items... ✓ 30
+  batch_0056 (string_constant): 30 items... ✓ 30
+  batch_0057 (string_constant): 30 items... ✓ 30
+  batch_0058 (string_constant): 30 items... ✓ 30
+  batch_0059 (string_constant): 30 items... ✓ 30
+  batch_0060 (string_constant): 30 items... ✓ 30
+  batch_0061 (string_constant): 30 items... ✓ 30
+  batch_0062 (string_constant): 17 items... ✓ 17
+
+========================================
+Translated: 1470
+Failed: 138
+Total in memory: 1630
+Output: /Users/olkr/Projects/MiroFish/scripts/i18n/output/translations.jsonl

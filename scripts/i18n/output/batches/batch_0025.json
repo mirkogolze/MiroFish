@@ -1,0 +1,232 @@
+{
+  "batch_id": "batch_0025",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/api/report.py:474:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    与Report Agent对话\n    \n    Report Agent可以在对话中自主调用检索工具来回答问题\n    \n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",        // 必填，模拟ID\n            \"message\": \"请解释一下舆情走向\",    // 必填，用户消息\n            \"chat_history\": [                   // 可选，对话历史\n                {\"role\": \"user\", \"content\": \"...\"},\n                {\"role\": \"assistant\", \"content\": \"...\"}\n            ]\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"response\": \"Agent回复...\",\n                \"tool_calls\": [调用的工具列表],\n                \"sources\": [信息来源]\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"response\": \"Agent回复...\",\n                \"tool_calls\": [调用的工具列表],\n                \"sources\": [信息来源]\n            }",
+        "{\"role\": \"assistant\", \"content\": \"...\"}",
+        "{\"role\": \"user\", \"content\": \"...\"}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/chat', methods=['POST'])\ndef chat_with_report_agent():"
+    },
+    {
+      "id": "backend/app/api/report.py:571:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取报告生成进度（实时）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"status\": \"generating\",\n                \"progress\": 45,\n                \"message\": \"正在生成章节: 关键发现\",\n                \"current_section\": \"关键发现\",\n                \"completed_sections\": [\"执行摘要\", \"模拟背景\"],\n                \"updated_at\": \"2025-12-09T...\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"status\": \"generating\",\n                \"progress\": 45,\n                \"message\": \"正在生成章节: 关键发现\",\n                \"current_section\": \"关键发现\",\n                \"completed_sections\": [\"执行摘要\", \"模拟背景\"],\n                \"updated_at\": \"2025-12-09T...\"\n            }"
+      ],
+      "context": "@report_bp.route('/<report_id>/progress', methods=['GET'])\ndef get_report_progress(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:612:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取已生成的章节列表（分章节输出）\n    \n    前端可以轮询此接口获取已生成的章节内容，无需等待整个报告完成\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"report_id\": \"report_xxxx\",\n                \"sections\": [\n                    {\n                        \"filename\": \"section_01.md\",\n                        \"section_index\": 1,\n                        \"content\": \"## 执行摘要\\\\n\\\\n...\"\n                    },\n                    ...\n                ],\n                \"total_sections\": 3,\n                \"is_complete\": false\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                        \"filename\": \"section_01.md\",\n                        \"section_index\": 1,\n                        \"content\": \"## 执行摘要\\\\n\\\\n...\"\n                    }"
+      ],
+      "context": "@report_bp.route('/<report_id>/sections', methods=['GET'])\ndef get_report_sections(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:663:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取单个章节内容\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"filename\": \"section_01.md\",\n                \"content\": \"## 执行摘要\\\\n\\\\n...\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"filename\": \"section_01.md\",\n                \"content\": \"## 执行摘要\\\\n\\\\n...\"\n            }"
+      ],
+      "context": "@report_bp.route('/<report_id>/section/<int:section_index>', methods=['GET'])\ndef get_single_section(report_id: str, section_index: int):"
+    },
+    {
+      "id": "backend/app/api/report.py:709:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    检查模拟是否有报告，以及报告状态\n    \n    用于前端判断是否解锁Interview功能\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"has_report\": true,\n                \"report_status\": \"completed\",\n                \"report_id\": \"report_xxxx\",\n                \"interview_unlocked\": true\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"has_report\": true,\n                \"report_status\": \"completed\",\n                \"report_id\": \"report_xxxx\",\n                \"interview_unlocked\": true\n            }"
+      ],
+      "context": "@report_bp.route('/check/<simulation_id>', methods=['GET'])\ndef check_report_status(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:760:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取 Report Agent 的详细执行日志\n    \n    实时获取报告生成过程中的每一步动作，包括：\n    - 报告开始、规划开始/完成\n    - 每个章节的开始、工具调用、LLM响应、完成\n    - 报告完成或失败\n    \n    Query参数：\n        from_line: 从第几行开始读取（可选，默认0，用于增量获取）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"logs\": [\n                    {\n                        \"timestamp\": \"2025-12-13T...\",\n                        \"elapsed_seconds\": 12.5,\n                        \"report_id\": \"report_xxxx\",\n                        \"action\": \"tool_call\",\n                        \"stage\": \"generating\",\n                        \"section_title\": \"执行摘要\",\n                        \"section_index\": 1,\n                        \"details\": {\n                            \"tool_name\": \"insight_forge\",\n                            \"parameters\": {...},\n                            ...\n                        }\n                    },\n                    ...\n                ],\n                \"total_lines\": 25,\n                \"from_line\": 0,\n                \"has_more\": false\n            }\n        }\n    ",
+      "placeholders": [
+        "{...}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "LLM"
+      ],
+      "context": "@report_bp.route('/<report_id>/agent-log', methods=['GET'])\ndef get_agent_log(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:819:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取完整的 Agent 日志（一次性获取全部）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"logs\": [...],\n                \"count\": 25\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"logs\": [...],\n                \"count\": 25\n            }"
+      ],
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@report_bp.route('/<report_id>/agent-log/stream', methods=['GET'])\ndef stream_agent_log(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:855:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取 Report Agent 的控制台输出日志\n    \n    实时获取报告生成过程中的控制台输出（INFO、WARNING等），\n    这与 agent-log 接口返回的结构化 JSON 日志不同，\n    是纯文本格式的控制台风格日志。\n    \n    Query参数：\n        from_line: 从第几行开始读取（可选，默认0，用于增量获取）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"logs\": [\n                    \"[19:46:14] INFO: 搜索完成: 找到 15 条相关事实\",\n                    \"[19:46:14] INFO: 图谱搜索: graph_id=xxx, query=...\",\n                    ...\n                ],\n                \"total_lines\": 100,\n                \"from_line\": 0,\n                \"has_more\": false\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"logs\": [\n                    \"[19:46:14] INFO: 搜索完成: 找到 15 条相关事实\",\n                    \"[19:46:14] INFO: 图谱搜索: graph_id=xxx, query=...\",\n                    ...\n                ],\n                \"total_lines\": 100,\n                \"from_line\": 0,\n                \"has_more\": false\n            }"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/<report_id>/console-log', methods=['GET'])\ndef get_console_log(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:901:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取完整的控制台日志（一次性获取全部）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"logs\": [...],\n                \"count\": 100\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"logs\": [...],\n                \"count\": 100\n            }"
+      ],
+      "context": "@report_bp.route('/<report_id>/console-log/stream', methods=['GET'])\ndef stream_console_log(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:937:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    图谱搜索工具接口（供调试使用）\n    \n    请求（JSON）：\n        {\n            \"graph_id\": \"mirofish_xxxx\",\n            \"query\": \"搜索查询\",\n            \"limit\": 10\n        }\n    ",
+      "placeholders": [
+        "{\n            \"graph_id\": \"mirofish_xxxx\",\n            \"query\": \"搜索查询\",\n            \"limit\": 10\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/tools/search', methods=['POST'])\ndef search_graph_tool():"
+    },
+    {
+      "id": "backend/app/api/report.py:985:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    图谱统计工具接口（供调试使用）\n    \n    请求（JSON）：\n        {\n            \"graph_id\": \"mirofish_xxxx\"\n        }\n    ",
+      "placeholders": [
+        "{\n            \"graph_id\": \"mirofish_xxxx\"\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/tools/statistics', methods=['POST'])\ndef get_graph_statistics_tool():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n模拟相关API路由\nStep2: Zep实体读取与过滤、OASIS模拟准备与运行（全程自动化）\n",
+      "protected_terms": [
+        "API",
+        "OASIS",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:29:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    优化Interview提问，添加前缀避免Agent调用工具\n    \n    Args:\n        prompt: 原始提问\n        \n    Returns:\n        优化后的提问\n    ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "def optimize_interview_prompt(prompt: str) -> str:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:50:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取图谱中的所有实体（已过滤）\n    \n    只返回符合预定义实体类型的节点（Labels不只是Entity的节点）\n    \n    Query参数：\n        entity_types: 逗号分隔的实体类型列表（可选，用于进一步过滤）\n        enrich: 是否获取相关边信息（默认true）\n    ",
+      "protected_terms": [
+        "Entity"
+      ],
+      "context": "@simulation_bp.route('/entities/<graph_id>', methods=['GET'])\ndef get_graph_entities(graph_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:167:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    创建新的模拟\n    \n    注意：max_rounds等参数由LLM智能生成，无需手动设置\n    \n    请求（JSON）：\n        {\n            \"project_id\": \"proj_xxxx\",      // 必填\n            \"graph_id\": \"mirofish_xxxx\",    // 可选，如不提供则从project获取\n            \"enable_twitter\": true,          // 可选，默认true\n            \"enable_reddit\": true            // 可选，默认true\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"project_id\": \"proj_xxxx\",\n                \"graph_id\": \"mirofish_xxxx\",\n                \"status\": \"created\",\n                \"enable_twitter\": true,\n                \"enable_reddit\": true,\n                \"created_at\": \"2025-12-01T10:00:00\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"project_id\": \"proj_xxxx\",\n                \"graph_id\": \"mirofish_xxxx\",\n                \"status\": \"created\",\n                \"enable_twitter\": true,\n                \"enable_reddit\": true,\n                \"created_at\": \"2025-12-01T10:00:00\"\n            }",
+        "{\n            \"project_id\": \"proj_xxxx\",      // 必填\n            \"graph_id\": \"mirofish_xxxx\",    // 可选，如不提供则从project获取\n            \"enable_twitter\": true,          // 可选，默认true\n            \"enable_reddit\": true            // 可选，默认true\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "LLM"
+      ],
+      "context": "@simulation_bp.route('/create', methods=['POST'])\ndef create_simulation():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:241:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    检查模拟是否已经准备完成\n    \n    检查条件：\n    1. state.json 存在且 status 为 \"ready\"\n    2. 必要文件存在：reddit_profiles.json, twitter_profiles.csv, simulation_config.json\n    \n    注意：运行脚本(run_*.py)保留在 backend/scripts/ 目录，不再复制到模拟目录\n    \n    Args:\n        simulation_id: 模拟ID\n        \n    Returns:\n        (is_prepared: bool, info: dict)\n    ",
+      "protected_terms": [
+        "config"
+      ],
+      "context": "def _check_simulation_prepared(simulation_id: str) -> tuple:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:644:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    查询准备任务进度\n    \n    支持两种查询方式：\n    1. 通过task_id查询正在进行的任务进度\n    2. 通过simulation_id检查是否已有完成的准备工作\n    \n    请求（JSON）：\n        {\n            \"task_id\": \"task_xxxx\",          // 可选，prepare返回的task_id\n            \"simulation_id\": \"sim_xxxx\"      // 可选，模拟ID（用于检查已完成的准备）\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"task_id\": \"task_xxxx\",\n                \"status\": \"processing|completed|ready\",\n                \"progress\": 45,\n                \"message\": \"...\",\n                \"already_prepared\": true|false,  // 是否已有完成的准备\n                \"prepare_info\": {...}            // 已准备完成时的详细信息\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n            \"task_id\": \"task_xxxx\",          // 可选，prepare返回的task_id\n            \"simulation_id\": \"sim_xxxx\"      // 可选，模拟ID（用于检查已完成的准备）\n        }",
+        "{...}"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/prepare/status', methods=['POST'])\ndef get_prepare_status():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:790:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    列出所有模拟\n    \n    Query参数：\n        project_id: 按项目ID过滤（可选）\n    ",
+      "context": "@simulation_bp.route('/list', methods=['GET'])\ndef list_simulations():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:818:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取 simulation 对应的最新 report_id\n    \n    遍历 reports 目录，找出 simulation_id 匹配的 report，\n    如果有多个则返回最新的（按 created_at 排序）\n    \n    Args:\n        simulation_id: 模拟ID\n        \n    Returns:\n        report_id 或 None\n    ",
+      "context": "def _get_report_id_for_simulation(simulation_id: str) -> str:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:878:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取历史模拟列表（带项目详情）\n    \n    用于首页历史项目展示，返回包含项目名称、描述等丰富信息的模拟列表\n    \n    Query参数：\n        limit: 返回数量限制（默认20）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": [\n                {\n                    \"simulation_id\": \"sim_xxxx\",\n                    \"project_id\": \"proj_xxxx\",\n                    \"project_name\": \"武大舆情分析\",\n                    \"simulation_requirement\": \"如果武汉大学发布...\",\n                    \"status\": \"completed\",\n                    \"entities_count\": 68,\n                    \"profiles_count\": 68,\n                    \"entity_types\": [\"Student\", \"Professor\", ...],\n                    \"created_at\": \"2024-12-10\",\n                    \"updated_at\": \"2024-12-10\",\n                    \"total_rounds\": 120,\n                    \"current_round\": 120,\n                    \"report_id\": \"report_xxxx\",\n                    \"version\": \"v1.0.2\"\n                },\n                ...\n            ],\n            \"count\": 7\n        }\n    ",
+      "placeholders": [
+        "{\n                    \"simulation_id\": \"sim_xxxx\",\n                    \"project_id\": \"proj_xxxx\",\n                    \"project_name\": \"武大舆情分析\",\n                    \"simulation_requirement\": \"如果武汉大学发布...\",\n                    \"status\": \"completed\",\n                    \"entities_count\": 68,\n                    \"profiles_count\": 68,\n                    \"entity_types\": [\"Student\", \"Professor\", ...],\n                    \"created_at\": \"2024-12-10\",\n                    \"updated_at\": \"2024-12-10\",\n                    \"total_rounds\": 120,\n                    \"current_round\": 120,\n                    \"report_id\": \"report_xxxx\",\n                    \"version\": \"v1.0.2\"\n                }"
+      ],
+      "context": "@simulation_bp.route('/history', methods=['GET'])\ndef get_simulation_history():"
+    }
+  ]
+}

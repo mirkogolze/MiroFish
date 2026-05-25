@@ -1,0 +1,205 @@
+{
+  "batch_id": "batch_0057",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:1934:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取大纲文件路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1939:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取进度文件路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1944:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取章节Markdown文件路径",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1949:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取 Agent 日志文件路径",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1954:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取控制台日志文件路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2230:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取报告生成进度"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2428:8:STRING",
+      "kind": "string_constant",
+      "source_text": "保存报告元信息和完整报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2448:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2501:8:STRING",
+      "kind": "string_constant",
+      "source_text": "根据模拟ID获取报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2522:8:STRING",
+      "kind": "string_constant",
+      "source_text": "列出报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2549:8:STRING",
+      "kind": "string_constant",
+      "source_text": "删除报告（整个文件夹）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:53:4:STRING",
+      "kind": "string_constant",
+      "source_text": "单个Agent的活动配置",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:85:4:STRING",
+      "kind": "string_constant",
+      "source_text": "时间模拟配置（基于中国人作息习惯）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:115:4:STRING",
+      "kind": "string_constant",
+      "source_text": "事件配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:131:4:STRING",
+      "kind": "string_constant",
+      "source_text": "平台特定配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:148:4:STRING",
+      "kind": "string_constant",
+      "source_text": "完整的模拟参数配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:196:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为JSON字符串",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:331:20:STRING",
+      "kind": "string_constant",
+      "source_text": "为初始帖子分配合适的发布者 Agent...",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:387:8:STRING",
+      "kind": "string_constant",
+      "source_text": "构建LLM上下文，截断到最大长度",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:404:28:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n...(文档已截断)"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:410:8:STRING",
+      "kind": "string_constant",
+      "source_text": "生成实体摘要"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:435:8:STRING",
+      "kind": "string_constant",
+      "source_text": "带重试的LLM调用，包含JSON修复逻辑",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:484:8:STRING",
+      "kind": "string_constant",
+      "source_text": "修复被截断的JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:502:8:STRING",
+      "kind": "string_constant",
+      "source_text": "尝试修复配置JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:536:8:STRING",
+      "kind": "string_constant",
+      "source_text": "生成时间配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:588:24:STRING",
+      "kind": "string_constant",
+      "source_text": "你是社交媒体模拟专家。返回纯JSON格式，时间配置需符合模拟场景中目标用户群体的作息习惯。",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:598:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取默认时间配置（中国人作息）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:608:25:STRING",
+      "kind": "string_constant",
+      "source_text": "使用默认中国人作息配置（每轮1小时）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:612:8:STRING",
+      "kind": "string_constant",
+      "source_text": "解析时间配置结果，并验证agents_per_hour值不超过总agent数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:652:8:STRING",
+      "kind": "string_constant",
+      "source_text": "生成事件配置"
+    }
+  ]
+}

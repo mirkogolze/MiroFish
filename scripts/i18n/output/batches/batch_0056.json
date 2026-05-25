@@ -1,0 +1,179 @@
+{
+  "batch_id": "batch_0056",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:934:29:STRING",
+      "kind": "string_constant",
+      "source_text": "搜索查询，用于相关性排序"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:935:39:STRING",
+      "kind": "string_constant",
+      "source_text": "是否包含过期/历史内容（默认True）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:942:29:STRING",
+      "kind": "string_constant",
+      "source_text": "搜索查询字符串"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:943:29:STRING",
+      "kind": "string_constant",
+      "source_text": "返回结果数量（可选，默认10）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:950:39:STRING",
+      "kind": "string_constant",
+      "source_text": "采访主题或需求描述（如：'了解学生对宿舍甲醛事件的看法'）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:951:34:STRING",
+      "kind": "string_constant",
+      "source_text": "最多采访的Agent数量（可选，默认5，最大10）",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1115:8:STRING",
+      "kind": "string_constant",
+      "source_text": "校验解析出的 JSON 是否是合法的工具调用",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1128:8:STRING",
+      "kind": "string_constant",
+      "source_text": "生成工具描述文本"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1129:22:STRING",
+      "kind": "string_constant",
+      "source_text": "可用工具："
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1197:44:STRING",
+      "kind": "string_constant",
+      "source_text": "模拟分析报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1212:22:STRING",
+      "kind": "string_constant",
+      "source_text": "未来预测报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1213:24:STRING",
+      "kind": "string_constant",
+      "source_text": "基于模拟预测的未来趋势与风险分析"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1215:40:STRING",
+      "kind": "string_constant",
+      "source_text": "预测场景与核心发现"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1216:40:STRING",
+      "kind": "string_constant",
+      "source_text": "人群行为预测分析"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1217:40:STRING",
+      "kind": "string_constant",
+      "source_text": "趋势展望与风险提示"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1273:31:STRING",
+      "kind": "string_constant",
+      "source_text": "（这是第一个章节）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1316:69:STRING",
+      "kind": "string_constant",
+      "source_text": "（响应为空）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1317:64:STRING",
+      "kind": "string_constant",
+      "source_text": "请继续生成内容。"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1342:28:STRING",
+      "kind": "string_constant",
+      "source_text": "【格式错误】你在一次回复中同时包含了工具调用和 Final Answer，这是不允许的。\\n"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1343:28:STRING",
+      "kind": "string_constant",
+      "source_text": "每次回复只能做以下两件事之一：\\n"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1344:28:STRING",
+      "kind": "string_constant",
+      "source_text": "- 调用一个工具（输出一个 <tool_call> 块，不要写 Final Answer）\\n"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1345:28:STRING",
+      "kind": "string_constant",
+      "source_text": "- 输出最终内容（以 'Final Answer:' 开头，不要包含 <tool_call>）\\n"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1346:28:STRING",
+      "kind": "string_constant",
+      "source_text": "请重新回复，只做其中一件事。"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1799:38:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n\\n... [报告内容已截断] ..."
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1805:65:STRING",
+      "kind": "string_constant",
+      "source_text": "（暂无报告）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1907:8:STRING",
+      "kind": "string_constant",
+      "source_text": "确保报告根目录存在"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1912:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取报告文件夹路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1917:8:STRING",
+      "kind": "string_constant",
+      "source_text": "确保报告文件夹存在并返回路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1924:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取报告元信息文件路径"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1929:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取完整报告Markdown文件路径",
+      "protected_terms": [
+        "Markdown"
+      ]
+    }
+  ]
+}

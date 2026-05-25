@@ -1,0 +1,240 @@
+{
+  "batch_id": "batch_0016",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_runner.py:224:40:COMMENT",
+      "kind": "comment",
+      "source_text": "存储 stdout 文件句柄"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:225:40:COMMENT",
+      "kind": "comment",
+      "source_text": "存储 stderr 文件句柄"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:227:4:COMMENT",
+      "kind": "comment",
+      "source_text": "图谱记忆更新配置"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:236:8:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试从文件加载"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:278:12:COMMENT",
+      "kind": "comment",
+      "source_text": "加载最近动作"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:317:33:COMMENT",
+      "kind": "comment",
+      "source_text": "最大模拟轮数（可选，用于截断过长的模拟）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:318:51:COMMENT",
+      "kind": "comment",
+      "source_text": "是否将活动更新到Zep图谱",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:319:30:COMMENT",
+      "kind": "comment",
+      "source_text": "Zep图谱ID（启用图谱更新时必需）",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:334:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否已在运行"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:339:8:COMMENT",
+      "kind": "comment",
+      "source_text": "加载模拟配置"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:349:8:COMMENT",
+      "kind": "comment",
+      "source_text": "初始化运行状态"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:355:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果指定了最大轮数，则截断"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:372:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果启用图谱记忆更新，创建更新器"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:387:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确定运行哪个脚本（脚本位于 backend/scripts/ 目录）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:404:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建动作队列"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:408:8:COMMENT",
+      "kind": "comment",
+      "source_text": "启动模拟进程"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:410:12:COMMENT",
+      "kind": "comment",
+      "source_text": "构建运行命令，使用完整路径"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:411:12:COMMENT",
+      "kind": "comment",
+      "source_text": "新的日志结构："
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:412:12:COMMENT",
+      "kind": "comment",
+      "source_text": "twitter/actions.jsonl - Twitter 动作日志",
+      "protected_terms": [
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:413:12:COMMENT",
+      "kind": "comment",
+      "source_text": "reddit/actions.jsonl  - Reddit 动作日志",
+      "protected_terms": [
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:414:12:COMMENT",
+      "kind": "comment",
+      "source_text": "simulation.log        - 主进程日志"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:417:33:COMMENT",
+      "kind": "comment",
+      "source_text": "Python解释器",
+      "protected_terms": [
+        "Python"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:419:42:COMMENT",
+      "kind": "comment",
+      "source_text": "使用完整配置文件路径"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:422:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果指定了最大轮数，添加到命令行参数"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:426:12:COMMENT",
+      "kind": "comment",
+      "source_text": "创建主日志文件，避免 stdout/stderr 管道缓冲区满导致进程阻塞"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:430:12:COMMENT",
+      "kind": "comment",
+      "source_text": "设置子进程环境变量，确保 Windows 上使用 UTF-8 编码"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:431:12:COMMENT",
+      "kind": "comment",
+      "source_text": "这可以修复第三方库（如 OASIS）读取文件时未指定编码的问题",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:433:37:COMMENT",
+      "kind": "comment",
+      "source_text": "Python 3.7+ 支持，让所有 open() 默认使用 UTF-8",
+      "protected_terms": [
+        "Python"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:434:47:COMMENT",
+      "kind": "comment",
+      "source_text": "确保 stdout/stderr 使用 UTF-8"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:436:12:COMMENT",
+      "kind": "comment",
+      "source_text": "设置工作目录为模拟目录（数据库等文件会生成在此）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:437:12:COMMENT",
+      "kind": "comment",
+      "source_text": "使用 start_new_session=True 创建新的进程组，确保可以通过 os.killpg 终止所有子进程"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:442:43:COMMENT",
+      "kind": "comment",
+      "source_text": "stderr 也写入同一个文件"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:444:35:COMMENT",
+      "kind": "comment",
+      "source_text": "显式指定编码"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:446:26:COMMENT",
+      "kind": "comment",
+      "source_text": "传递带有 UTF-8 设置的环境变量"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:447:41:COMMENT",
+      "kind": "comment",
+      "source_text": "创建新进程组，确保服务器关闭时能终止所有相关进程"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:450:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存文件句柄以便后续关闭"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:452:53:COMMENT",
+      "kind": "comment",
+      "source_text": "不再需要单独的 stderr"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:462:12:COMMENT",
+      "kind": "comment",
+      "source_text": "启动监控线程"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:487:8:COMMENT",
+      "kind": "comment",
+      "source_text": "新的日志结构：分平台的动作日志"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:501:43:COMMENT",
+      "kind": "comment",
+      "source_text": "进程仍在运行"
+    }
+  ]
+}

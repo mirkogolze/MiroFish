@@ -1,0 +1,175 @@
+{
+  "batch_id": "batch_0059",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_runner.py:103:4:STRING",
+      "kind": "string_constant",
+      "source_text": "模拟运行状态（实时）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:148:8:STRING",
+      "kind": "string_constant",
+      "source_text": "添加动作到最近动作列表"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:189:8:STRING",
+      "kind": "string_constant",
+      "source_text": "包含最近动作的详细信息"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:232:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取运行状态"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:244:8:STRING",
+      "kind": "string_constant",
+      "source_text": "从文件加载运行状态"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:300:8:STRING",
+      "kind": "string_constant",
+      "source_text": "保存运行状态到文件"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:483:8:STRING",
+      "kind": "string_constant",
+      "source_text": "监控模拟进程，解析动作日志"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:778:8:STRING",
+      "kind": "string_constant",
+      "source_text": "停止模拟"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1130:48:STRING",
+      "kind": "string_constant",
+      "source_text": "模拟目录不存在，无需清理"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1205:20:STRING",
+      "kind": "string_constant",
+      "source_text": "正在清理所有模拟进程..."
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1240:38:STRING",
+      "kind": "string_constant",
+      "source_text": "服务器关闭，模拟被终止"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1285:20:STRING",
+      "kind": "string_constant",
+      "source_text": "模拟进程清理完成"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1320:12:STRING",
+      "kind": "string_constant",
+      "source_text": "信号处理器：先清理模拟进程，再调用原处理器"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1356:27:STRING",
+      "kind": "string_constant",
+      "source_text": "无法注册信号处理器（不在主线程），仅使用 atexit"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1637:27:STRING",
+      "kind": "string_constant",
+      "source_text": "环境已经关闭"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1647:27:STRING",
+      "kind": "string_constant",
+      "source_text": "环境关闭命令已发送"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1655:27:STRING",
+      "kind": "string_constant",
+      "source_text": "环境关闭命令已发送（等待响应超时，环境可能正在关闭）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1666:8:STRING",
+      "kind": "string_constant",
+      "source_text": "从单个数据库获取Interview历史"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:10:4:STRING",
+      "kind": "string_constant",
+      "source_text": "文本处理器"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:14:8:STRING",
+      "kind": "string_constant",
+      "source_text": "从多个文件提取文本"
+    },
+    {
+      "id": "backend/app/services/text_processor.py:65:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取文本统计信息"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:24:4:STRING",
+      "kind": "string_constant",
+      "source_text": "实体节点数据结构"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:47:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取实体类型（排除默认的Entity标签）",
+      "protected_terms": [
+        "Entity"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:56:4:STRING",
+      "kind": "string_constant",
+      "source_text": "过滤后的实体集合"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:29:4:STRING",
+      "kind": "string_constant",
+      "source_text": "搜索结果"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:46:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为文本格式，供LLM理解",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:50:30:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n### 相关事实:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:59:4:STRING",
+      "kind": "string_constant",
+      "source_text": "节点信息"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:76:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为文本格式"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:77:84:STRING",
+      "kind": "string_constant",
+      "source_text": "未知类型"
+    }
+  ]
+}

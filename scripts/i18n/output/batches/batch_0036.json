@@ -1,0 +1,169 @@
+{
+  "batch_id": "batch_0036",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/__init__.py:55:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "请求: ",
+      "context": "def log_request():\n        logger = get_logger('mirofish.request')"
+    },
+    {
+      "id": "backend/app/__init__.py:57:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "请求体: ",
+      "context": "logger.debug(f\"请求: {request.method} {request.path}\")\n        if request.content_type and 'json' in request.content_type:"
+    },
+    {
+      "id": "backend/app/__init__.py:62:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "响应: ",
+      "context": "def log_response(response):\n        logger = get_logger('mirofish.request')"
+    },
+    {
+      "id": "backend/app/api/graph.py:158:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "项目名称: ",
+      "context": "additional_context = request.form.get('additional_context', '')"
+    },
+    {
+      "id": "backend/app/api/graph.py:159:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟需求: ",
+      "context": "logger.debug(f\"项目名称: {project_name}\")"
+    },
+    {
+      "id": "backend/app/api/graph.py:178:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "创建项目: ",
+      "context": "project = ProjectManager.create_project(name=project_name)\n        project.simulation_requirement = simulation_requirement"
+    },
+    {
+      "id": "backend/app/api/graph.py:213:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "文本提取完成，共 ",
+      "context": "project.total_text_length = len(all_text)\n        ProjectManager.save_extracted_text(project.project_id, all_text)"
+    },
+    {
+      "id": "backend/app/api/graph.py:213:46:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 字符",
+      "context": "project.total_text_length = len(all_text)\n        ProjectManager.save_extracted_text(project.project_id, all_text)"
+    },
+    {
+      "id": "backend/app/api/graph.py:227:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "本体生成完成: ",
+      "context": "entity_count = len(ontology.get(\"entity_types\", []))\n        edge_count = len(ontology.get(\"edge_types\", []))"
+    },
+    {
+      "id": "backend/app/api/graph.py:227:44:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 个实体类型, ",
+      "context": "entity_count = len(ontology.get(\"entity_types\", []))\n        edge_count = len(ontology.get(\"edge_types\", []))"
+    },
+    {
+      "id": "backend/app/api/graph.py:227:64:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 个关系类型",
+      "context": "entity_count = len(ontology.get(\"entity_types\", []))\n        edge_count = len(ontology.get(\"edge_types\", []))"
+    },
+    {
+      "id": "backend/app/api/graph.py:236:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "=== 本体生成完成 === 项目ID: ",
+      "context": "project.status = ProjectStatus.ONTOLOGY_GENERATED\n        ProjectManager.save_project(project)"
+    },
+    {
+      "id": "backend/app/api/graph.py:291:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "配置错误: ",
+      "context": "errors.append(t('api.zepApiKeyMissing'))\n        if errors:"
+    },
+    {
+      "id": "backend/app/api/graph.py:300:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "请求参数: project_id=",
+      "context": "data = request.get_json() or {}\n        project_id = data.get('project_id')"
+    },
+    {
+      "id": "backend/app/api/graph.py:366:45:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "构建图谱: ",
+      "context": "# 创建异步任务\n        task_manager = TaskManager()"
+    },
+    {
+      "id": "backend/app/api/graph.py:367:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "创建图谱构建任务: task_id=",
+      "context": "task_manager = TaskManager()\n        task_id = task_manager.create_task(f\"构建图谱: {graph_name}\")"
+    },
+    {
+      "id": "backend/app/api/graph.py:382:46:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "] 开始构建图谱...",
+      "context": "build_logger = get_logger('mirofish.build')\n            try:"
+    },
+    {
+      "id": "backend/app/api/graph.py:478:46:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "] 图谱构建完成: graph_id=",
+      "context": "node_count = graph_data.get(\"node_count\", 0)\n                edge_count = graph_data.get(\"edge_count\", 0)"
+    },
+    {
+      "id": "backend/app/api/graph.py:478:75:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 节点=",
+      "context": "node_count = graph_data.get(\"node_count\", 0)\n                edge_count = graph_data.get(\"edge_count\", 0)"
+    },
+    {
+      "id": "backend/app/api/graph.py:478:92:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 边=",
+      "context": "node_count = graph_data.get(\"node_count\", 0)\n                edge_count = graph_data.get(\"edge_count\", 0)"
+    },
+    {
+      "id": "backend/app/api/graph.py:497:47:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "] 图谱构建失败: ",
+      "context": "except Exception as e:\n                # 更新项目状态为失败"
+    },
+    {
+      "id": "backend/app/api/report.py:175:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "报告生成失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:195:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "启动报告生成任务失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:268:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "查询任务状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/report.py:311:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取报告失败: ",
+      "context": "except Exception as e:"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "batch_id": "batch_0045",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/zep_entity_reader.py:164:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的所有边...",
+      "context": "边列表\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:179:43:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 条边",
+      "context": "})"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:196:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取节点边(node=",
+      "context": "edges = self._call_with_retry(\n                func=lambda: self.client.graph.node.get_entity_edges(node_uuid=node_uuid),"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:212:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取节点 ",
+      "context": "return edges_data\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:212:45:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的边失败: ",
+      "context": "return edges_data\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:236:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "开始筛选图谱 ",
+      "context": "FilteredEntities: 过滤后的实体集合\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:236:39:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的实体...",
+      "context": "FilteredEntities: 过滤后的实体集合\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:323:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "筛选完成: 总节点 ",
+      "context": "filtered_entities.append(entity)"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:323:45:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 符合条件 ",
+      "context": "filtered_entities.append(entity)"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:324:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "实体类型: ",
+      "context": "logger.info(f\"筛选完成: 总节点 {total_count}, 符合条件 {len(filtered_entities)}, \""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:352:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取节点详情(uuid=",
+      "context": "node = self._call_with_retry(\n                func=lambda: self.client.graph.node.get(uuid_=entity_uuid),"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:410:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取实体 ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:47:24:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "搜索查询: ",
+      "context": "def to_text(self) -> str:\n        \"\"\"转换为文本格式，供LLM理解\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:47:47:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "找到 ",
+      "context": "def to_text(self) -> str:\n        \"\"\"转换为文本格式，供LLM理解\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:47:68:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 条相关信息",
+      "context": "def to_text(self) -> str:\n        \"\"\"转换为文本格式，供LLM理解\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:78:17:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "实体: ",
+      "context": "\"\"\"转换为文本格式\"\"\"\n        entity_type = next((l for l in self.labels if l not in [\"Entity\", \"Node\"]), \"未知类型\")"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:78:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " (类型: ",
+      "context": "\"\"\"转换为文本格式\"\"\"\n        entity_type = next((l for l in self.labels if l not in [\"Entity\", \"Node\"]), \"未知类型\")"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:78:51:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ")\\n摘要: ",
+      "context": "\"\"\"转换为文本格式\"\"\"\n        entity_type = next((l for l in self.labels if l not in [\"Entity\", \"Node\"]), \"未知类型\")"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:116:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "关系: ",
+      "context": "source = self.source_node_name or self.source_node_uuid[:8]\n        target = self.target_node_name or self.target_node_uuid[:8]"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:116:62:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n事实: ",
+      "context": "source = self.source_node_name or self.source_node_uuid[:8]\n        target = self.target_node_name or self.target_node_uuid[:8]"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:121:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n时效: ",
+      "context": "valid_at = self.valid_at or \"未知\"\n            invalid_at = self.invalid_at or \"至今\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:123:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " (已过期: ",
+      "context": "base_text += f\"\\n时效: {valid_at} - {invalid_at}\"\n            if self.expired_at:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:174:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "## 未来预测深度分析",
+      "context": "\"\"\"转换为详细的文本格式，供LLM理解\"\"\"\n        text_parts = ["
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:175:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "分析问题: ",
+      "context": "text_parts = [\n            f\"## 未来预测深度分析\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:176:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "预测场景: ",
+      "context": "f\"## 未来预测深度分析\",\n            f\"分析问题: {self.query}\","
+    }
+  ]
+}

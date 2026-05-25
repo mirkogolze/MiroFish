@@ -1,0 +1,193 @@
+{
+  "batch_id": "batch_0053",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/__init__.py:20:4:STRING",
+      "kind": "string_constant",
+      "source_text": "Flask应用工厂函数",
+      "protected_terms": [
+        "Flask"
+      ]
+    },
+    {
+      "id": "backend/app/__init__.py:39:20:STRING",
+      "kind": "string_constant",
+      "source_text": "MiroFish Backend 启动中...",
+      "protected_terms": [
+        "Miro",
+        "MiroFish"
+      ]
+    },
+    {
+      "id": "backend/app/__init__.py:49:20:STRING",
+      "kind": "string_constant",
+      "source_text": "已注册模拟进程清理函数"
+    },
+    {
+      "id": "backend/app/__init__.py:77:20:STRING",
+      "kind": "string_constant",
+      "source_text": "MiroFish Backend 启动完成",
+      "protected_terms": [
+        "Miro",
+        "MiroFish"
+      ]
+    },
+    {
+      "id": "backend/app/api/graph.py:27:4:STRING",
+      "kind": "string_constant",
+      "source_text": "检查文件扩展名是否允许"
+    },
+    {
+      "id": "backend/app/api/graph.py:151:20:STRING",
+      "kind": "string_constant",
+      "source_text": "=== 开始生成本体定义 ==="
+    },
+    {
+      "id": "backend/app/api/graph.py:216:20:STRING",
+      "kind": "string_constant",
+      "source_text": "调用 LLM 生成本体定义...",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/api/graph.py:284:20:STRING",
+      "kind": "string_constant",
+      "source_text": "=== 开始构建图谱 ==="
+    },
+    {
+      "id": "backend/app/api/report.py:446:4:STRING",
+      "kind": "string_constant",
+      "source_text": "删除报告"
+    },
+    {
+      "id": "backend/app/api/simulation.py:25:26:STRING",
+      "kind": "string_constant",
+      "source_text": "结合你的人设、所有的过往记忆与行动，不调用任何工具直接用文本回复我："
+    },
+    {
+      "id": "backend/app/api/simulation.py:95:4:STRING",
+      "kind": "string_constant",
+      "source_text": "获取单个实体的详细信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:128:4:STRING",
+      "kind": "string_constant",
+      "source_text": "获取指定类型的所有实体"
+    },
+    {
+      "id": "backend/app/api/simulation.py:263:33:STRING",
+      "kind": "string_constant",
+      "source_text": "模拟目录不存在"
+    },
+    {
+      "id": "backend/app/api/simulation.py:285:22:STRING",
+      "kind": "string_constant",
+      "source_text": "缺少必要文件"
+    },
+    {
+      "id": "backend/app/api/simulation.py:757:4:STRING",
+      "kind": "string_constant",
+      "source_text": "获取模拟状态"
+    },
+    {
+      "id": "backend/app/api/simulation.py:954:51:STRING",
+      "kind": "string_constant",
+      "source_text": "未知文件"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1296:4:STRING",
+      "kind": "string_constant",
+      "source_text": "下载模拟配置文件"
+    },
+    {
+      "id": "backend/app/config.py:21:4:STRING",
+      "kind": "string_constant",
+      "source_text": "Flask配置类",
+      "protected_terms": [
+        "Flask"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:68:8:STRING",
+      "kind": "string_constant",
+      "source_text": "验证必要配置"
+    },
+    {
+      "id": "backend/app/config.py:71:26:STRING",
+      "kind": "string_constant",
+      "source_text": "LLM_API_KEY 未配置",
+      "protected_terms": [
+        "API",
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:73:26:STRING",
+      "kind": "string_constant",
+      "source_text": "ZEP_API_KEY 未配置",
+      "protected_terms": [
+        "API"
+      ]
+    },
+    {
+      "id": "backend/app/models/project.py:18:4:STRING",
+      "kind": "string_constant",
+      "source_text": "项目状态"
+    },
+    {
+      "id": "backend/app/models/project.py:28:4:STRING",
+      "kind": "string_constant",
+      "source_text": "项目数据模型"
+    },
+    {
+      "id": "backend/app/models/project.py:56:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为字典"
+    },
+    {
+      "id": "backend/app/models/project.py:77:8:STRING",
+      "kind": "string_constant",
+      "source_text": "从字典创建"
+    },
+    {
+      "id": "backend/app/models/project.py:102:4:STRING",
+      "kind": "string_constant",
+      "source_text": "项目管理器 - 负责项目的持久化存储和检索"
+    },
+    {
+      "id": "backend/app/models/project.py:109:8:STRING",
+      "kind": "string_constant",
+      "source_text": "确保项目目录存在"
+    },
+    {
+      "id": "backend/app/models/project.py:114:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取项目目录路径"
+    },
+    {
+      "id": "backend/app/models/project.py:119:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取项目元数据文件路径"
+    },
+    {
+      "id": "backend/app/models/project.py:124:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取项目文件存储目录"
+    }
+  ]
+}

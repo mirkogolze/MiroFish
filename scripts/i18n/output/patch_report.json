@@ -1,0 +1,41 @@
+{
+  "results": {
+    "success": 30,
+    "failed": 0,
+    "skipped": 0
+  },
+  "failed_files": [],
+  "total_patches": 1909,
+  "files_patched": [
+    "backend/app/__init__.py",
+    "backend/app/api/graph.py",
+    "backend/app/api/report.py",
+    "backend/app/api/simulation.py",
+    "backend/app/config.py",
+    "backend/app/models/project.py",
+    "backend/app/models/task.py",
+    "backend/app/services/graph_builder.py",
+    "backend/app/services/ontology_generator.py",
+    "backend/app/services/report_agent.py",
+    "backend/app/services/simulation_config_generator.py",
+    "backend/app/services/simulation_ipc.py",
+    "backend/app/services/simulation_manager.py",
+    "backend/app/services/simulation_runner.py",
+    "backend/app/services/text_processor.py",
+    "backend/app/services/zep_entity_reader.py",
+    "backend/app/services/zep_tools.py",
+    "backend/app/utils/file_parser.py",
+    "backend/app/api/__init__.py",
+    "backend/app/services/__init__.py",
+    "backend/app/utils/__init__.py",
+    "backend/app/utils/llm_client.py",
+    "backend/app/utils/logger.py",
+    "backend/app/utils/retry.py",
+    "backend/run.py",
+    "backend/scripts/action_logger.py",
+    "backend/scripts/test_profile_format.py",
+    "backend/app/utils/locale.py",
+    "backend/app/utils/zep_paging.py",
+    "backend/app/models/__init__.py"
+  ]
+}

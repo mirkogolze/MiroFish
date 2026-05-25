@@ -1,0 +1,183 @@
+{
+  "batch_id": "batch_0042",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_config_generator.py:876:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "Agent配置批次LLM生成失败: ",
+      "protected_terms": [
+        "Agent",
+        "LLM"
+      ],
+      "context": "llm_configs = {cfg[\"agent_id\"]: cfg for cfg in result.get(\"agent_configs\", [])}\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:876:50:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 使用规则生成",
+      "context": "llm_configs = {cfg[\"agent_id\"]: cfg for cfg in result.get(\"agent_configs\", [])}\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:151:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "发送IPC命令: ",
+      "context": "json.dump(command.to_dict(), f, ensure_ascii=False, indent=2)"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:171:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "收到IPC响应: command_id=",
+      "context": "pass"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:174:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "解析响应失败: ",
+      "context": "return response\n                except (json.JSONDecodeError, KeyError) as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:179:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "等待IPC响应超时: command_id=",
+      "context": "# 超时"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:187:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "等待命令响应超时 (",
+      "context": "pass"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:187:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "秒)",
+      "context": "pass"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:357:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取命令文件失败: ",
+      "context": "return IPCCommand.from_dict(data)\n            except (json.JSONDecodeError, KeyError, OSError) as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:226:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "创建模拟: ",
+      "context": "self._save_simulation_state(state)"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:264:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟不存在: ",
+      "context": "state = self._load_simulation_state(simulation_id)\n        if not state:"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:445:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟准备完成: ",
+      "context": "self._save_simulation_state(state)"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:451:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟准备失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:523:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "1. 激活conda环境: conda activate MiroFish\\n",
+      "protected_terms": [
+        "Miro",
+        "MiroFish"
+      ],
+      "context": "},\n            \"instructions\": ("
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:524:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "2. 运行模拟 (脚本位于 ",
+      "context": "\"instructions\": (\n                f\"1. 激活conda环境: conda activate MiroFish\\n\""
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:525:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   - 单独运行Twitter: python ",
+      "protected_terms": [
+        "Twitter"
+      ],
+      "context": "f\"1. 激活conda环境: conda activate MiroFish\\n\"\n                f\"2. 运行模拟 (脚本位于 {scripts_dir}):\\n\""
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:526:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   - 单独运行Reddit: python ",
+      "protected_terms": [
+        "Reddit"
+      ],
+      "context": "f\"2. 运行模拟 (脚本位于 {scripts_dir}):\\n\"\n                f\"   - 单独运行Twitter: python {scripts_dir}/run_twitter_simulation.py --config {config_path}\\n\""
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:527:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   - 并行运行双平台: python ",
+      "context": "f\"   - 单独运行Twitter: python {scripts_dir}/run_twitter_simulation.py --config {config_path}\\n\"\n                f\"   - 单独运行Reddit: python {scripts_dir}/run_reddit_simulation.py --config {config_path}\\n\""
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:295:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "加载运行状态失败: ",
+      "context": "return state\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:337:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟已在运行中: ",
+      "context": "existing = cls.get_run_state(simulation_id)\n        if existing and existing.runner_status in [RunnerStatus.RUNNING, RunnerStatus.STARTING]:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:344:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟配置不存在，请先调用 /prepare 接口",
+      "context": "if not os.path.exists(config_path):"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:360:30:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "轮数已截断: ",
+      "context": "total_rounds = min(total_rounds, max_rounds)\n            if total_rounds < original_rounds:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:380:30:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "已启用图谱记忆更新: simulation_id=",
+      "context": "ZepGraphMemoryManager.create_updater(simulation_id, graph_id)\n                cls._graph_memory_enabled[simulation_id] = True"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:382:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "创建图谱记忆更新器失败: ",
+      "context": "logger.info(f\"已启用图谱记忆更新: simulation_id={simulation_id}, graph_id={graph_id}\")\n            except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:402:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "脚本不存在: ",
+      "context": "if not os.path.exists(script_path):"
+    }
+  ]
+}

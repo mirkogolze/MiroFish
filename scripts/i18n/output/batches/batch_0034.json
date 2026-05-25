@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch_0034",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 13,
+  "items": [
+    {
+      "id": "backend/app/utils/retry.py:24:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    带指数退避的重试装饰器\n    \n    Args:\n        max_retries: 最大重试次数\n        initial_delay: 初始延迟（秒）\n        max_delay: 最大延迟（秒）\n        backoff_factor: 退避因子\n        jitter: 是否添加随机抖动\n        exceptions: 需要重试的异常类型\n        on_retry: 重试时的回调函数 (exception, retry_count)\n    \n    Usage:\n        @retry_with_backoff(max_retries=3)\n        def call_llm_api():\n            ...\n    ",
+      "context": "on_retry: Optional[Callable[[Exception, int], None]] = None\n):"
+    },
+    {
+      "id": "backend/app/utils/retry.py:89:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    异步版本的重试装饰器\n    ",
+      "context": "on_retry: Optional[Callable[[Exception, int], None]] = None\n):"
+    },
+    {
+      "id": "backend/app/utils/retry.py:133:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    可重试的API客户端封装\n    ",
+      "protected_terms": [
+        "API"
+      ],
+      "context": "class RetryableAPIClient:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:156:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        执行函数调用并在失败时重试\n        \n        Args:\n            func: 要调用的函数\n            *args: 函数参数\n            exceptions: 需要重试的异常类型\n            **kwargs: 函数关键字参数\n            \n        Returns:\n            函数返回值\n        ",
+      "context": "**kwargs\n    ) -> Any:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:202:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        批量调用并对每个失败项单独重试\n        \n        Args:\n            items: 要处理的项目列表\n            process_func: 处理函数，接收单个item作为参数\n            exceptions: 需要重试的异常类型\n            continue_on_failure: 单项失败后是否继续处理其他项\n            \n        Returns:\n            (成功结果列表, 失败项列表)\n        ",
+      "context": "continue_on_failure: bool = True\n    ) -> Tuple[list, list]:"
+    },
+    {
+      "id": "backend/app/utils/zep_paging.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "Zep Graph 分页读取工具。\n\nZep 的 node/edge 列表接口使用 UUID cursor 分页，\n本模块封装自动翻页逻辑（含单页重试），对调用方透明地返回完整列表。\n",
+      "protected_terms": [
+        "UUID",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/run.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nMiroFish Backend 启动入口\n",
+      "protected_terms": [
+        "Miro",
+        "MiroFish"
+      ]
+    },
+    {
+      "id": "backend/scripts/action_logger.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n动作日志记录器\n用于记录OASIS模拟中每个Agent的动作，供后端监控使用\n\n日志结构:\n    sim_xxx/\n    ├── twitter/\n    │   └── actions.jsonl    # Twitter 平台动作日志\n    ├── reddit/\n    │   └── actions.jsonl    # Reddit 平台动作日志\n    ├── simulation.log       # 主模拟进程日志\n    └── run_state.json       # 运行状态（API 查询用）\n",
+      "protected_terms": [
+        "API",
+        "Agent",
+        "OASIS",
+        "Reddit",
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/scripts/action_logger.py:26:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        初始化日志记录器\n        \n        Args:\n            platform: 平台名称 (twitter/reddit)\n            base_dir: 模拟目录的基础路径\n        ",
+      "context": "def __init__(self, platform: str, base_dir: str):"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:120:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟日志管理器\n    统一管理所有日志文件，按平台分离\n    ",
+      "context": "class SimulationLogManager:"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:126:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        初始化日志管理器\n        \n        Args:\n            simulation_dir: 模拟目录路径\n        ",
+      "context": "def __init__(self, simulation_dir: str):"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:202:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    动作日志记录器（兼容旧接口）\n    建议使用 SimulationLogManager 代替\n    ",
+      "protected_terms": [
+        "Simulation"
+      ],
+      "context": "class ActionLogger:"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n测试Profile格式生成是否符合OASIS要求\n验证：\n1. Twitter Profile生成CSV格式\n2. Reddit Profile生成JSON详细格式\n",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "OASIS",
+        "Reddit",
+        "Twitter"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "batch_id": "batch_0048",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/zep_tools.py:1673:73:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "，您有什么看法？",
+      "context": ")"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1678:43:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "，您的观点是什么？",
+      "context": "logger.warning(t(\"console.generateInterviewQuestionsFailed\", error=e))\n            return ["
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1699:28:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "你是一个专业的新闻编辑。请根据多位受访者的回答，生成一份采访摘要。\n\n摘要要求：\n1. 提炼各方主要观点\n2. 指出观点的共识和分歧\n3. 突出有价值的引言\n4. 客观中立，不偏袒任何一方\n5. 控制在1000字内\n\n格式约束（必须遵守）：\n- 使用纯文本段落，用空行分隔不同部分\n- 不要使用Markdown标题（如#、##、###）\n- 不要使用分割线（如---、***）\n- ",
+      "protected_terms": [
+        "Markdown"
+      ],
+      "context": "quote_instruction = \"引用受访者原话时使用中文引号「」\" if get_locale() == 'zh' else 'Use quotation marks \"\" when quoting interviewees'"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1712:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n- 可以使用**加粗**标记关键词，但不要使用其他Markdown语法",
+      "protected_terms": [
+        "Markdown"
+      ],
+      "context": "- 不要使用Markdown标题（如#、##、###）\n- 不要使用分割线（如---、***）"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1715:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "采访主题：",
+      "context": "- 可以使用**加粗**标记关键词，但不要使用其他Markdown语法\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1715:54:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n采访内容：\n",
+      "context": "- 可以使用**加粗**标记关键词，但不要使用其他Markdown语法\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1718:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n请生成采访摘要。",
+      "context": "采访内容："
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1736:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "共采访了",
+      "context": "logger.warning(t(\"console.generateInterviewSummaryFailed\", error=e))\n            # 降级：简单拼接"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1736:42:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "位受访者，包括：",
+      "context": "logger.warning(t(\"console.generateInterviewSummaryFailed\", error=e))\n            # 降级：简单拼接"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:80:38:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "文件不存在: ",
+      "context": "if not path.exists():"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:85:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "不支持的文件格式: ",
+      "context": "if suffix not in cls.SUPPORTED_EXTENSIONS:"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:94:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "无法处理的文件格式: ",
+      "context": "return cls._extract_from_txt(file_path)"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:140:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "=== 文档 ",
+      "context": "text = cls.extract_text(file_path)\n                filename = Path(file_path).name"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:142:58:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " (提取失败: ",
+      "context": "all_texts.append(f\"=== 文档 {i}: {filename} ===\\n{text}\")\n            except Exception as e:"
+    },
+    {
+      "id": "backend/app/utils/llm_client.py:102:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "LLM返回的JSON格式无效: ",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "LLM"
+      ],
+      "context": "return json.loads(cleaned_response)\n        except json.JSONDecodeError:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:55:39:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "函数 ",
+      "context": "if attempt == max_retries:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:55:73:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 次重试后仍失败: ",
+      "context": "if attempt == max_retries:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:108:39:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "异步函数 ",
+      "context": "if attempt == max_retries:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:179:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "API调用在 ",
+      "protected_terms": [
+        "API"
+      ],
+      "context": "if attempt == self.max_retries:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:186:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "API调用第 ",
+      "protected_terms": [
+        "API"
+      ],
+      "context": "logger.warning("
+    },
+    {
+      "id": "backend/app/utils/retry.py:227:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "处理第 ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:227:44:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 项失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:81:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   文件: ",
+      "context": "rows = list(reader)"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:82:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   行数: ",
+      "context": "print(f\"   文件: {twitter_path}\")"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:83:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   表头: ",
+      "context": "print(f\"   文件: {twitter_path}\")\n        print(f\"   行数: {len(rows)}\")"
+    }
+  ]
+}

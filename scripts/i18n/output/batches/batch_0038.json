@@ -1,0 +1,172 @@
+{
+  "batch_id": "batch_0038",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:426:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "开始处理 /prepare 请求: simulation_id=",
+      "context": "# 检查是否强制重新生成\n        force_regenerate = data.get('force_regenerate', False)"
+    },
+    {
+      "id": "backend/app/api/simulation.py:430:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "检查模拟 ",
+      "context": "# 检查是否已经准备完成（避免重复生成）\n        if not force_regenerate:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:430:47:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 是否已准备完成...",
+      "context": "# 检查是否已经准备完成（避免重复生成）\n        if not force_regenerate:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:432:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "检查结果: is_prepared=",
+      "context": "logger.debug(f\"检查模拟 {simulation_id} 是否已准备完成...\")\n            is_prepared, prepare_info = _check_simulation_prepared(simulation_id)"
+    },
+    {
+      "id": "backend/app/api/simulation.py:434:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 已准备完成，跳过重复生成",
+      "context": "logger.debug(f\"检查结果: is_prepared={is_prepared}, prepare_info={prepare_info}\")\n            if is_prepared:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:446:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 未准备完成，将启动准备任务",
+      "context": "})\n            else:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:474:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "同步获取实体数量: graph_id=",
+      "context": "# 这样前端在调用prepare后立即就能获取到预期Agent总数\n        try:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:485:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "预期实体数量: ",
+      "context": "state.entities_count = filtered_preview.filtered_count\n            state.entity_types = list(filtered_preview.entity_types)"
+    },
+    {
+      "id": "backend/app/api/simulation.py:485:67:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 类型: ",
+      "context": "state.entities_count = filtered_preview.filtered_count\n            state.entity_types = list(filtered_preview.entity_types)"
+    },
+    {
+      "id": "backend/app/api/simulation.py:487:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "同步获取实体数量失败（将在后台任务中重试）: ",
+      "context": "logger.info(f\"预期实体数量: {filtered_preview.filtered_count}, 类型: {filtered_preview.entity_types}\")\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:600:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "准备模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:634:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "启动准备任务失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:780:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取模拟状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:809:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "列出模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:872:25:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "查找 simulation ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:872:54:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的 report 失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:982:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取历史模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1020:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取Profile失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1097:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取 profiles 文件失败（可能正在写入中）: ",
+      "context": "profiles = list(reader)\n            except (json.JSONDecodeError, Exception) as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1130:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "实时获取Profile失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1192:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取 config 文件失败（可能正在写入中）: ",
+      "protected_terms": [
+        "config"
+      ],
+      "context": "config = json.load(f)\n            except (json.JSONDecodeError, Exception) as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1250:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "实时获取Config失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1286:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取配置失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1315:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "下载配置失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1367:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "下载脚本失败: ",
+      "context": "except Exception as e:"
+    }
+  ]
+}

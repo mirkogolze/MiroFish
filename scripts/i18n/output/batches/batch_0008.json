@@ -1,0 +1,250 @@
+{
+  "batch_id": "batch_0008",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/ontology_generator.py:381:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果添加后会超过 10 个，需要移除一些现有类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:383:16:COMMENT",
+      "kind": "comment",
+      "source_text": "计算需要移除多少个"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:385:16:COMMENT",
+      "kind": "comment",
+      "source_text": "从末尾移除（保留前面更重要的具体类型）"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:388:12:COMMENT",
+      "kind": "comment",
+      "source_text": "添加兜底类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:391:8:COMMENT",
+      "kind": "comment",
+      "source_text": "最终确保不超过限制（防御性编程）"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:424:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成实体类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:450:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成关系类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:453:12:COMMENT",
+      "kind": "comment",
+      "source_text": "转换为PascalCase类名"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:475:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成类型字典"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:492:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成边的source_targets映射"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:96:8:COMMENT",
+      "kind": "comment",
+      "source_text": "追加写入 JSONL 文件",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:206:35:COMMENT",
+      "kind": "comment",
+      "source_text": "完整结果，不截断"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:229:39:COMMENT",
+      "kind": "comment",
+      "source_text": "完整响应，不截断"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:251:37:COMMENT",
+      "kind": "comment",
+      "source_text": "完整内容，不截断"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:339:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建文件处理器"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:347:8:COMMENT",
+      "kind": "comment",
+      "source_text": "使用与控制台相同的简洁格式"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:354:8:COMMENT",
+      "kind": "comment",
+      "source_text": "添加到 report_agent 相关的 logger",
+      "protected_terms": [
+        "logger"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:362:12:COMMENT",
+      "kind": "comment",
+      "source_text": "避免重复添加"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:471:0:COMMENT",
+      "kind": "comment",
+      "source_text": "Prompt 模板常量"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:474:0:COMMENT",
+      "kind": "comment",
+      "source_text": "── 工具描述 ──"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:550:0:COMMENT",
+      "kind": "comment",
+      "source_text": "── 大纲规划 prompt ──"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:613:0:COMMENT",
+      "kind": "comment",
+      "source_text": "── 章节生成 prompt ──"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:794:0:COMMENT",
+      "kind": "comment",
+      "source_text": "── ReACT 循环内消息模板 ──",
+      "protected_terms": [
+        "ReACT"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:861:0:COMMENT",
+      "kind": "comment",
+      "source_text": "ReportAgent 主类",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:875:4:COMMENT",
+      "kind": "comment",
+      "source_text": "最大工具调用次数（每个章节）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:878:4:COMMENT",
+      "kind": "comment",
+      "source_text": "最大反思轮数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:881:4:COMMENT",
+      "kind": "comment",
+      "source_text": "对话中的最大工具调用次数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:909:8:COMMENT",
+      "kind": "comment",
+      "source_text": "工具定义"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:912:8:COMMENT",
+      "kind": "comment",
+      "source_text": "日志记录器（在 generate_report 中初始化）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:914:8:COMMENT",
+      "kind": "comment",
+      "source_text": "控制台日志记录器（在 generate_report 中初始化）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:983:16:COMMENT",
+      "kind": "comment",
+      "source_text": "广度搜索 - 获取全貌"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:996:16:COMMENT",
+      "kind": "comment",
+      "source_text": "简单搜索 - 快速检索"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1009:16:COMMENT",
+      "kind": "comment",
+      "source_text": "深度采访 - 调用真实的OASIS采访API获取模拟Agent的回答（双平台）",
+      "protected_terms": [
+        "API",
+        "Agent",
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1023:12:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 向后兼容的旧工具（内部重定向到新工具） =========="
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1026:16:COMMENT",
+      "kind": "comment",
+      "source_text": "重定向到 quick_search"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1043:16:COMMENT",
+      "kind": "comment",
+      "source_text": "重定向到 insight_forge，因为它更强大"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1064:4:COMMENT",
+      "kind": "comment",
+      "source_text": "合法的工具名称集合，用于裸 JSON 兜底解析时校验",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1077:8:COMMENT",
+      "kind": "comment",
+      "source_text": "格式1: XML风格（标准格式）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1089:8:COMMENT",
+      "kind": "comment",
+      "source_text": "格式2: 兜底 - LLM 直接输出裸 JSON（没包 <tool_call> 标签）",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1090:8:COMMENT",
+      "kind": "comment",
+      "source_text": "只在格式1未匹配时尝试，避免误匹配正文中的 JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    }
+  ]
+}

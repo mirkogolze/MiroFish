@@ -1,0 +1,231 @@
+Already translated: 1630
+Missing translations: 138
+  [1/138] backend/app/utils/llm_client.py:66:8:COM...       PARSE ERROR
+      PARSE ERROR
+✗
+  [2/138] backend/app/utils/llm_client.py:93:8:COM... ✓
+  [3/138] backend/app/utils/logger.py:19:8:COMMENT... ✓
+  [4/138] backend/app/utils/logger.py:26:0:COMMENT... ✓
+  [5/138] backend/app/utils/logger.py:41:4:COMMENT... ✓
+  [6/138] backend/app/utils/logger.py:44:4:COMMENT... ✓
+  [7/138] backend/app/utils/logger.py:48:4:COMMENT... ✓
+  [8/138] backend/app/utils/logger.py:51:4:COMMENT... ✓
+  [9/138] backend/app/utils/logger.py:55:4:COMMENT... ✓
+  [10/138] backend/app/utils/logger.py:66:4:COMMENT... ✓
+  [11/138] backend/app/utils/logger.py:77:4:COMMENT... ✓
+  [12/138] backend/app/utils/logger.py:78:4:COMMENT... ✓
+  [13/138] backend/app/utils/logger.py:84:4:COMMENT... ✓
+  [14/138] backend/app/utils/logger.py:107:0:COMMEN... ✓
+  [15/138] backend/app/utils/logger.py:111:0:COMMEN... ✓
+  [16/138] backend/app/utils/retry.py:58:20:COMMENT... ✓
+  [17/138] backend/run.py:8:0:COMMENT... ✓
+  [18/138] backend/run.py:10:4:COMMENT... ✓
+  [19/138] backend/run.py:12:4:COMMENT... ✓
+  [20/138] backend/run.py:18:0:COMMENT... ✓
+  [21/138] backend/run.py:27:4:COMMENT... ✓
+  [22/138] backend/run.py:36:4:COMMENT... ✓
+  [23/138] backend/run.py:39:4:COMMENT... ✓
+  [24/138] backend/run.py:44:4:COMMENT... ✓
+  [25/138] backend/scripts/action_logger.py:137:8:C... ✓
+  [26/138] backend/scripts/action_logger.py:144:8:C... ✓
+  [27/138] backend/scripts/action_logger.py:149:8:C... ✓
+  [28/138] backend/scripts/action_logger.py:158:8:C... ✓
+  [29/138] backend/scripts/action_logger.py:199:0:C... ✓
+  [30/138] backend/scripts/action_logger.py:291:0:C... ✓
+  [31/138] backend/scripts/test_profile_format.py:1... ✓
+  [32/138] backend/scripts/test_profile_format.py:2... ✓
+  [33/138] backend/scripts/test_profile_format.py:6... ✓
+  [34/138] backend/scripts/test_profile_format.py:7... ✓
+  [35/138] backend/scripts/test_profile_format.py:7... ✓
+  [36/138] backend/scripts/test_profile_format.py:8... ✓
+  [37/138] backend/scripts/test_profile_format.py:9... ✓
+  [38/138] backend/scripts/test_profile_format.py:1... ✓
+  [39/138] backend/scripts/test_profile_format.py:1... ✓
+  [40/138] backend/app/api/report.py:474:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [41/138] backend/app/api/report.py:571:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [42/138] backend/app/api/report.py:612:4:STRING... ✓
+  [43/138] backend/app/api/report.py:663:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [44/138] backend/app/api/report.py:709:4:STRING... ✓
+  [45/138] backend/app/api/report.py:760:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [46/138] backend/app/api/report.py:819:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [47/138] backend/app/api/report.py:855:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [48/138] backend/app/api/report.py:901:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [49/138] backend/app/api/report.py:937:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [50/138] backend/app/api/report.py:985:4:STRING...       PARSE ERROR
+      PARSE ERROR
+✗
+  [51/138] backend/app/api/simulation.py:1:0:STRING... ✓
+  [52/138] backend/app/api/simulation.py:29:4:STRIN...       PARSE ERROR
+      PARSE ERROR
+✗
+  [53/138] backend/app/api/simulation.py:50:4:STRIN... ✓
+  [54/138] backend/app/api/simulation.py:167:4:STRI...       PARSE ERROR
+      PARSE ERROR
+✗
+  [55/138] backend/app/api/simulation.py:241:4:STRI... ✓
+  [56/138] backend/app/api/simulation.py:644:4:STRI... ✓
+  [57/138] backend/app/api/simulation.py:790:4:STRI... ✓
+  [58/138] backend/app/api/simulation.py:818:4:STRI... ✓
+  [59/138] backend/app/api/simulation.py:878:4:STRI... ✓
+  [60/138] backend/app/api/simulation.py:992:4:STRI... ✓
+  [61/138] backend/app/api/simulation.py:1030:4:STR... ✓
+  [62/138] backend/app/api/simulation.py:1140:4:STR... ✓
+  [63/138] backend/app/api/simulation.py:1260:4:STR... ✓
+  [64/138] backend/app/api/simulation.py:1325:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [65/138] backend/app/api/simulation.py:1379:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [66/138] backend/app/api/simulation.py:1453:4:STR... ✓
+  [67/138] backend/app/api/simulation.py:1646:4:STR... ✓
+  [68/138] backend/app/api/simulation.py:1707:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [69/138] backend/app/api/simulation.py:1765:4:STR... ✓
+  [70/138] backend/app/api/simulation.py:1866:4:STR... ✓
+  [71/138] backend/app/api/simulation.py:1920:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [72/138] backend/app/api/simulation.py:1960:4:STR... ✓
+  [73/138] backend/app/api/simulation.py:1989:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [74/138] backend/app/api/simulation.py:2067:4:STR... ✓
+  [75/138] backend/app/api/simulation.py:2514:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [76/138] backend/app/api/simulation.py:2586:4:STR...       PARSE ERROR
+      PARSE ERROR
+✗
+  [77/138] backend/app/api/simulation.py:2651:4:STR... ✓
+  [78/138] backend/app/config.py:1:0:STRING... ✓
+  [79/138] backend/app/models/__init__.py:1:0:STRIN... ✓
+  [80/138] backend/app/services/report_agent.py:37:...       PARSE ERROR
+      PARSE ERROR
+✗
+  [81/138] backend/app/services/report_agent.py:45:... ✓
+  [82/138] backend/app/services/report_agent.py:75:...       PARSE ERROR
+      PARSE ERROR
+✗
+  [83/138] backend/app/services/report_agent.py:264...       PARSE ERROR
+      PARSE ERROR
+✗
+  [84/138] backend/app/services/report_agent.py:308... ✓
+  [85/138] backend/app/services/report_agent.py:316...       PARSE ERROR
+      PARSE ERROR
+✗
+  [86/138] backend/app/services/report_agent.py:476... ✓
+  [87/138] backend/app/services/report_agent.py:494...       PARSE ERROR
+      PARSE ERROR
+✗
+  [88/138] backend/app/services/report_agent.py:511... ✓
+  [89/138] backend/app/services/report_agent.py:523... ✓
+  [90/138] backend/app/services/report_agent.py:796... ✓
+  [91/138] backend/app/services/report_agent.py:866...       PARSE ERROR
+      PARSE ERROR
+✗
+  [92/138] backend/app/services/report_agent.py:892...       PARSE ERROR
+      PARSE ERROR
+✗
+  [93/138] backend/app/services/report_agent.py:957...       PARSE ERROR
+      PARSE ERROR
+✗
+  [94/138] backend/app/services/report_agent.py:106...       PARSE ERROR
+      PARSE ERROR
+✗
+  [95/138] backend/app/services/report_agent.py:114...       PARSE ERROR
+      PARSE ERROR
+✗
+  [96/138] backend/app/services/report_agent.py:122...       PARSE ERROR
+      PARSE ERROR
+✗
+  [97/138] backend/app/services/report_agent.py:153...       PARSE ERROR
+      PARSE ERROR
+✗
+  [98/138] backend/app/services/report_agent.py:177...       PARSE ERROR
+      PARSE ERROR
+✗
+  [99/138] backend/app/services/report_agent.py:188...       PARSE ERROR
+      PARSE ERROR
+✗
+  [100/138] backend/app/utils/zep_paging.py:1:0:STRI... ✓
+  [101/138] backend/app/services/simulation_config_g... ✓
+  [102/138] backend/app/services/simulation_config_g... ✓
+  [103/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [104/138] backend/app/services/simulation_config_g... ✓
+  [105/138] backend/app/services/simulation_config_g... ✓
+  [106/138] backend/app/services/simulation_config_g... ✓
+  [107/138] backend/app/services/simulation_config_g... ✓
+  [108/138] backend/app/services/simulation_config_g... ✓
+  [109/138] backend/app/services/simulation_config_g... ✓
+  [110/138] backend/app/services/simulation_config_g... ✓
+  [111/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [112/138] backend/app/services/simulation_config_g... ✓
+  [113/138] backend/app/services/simulation_config_g... ✓
+  [114/138] backend/app/services/simulation_config_g... ✓
+  [115/138] backend/app/services/simulation_config_g... ✓
+  [116/138] backend/app/services/simulation_config_g... ✓
+  [117/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [118/138] backend/app/services/simulation_config_g... ✓
+  [119/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [120/138] backend/app/services/simulation_config_g... ✓
+  [121/138] backend/app/services/simulation_config_g... ✓
+  [122/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [123/138] backend/app/services/simulation_config_g... ✓
+  [124/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [125/138] backend/app/services/simulation_config_g...       PARSE ERROR
+      PARSE ERROR
+✗
+  [126/138] backend/app/services/zep_entity_reader.p...       PARSE ERROR
+      PARSE ERROR
+✗
+  [127/138] backend/app/services/zep_tools.py:380:70... ✓
+  [128/138] backend/app/services/zep_tools.py:1673:4... ✓
+  [129/138] backend/app/api/simulation.py:361:4:STRI... ✓
+  [130/138] backend/app/api/simulation.py:2144:4:STR... ✓
+  [131/138] backend/app/api/simulation.py:2273:4:STR... ✓
+  [132/138] backend/app/api/simulation.py:2411:4:STR... ✓
+  [133/138] backend/app/services/ontology_generator....       PARSE ERROR
+      PARSE ERROR
+✗
+  [134/138] backend/app/services/ontology_generator.... ✓
+  [135/138] backend/app/services/report_agent.py:552... ✓
+  [136/138] backend/app/services/report_agent.py:591... ✓
+  [137/138] backend/app/services/report_agent.py:615...       PARSE ERROR
+      PARSE ERROR
+✗
+  [138/138] backend/app/services/report_agent.py:769... ✓
+
+========================================
+Success: 95
+Failed:  43
+Total now: 1725

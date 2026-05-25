@@ -1,0 +1,191 @@
+{
+  "batch_id": "batch_0024",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/__init__.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nMiroFish Backend - Flask应用工厂\n",
+      "protected_terms": [
+        "Flask",
+        "Miro",
+        "MiroFish"
+      ]
+    },
+    {
+      "id": "backend/app/api/__init__.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nAPI路由模块\n",
+      "protected_terms": [
+        "API"
+      ]
+    },
+    {
+      "id": "backend/app/api/graph.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n图谱相关API路由\n采用项目上下文机制，服务端持久化状态\n",
+      "protected_terms": [
+        "API"
+      ]
+    },
+    {
+      "id": "backend/app/api/graph.py:38:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取项目详情\n    ",
+      "context": "@graph_bp.route('/project/<project_id>', methods=['GET'])\ndef get_project(project_id: str):"
+    },
+    {
+      "id": "backend/app/api/graph.py:57:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    列出所有项目\n    ",
+      "context": "@graph_bp.route('/project/list', methods=['GET'])\ndef list_projects():"
+    },
+    {
+      "id": "backend/app/api/graph.py:72:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    删除项目\n    ",
+      "context": "@graph_bp.route('/project/<project_id>', methods=['DELETE'])\ndef delete_project(project_id: str):"
+    },
+    {
+      "id": "backend/app/api/graph.py:91:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    重置项目状态（用于重新构建图谱）\n    ",
+      "context": "@graph_bp.route('/project/<project_id>/reset', methods=['POST'])\ndef reset_project(project_id: str):"
+    },
+    {
+      "id": "backend/app/api/graph.py:124:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    接口1：上传文件，分析生成本体定义\n    \n    请求方式：multipart/form-data\n    \n    参数：\n        files: 上传的文件（PDF/MD/TXT），可多个\n        simulation_requirement: 模拟需求描述（必填）\n        project_name: 项目名称（可选）\n        additional_context: 额外说明（可选）\n        \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"project_id\": \"proj_xxxx\",\n                \"ontology\": {\n                    \"entity_types\": [...],\n                    \"edge_types\": [...],\n                    \"analysis_summary\": \"...\"\n                },\n                \"files\": [...],\n                \"total_text_length\": 12345\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                    \"entity_types\": [...],\n                    \"edge_types\": [...],\n                    \"analysis_summary\": \"...\"\n                }"
+      ],
+      "context": "@graph_bp.route('/ontology/generate', methods=['POST'])\ndef generate_ontology():"
+    },
+    {
+      "id": "backend/app/api/graph.py:262:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    接口2：根据project_id构建图谱\n    \n    请求（JSON）：\n        {\n            \"project_id\": \"proj_xxxx\",  // 必填，来自接口1\n            \"graph_name\": \"图谱名称\",    // 可选\n            \"chunk_size\": 500,          // 可选，默认500\n            \"chunk_overlap\": 50         // 可选，默认50\n        }\n        \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"project_id\": \"proj_xxxx\",\n                \"task_id\": \"task_xxxx\",\n                \"message\": \"图谱构建任务已启动\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"project_id\": \"proj_xxxx\",\n                \"task_id\": \"task_xxxx\",\n                \"message\": \"图谱构建任务已启动\"\n            }",
+        "{\n            \"project_id\": \"proj_xxxx\",  // 必填，来自接口1\n            \"graph_name\": \"图谱名称\",    // 可选\n            \"chunk_size\": 500,          // 可选，默认500\n            \"chunk_overlap\": 50         // 可选，默认50\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@graph_bp.route('/build', methods=['POST'])\ndef build_graph():"
+    },
+    {
+      "id": "backend/app/api/graph.py:536:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    查询任务状态\n    ",
+      "context": "@graph_bp.route('/task/<task_id>', methods=['GET'])\ndef get_task(task_id: str):"
+    },
+    {
+      "id": "backend/app/api/graph.py:555:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    列出所有任务\n    ",
+      "context": "@graph_bp.route('/tasks', methods=['GET'])\ndef list_tasks():"
+    },
+    {
+      "id": "backend/app/api/graph.py:571:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取图谱数据（节点和边）\n    ",
+      "context": "@graph_bp.route('/data/<graph_id>', methods=['GET'])\ndef get_graph_data(graph_id: str):"
+    },
+    {
+      "id": "backend/app/api/graph.py:599:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    删除Zep图谱\n    ",
+      "protected_terms": [
+        "Zep"
+      ],
+      "context": "@graph_bp.route('/delete/<graph_id>', methods=['DELETE'])\ndef delete_graph(graph_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nReport API路由\n提供模拟报告生成、获取、对话等接口\n",
+      "protected_terms": [
+        "API"
+      ]
+    },
+    {
+      "id": "backend/app/api/report.py:27:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    生成模拟分析报告（异步任务）\n    \n    这是一个耗时操作，接口会立即返回task_id，\n    使用 GET /api/report/generate/status 查询进度\n    \n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",    // 必填，模拟ID\n            \"force_regenerate\": false        // 可选，强制重新生成\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"task_id\": \"task_xxxx\",\n                \"status\": \"generating\",\n                \"message\": \"报告生成任务已启动\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"task_id\": \"task_xxxx\",\n                \"status\": \"generating\",\n                \"message\": \"报告生成任务已启动\"\n            }",
+        "{\n            \"simulation_id\": \"sim_xxxx\",    // 必填，模拟ID\n            \"force_regenerate\": false        // 可选，强制重新生成\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/generate', methods=['POST'])\ndef generate_report():"
+    },
+    {
+      "id": "backend/app/api/report.py:205:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    查询报告生成任务进度\n    \n    请求（JSON）：\n        {\n            \"task_id\": \"task_xxxx\",         // 可选，generate返回的task_id\n            \"simulation_id\": \"sim_xxxx\"     // 可选，模拟ID\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"task_id\": \"task_xxxx\",\n                \"status\": \"processing|completed|failed\",\n                \"progress\": 45,\n                \"message\": \"...\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"task_id\": \"task_xxxx\",\n                \"status\": \"processing|completed|failed\",\n                \"progress\": 45,\n                \"message\": \"...\"\n            }",
+        "{\n            \"task_id\": \"task_xxxx\",         // 可选，generate返回的task_id\n            \"simulation_id\": \"sim_xxxx\"     // 可选，模拟ID\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@report_bp.route('/generate/status', methods=['POST'])\ndef get_generate_status():"
+    },
+    {
+      "id": "backend/app/api/report.py:279:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取报告详情\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"report_id\": \"report_xxxx\",\n                \"simulation_id\": \"sim_xxxx\",\n                \"status\": \"completed\",\n                \"outline\": {...},\n                \"markdown_content\": \"...\",\n                \"created_at\": \"...\",\n                \"completed_at\": \"...\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{...}"
+      ],
+      "context": "@report_bp.route('/<report_id>', methods=['GET'])\ndef get_report(report_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:321:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    根据模拟ID获取报告\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"report_id\": \"report_xxxx\",\n                ...\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"report_id\": \"report_xxxx\",\n                ...\n            }"
+      ],
+      "context": "@report_bp.route('/by-simulation/<simulation_id>', methods=['GET'])\ndef get_report_by_simulation(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/report.py:360:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    列出所有报告\n    \n    Query参数：\n        simulation_id: 按模拟ID过滤（可选）\n        limit: 返回数量限制（默认50）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": [...],\n            \"count\": 10\n        }\n    ",
+      "placeholders": [
+        "{\n            \"success\": true,\n            \"data\": [...],\n            \"count\": 10\n        }"
+      ],
+      "context": "@report_bp.route('/list', methods=['GET'])\ndef list_reports():"
+    },
+    {
+      "id": "backend/app/api/report.py:400:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    下载报告（Markdown格式）\n    \n    返回Markdown文件\n    ",
+      "protected_terms": [
+        "Markdown"
+      ],
+      "context": "@report_bp.route('/<report_id>/download', methods=['GET'])\ndef download_report(report_id: str):"
+    }
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "batch_id": "batch_0009",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:1101:8:COMMENT",
+      "kind": "comment",
+      "source_text": "响应可能包含思考文字 + 裸 JSON，尝试提取最后一个 JSON 对象",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1116:8:COMMENT",
+      "kind": "comment",
+      "source_text": "支持 {\"name\": ..., \"parameters\": ...} 和 {\"tool\": ..., \"params\": ...} 两种键名",
+      "placeholders": [
+        "{\"name\": ..., \"parameters\": ...}",
+        "{\"tool\": ..., \"params\": ...}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1119:12:COMMENT",
+      "kind": "comment",
+      "source_text": "统一键名为 name / parameters"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1157:8:COMMENT",
+      "kind": "comment",
+      "source_text": "首先获取模拟上下文"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1188:12:COMMENT",
+      "kind": "comment",
+      "source_text": "解析大纲"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1210:12:COMMENT",
+      "kind": "comment",
+      "source_text": "返回默认大纲（3个章节，作为fallback）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1251:8:COMMENT",
+      "kind": "comment",
+      "source_text": "记录章节开始日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1264:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建用户prompt - 每个已完成章节各传入最大4000字"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1268:16:COMMENT",
+      "kind": "comment",
+      "source_text": "每个章节最多4000字"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1285:8:COMMENT",
+      "kind": "comment",
+      "source_text": "ReACT循环",
+      "protected_terms": [
+        "ReACT"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1287:28:COMMENT",
+      "kind": "comment",
+      "source_text": "最大迭代轮数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1288:28:COMMENT",
+      "kind": "comment",
+      "source_text": "最少工具调用次数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1289:30:COMMENT",
+      "kind": "comment",
+      "source_text": "工具调用与Final Answer同时出现的连续冲突次数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1290:28:COMMENT",
+      "kind": "comment",
+      "source_text": "记录已调用过的工具名"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1293:8:COMMENT",
+      "kind": "comment",
+      "source_text": "报告上下文，用于InsightForge的子问题生成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1311:12:COMMENT",
+      "kind": "comment",
+      "source_text": "检查 LLM 返回是否为 None（API 异常或内容为空）",
+      "protected_terms": [
+        "API",
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1314:16:COMMENT",
+      "kind": "comment",
+      "source_text": "如果还有迭代次数，添加消息并重试"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1319:16:COMMENT",
+      "kind": "comment",
+      "source_text": "最后一次迭代也返回 None，跳出循环进入强制收尾"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1324:12:COMMENT",
+      "kind": "comment",
+      "source_text": "解析一次，复用结果"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1329:12:COMMENT",
+      "kind": "comment",
+      "source_text": "── 冲突处理：LLM 同时输出了工具调用和 Final Answer ──",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1337:20:COMMENT",
+      "kind": "comment",
+      "source_text": "前两次：丢弃本次响应，要求 LLM 重新回复",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1351:20:COMMENT",
+      "kind": "comment",
+      "source_text": "第三次：降级处理，截断到第一个工具调用，强制执行"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1363:12:COMMENT",
+      "kind": "comment",
+      "source_text": "记录 LLM 响应日志",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1374:12:COMMENT",
+      "kind": "comment",
+      "source_text": "── 情况1：LLM 输出了 Final Answer ──",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1376:16:COMMENT",
+      "kind": "comment",
+      "source_text": "工具调用次数不足，拒绝并要求继续调工具"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1391:16:COMMENT",
+      "kind": "comment",
+      "source_text": "正常结束"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1404:12:COMMENT",
+      "kind": "comment",
+      "source_text": "── 情况2：LLM 尝试调用工具 ──",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1406:16:COMMENT",
+      "kind": "comment",
+      "source_text": "工具额度已耗尽 → 明确告知，要求输出 Final Answer"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1418:16:COMMENT",
+      "kind": "comment",
+      "source_text": "只执行第一个工具调用"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1450:16:COMMENT",
+      "kind": "comment",
+      "source_text": "构建未使用工具提示"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1470:12:COMMENT",
+      "kind": "comment",
+      "source_text": "── 情况3：既没有工具调用，也没有 Final Answer ──"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1474:16:COMMENT",
+      "kind": "comment",
+      "source_text": "工具调用次数不足，推荐未用过的工具"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1488:12:COMMENT",
+      "kind": "comment",
+      "source_text": "工具调用已足够，LLM 输出了内容但没带 \"Final Answer:\" 前缀",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1489:12:COMMENT",
+      "kind": "comment",
+      "source_text": "直接将这段内容作为最终答案，不再空转"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1502:8:COMMENT",
+      "kind": "comment",
+      "source_text": "达到最大迭代次数，强制生成内容"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1512:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查强制收尾时 LLM 返回是否为 None",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1521:8:COMMENT",
+      "kind": "comment",
+      "source_text": "记录章节内容生成完成日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1560:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果没有传入 report_id，则自动生成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1574:8:COMMENT",
+      "kind": "comment",
+      "source_text": "已完成的章节标题列表（用于进度追踪）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1578:12:COMMENT",
+      "kind": "comment",
+      "source_text": "初始化：创建报告文件夹并保存初始状态"
+    }
+  ]
+}

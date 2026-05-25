@@ -1,0 +1,229 @@
+{
+  "batch_id": "batch_0012",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:2511:12:COMMENT",
+      "kind": "comment",
+      "source_text": "兼容旧格式：JSON文件",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2542:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按创建时间倒序"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2554:8:COMMENT",
+      "kind": "comment",
+      "source_text": "新格式：删除整个文件夹"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2560:8:COMMENT",
+      "kind": "comment",
+      "source_text": "兼容旧格式：删除单独的文件"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:28:0:COMMENT",
+      "kind": "comment",
+      "source_text": "中国作息时间配置（北京时间）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:30:4:COMMENT",
+      "kind": "comment",
+      "source_text": "深夜时段（几乎无人活动）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:32:4:COMMENT",
+      "kind": "comment",
+      "source_text": "早间时段（逐渐醒来）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:34:4:COMMENT",
+      "kind": "comment",
+      "source_text": "工作时段"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:36:4:COMMENT",
+      "kind": "comment",
+      "source_text": "晚间高峰（最活跃）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:38:4:COMMENT",
+      "kind": "comment",
+      "source_text": "夜间时段（活跃度下降）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:40:4:COMMENT",
+      "kind": "comment",
+      "source_text": "活跃度系数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:42:27:COMMENT",
+      "kind": "comment",
+      "source_text": "凌晨几乎无人"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:43:27:COMMENT",
+      "kind": "comment",
+      "source_text": "早间逐渐活跃"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:44:27:COMMENT",
+      "kind": "comment",
+      "source_text": "工作时段中等"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:45:27:COMMENT",
+      "kind": "comment",
+      "source_text": "晚间高峰"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:46:27:COMMENT",
+      "kind": "comment",
+      "source_text": "深夜下降"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:59:4:COMMENT",
+      "kind": "comment",
+      "source_text": "活跃度配置 (0.0-1.0)"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:60:33:COMMENT",
+      "kind": "comment",
+      "source_text": "整体活跃度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:62:4:COMMENT",
+      "kind": "comment",
+      "source_text": "发言频率（每小时预期发言次数）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:66:4:COMMENT",
+      "kind": "comment",
+      "source_text": "活跃时间段（24小时制，0-23）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:69:4:COMMENT",
+      "kind": "comment",
+      "source_text": "响应速度（对热点事件的反应延迟，单位：模拟分钟）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:73:4:COMMENT",
+      "kind": "comment",
+      "source_text": "情感倾向 (-1.0到1.0，负面到正面)"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:76:4:COMMENT",
+      "kind": "comment",
+      "source_text": "立场（对特定话题的态度）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:79:4:COMMENT",
+      "kind": "comment",
+      "source_text": "影响力权重（决定其发言被其他Agent看到的概率）",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:86:4:COMMENT",
+      "kind": "comment",
+      "source_text": "模拟总时长（模拟小时数）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:87:38:COMMENT",
+      "kind": "comment",
+      "source_text": "默认模拟72小时（3天）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:89:4:COMMENT",
+      "kind": "comment",
+      "source_text": "每轮代表的时间（模拟分钟）- 默认60分钟（1小时），加快时间流速"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:92:4:COMMENT",
+      "kind": "comment",
+      "source_text": "每小时激活的Agent数量范围",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:96:4:COMMENT",
+      "kind": "comment",
+      "source_text": "高峰时段（晚间19-22点，中国人最活跃的时间）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:100:4:COMMENT",
+      "kind": "comment",
+      "source_text": "低谷时段（凌晨0-5点，几乎无人活动）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:102:48:COMMENT",
+      "kind": "comment",
+      "source_text": "凌晨活跃度极低"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:104:4:COMMENT",
+      "kind": "comment",
+      "source_text": "早间时段"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:116:4:COMMENT",
+      "kind": "comment",
+      "source_text": "初始事件（模拟开始时的触发事件）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:119:4:COMMENT",
+      "kind": "comment",
+      "source_text": "定时事件（在特定时间触发的事件）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:122:4:COMMENT",
+      "kind": "comment",
+      "source_text": "热点话题关键词"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:125:4:COMMENT",
+      "kind": "comment",
+      "source_text": "舆论引导方向"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:134:4:COMMENT",
+      "kind": "comment",
+      "source_text": "推荐算法权重"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:135:33:COMMENT",
+      "kind": "comment",
+      "source_text": "时间新鲜度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:136:36:COMMENT",
+      "kind": "comment",
+      "source_text": "热度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:137:35:COMMENT",
+      "kind": "comment",
+      "source_text": "相关性"
+    }
+  ]
+}
