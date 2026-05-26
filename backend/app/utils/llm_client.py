@@ -233,52 +233,109 @@ class LLMClient:
         if isinstance(content, str):
             return content
 
+        if isinstance(content, dict):
+            text_value = content.get("text")
+            if isinstance(text_value, str):
+                return text_value
+            if isinstance(text_value, dict) and isinstance(text_value.get("value"), str):
+                return text_value["value"]
+
+            nested_content = content.get("content")
+            nested_text = LLMClient._coerce_message_content(nested_content)
+            if nested_text is not None:
+                return nested_text
+
         if isinstance(content, list):
             parts: List[str] = []
             for part in content:
-                if isinstance(part, str):
-                    parts.append(part)
+                part_text = LLMClient._coerce_message_content(part)
+                if part_text is not None:
+                    parts.append(part_text)
                     continue
 
-                if isinstance(part, dict):
-                    if isinstance(part.get("text"), str):
-                        parts.append(part["text"])
-                        continue
-                    if part.get("type") == "text" and isinstance(part.get("content"), str):
-                        parts.append(part["content"])
-                        continue
-
                 text_attr = getattr(part, "text", None)
-                if isinstance(text_attr, str):
-                    parts.append(text_attr)
+                if isinstance(text_attr, dict) and isinstance(text_attr.get("value"), str):
+                    parts.append(text_attr["value"])
+                    continue
+
+                text_value = getattr(text_attr, "value", None)
+                if isinstance(text_value, str):
+                    parts.append(text_value)
 
             return "".join(parts) if parts else None
 
+        text_attr = getattr(content, "text", None)
+        if isinstance(text_attr, str):
+            return text_attr
+
+        text_value = getattr(text_attr, "value", None)
+        if isinstance(text_value, str):
+            return text_value
+
+        nested_content = getattr(content, "content", None)
+        if nested_content is not None and nested_content is not content:
+            nested_text = LLMClient._coerce_message_content(nested_content)
+            if nested_text is not None:
+                return nested_text
+
         return None
+
+    @staticmethod
+    def _coerce_json_payload(value: Any) -> Optional[str]:
+        if value is None:
+            return None
+
+        if isinstance(value, str):
+            return value
+
+        if isinstance(value, (dict, list)):
+            return json.dumps(value, ensure_ascii=False)
+
+        model_dump = getattr(value, "model_dump", None)
+        if callable(model_dump):
+            try:
+                return json.dumps(model_dump(), ensure_ascii=False)
+            except Exception:  # noqa: BLE001
+                return None
+
+        return None
+
+    @staticmethod
+    def _summarize_response(response: Any) -> str:
+        choices = getattr(response, "choices", None)
+        if not choices:
+            return f"response_type={type(response).__name__} choices=0"
+
+        choice = choices[0]
+        message = getattr(choice, "message", None)
+        content = getattr(message, "content", None) if message is not None else None
+        return (
+            f"response_type={type(response).__name__} "
+            f"choice_type={type(choice).__name__} "
+            f"finish_reason={getattr(choice, 'finish_reason', None)!r} "
+            f"message_type={type(message).__name__ if message is not None else 'None'} "
+            f"content_type={type(content).__name__ if content is not None else 'None'}"
+        )
 
     def _extract_response_text(self, response: Any) -> str:
         """Extract textual content from the first completion choice."""
         choices = getattr(response, "choices", None)
         if not choices:
             logger.error(
-                "LLM response has no choices",
-                extra={
-                    "model": self.model,
-                    "base_url": self.base_url,
-                    "response_type": type(response).__name__,
-                },
+                "LLM response has no choices model=%s base_url=%s %s",
+                self.model,
+                self.base_url,
+                self._summarize_response(response),
             )
             raise ValueError("LLM-Antwort enthält keine Choices")
 
         message = getattr(choices[0], "message", None)
         if message is None:
             logger.error(
-                "LLM response first choice has no message",
-                extra={
-                    "model": self.model,
-                    "base_url": self.base_url,
-                    "finish_reason": getattr(choices[0], "finish_reason", None),
-                },
+                "LLM response first choice has no message model=%s base_url=%s %s",
+                self.model,
+                self.base_url,
+                self._summarize_response(response),
             )
             raise ValueError("LLM-Antwort enthält keine Message im ersten Choice")
 
@@ -286,28 +343,67 @@ class LLMClient:
         if content is not None:
             return content
 
+        parsed = self._coerce_json_payload(getattr(message, "parsed", None))
+        if parsed is not None:
+            logger.warning(
+                "LLM response used parsed payload fallback model=%s base_url=%s",
+                self.model,
+                self.base_url,
+            )
+            return parsed
+
+        function_call = getattr(message, "function_call", None)
+        function_args = self._coerce_json_payload(getattr(function_call, "arguments", None))
+        if function_args is not None:
+            logger.warning(
+                "LLM response used function_call arguments fallback model=%s base_url=%s",
+                self.model,
+                self.base_url,
+            )
+            return function_args
+
+        tool_calls = getattr(message, "tool_calls", None)
+        if tool_calls:
+            collected_args: List[str] = []
+            for tool_call in tool_calls:
+                function = getattr(tool_call, "function", None)
+                tool_args = self._coerce_json_payload(getattr(function, "arguments", None))
+                if tool_args is not None:
+                    collected_args.append(tool_args)
+            if collected_args:
+                logger.warning(
+                    "LLM response used tool_calls arguments fallback model=%s base_url=%s tool_calls=%s",
+                    self.model,
+                    self.base_url,
+                    len(collected_args),
+                )
+                return "\n".join(collected_args)
+
+        choice_text = self._coerce_message_content(getattr(choices[0], "text", None))
+        if choice_text is not None:
+            logger.warning(
+                "LLM response used choice.text fallback model=%s base_url=%s",
+                self.model,
+                self.base_url,
+            )
+            return choice_text
+
         refusal = getattr(message, "refusal", None)
         if isinstance(refusal, str) and refusal.strip():
             logger.error(
-                "LLM request refused: %s",
+                "LLM request refused model=%s base_url=%s finish_reason=%s refusal=%s",
+                self.model,
+                self.base_url,
+                getattr(choices[0], "finish_reason", None),
                 refusal.strip(),
-                extra={
-                    "model": self.model,
-                    "base_url": self.base_url,
-                    "finish_reason": getattr(choices[0], "finish_reason", None),
-                },
             )
             raise ValueError(f"LLM hat die Anfrage abgelehnt: {refusal.strip()}")
 
         logger.error(
-            "LLM response contains no textual content",
-            extra={
-                "model": self.model,
-                "base_url": self.base_url,
-                "finish_reason": getattr(choices[0], "finish_reason", None),
-                "message_type": type(message).__name__,
-                "content_type": type(getattr(message, "content", None)).__name__,
-            },
+            "LLM response contains no textual content model=%s base_url=%s %s",
+            self.model,
+            self.base_url,
+            self._summarize_response(response),
         )
         raise ValueError("LLM-Antwort enthält keinen Textinhalt")
 
