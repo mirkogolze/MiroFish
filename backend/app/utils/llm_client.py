@@ -222,6 +222,55 @@ class LLMClient:
 
         self._record_usage(response)
         return response
+
+    @staticmethod
+    def _coerce_message_content(content: Any) -> Optional[str]:
+        """Normalize provider-specific content payloads to plain text."""
+        if isinstance(content, str):
+            return content
+
+        if isinstance(content, list):
+            parts: List[str] = []
+            for part in content:
+                if isinstance(part, str):
+                    parts.append(part)
+                    continue
+
+                if isinstance(part, dict):
+                    if isinstance(part.get("text"), str):
+                        parts.append(part["text"])
+                        continue
+                    if part.get("type") == "text" and isinstance(part.get("content"), str):
+                        parts.append(part["content"])
+                        continue
+
+                text_attr = getattr(part, "text", None)
+                if isinstance(text_attr, str):
+                    parts.append(text_attr)
+
+            return "".join(parts) if parts else None
+
+        return None
+
+    def _extract_response_text(self, response: Any) -> str:
+        """Extract textual content from the first completion choice."""
+        choices = getattr(response, "choices", None)
+        if not choices:
+            raise ValueError("LLM-Antwort enthält keine Choices")
+
+        message = getattr(choices[0], "message", None)
+        if message is None:
+            raise ValueError("LLM-Antwort enthält keine Message im ersten Choice")
+
+        content = self._coerce_message_content(getattr(message, "content", None))
+        if content is not None:
+            return content
+
+        refusal = getattr(message, "refusal", None)
+        if isinstance(refusal, str) and refusal.strip():
+            raise ValueError(f"LLM hat die Anfrage abgelehnt: {refusal.strip()}")
+
+        raise ValueError("LLM-Antwort enthält keinen Textinhalt")
     
     def chat(
         self,
@@ -249,7 +298,7 @@ class LLMClient:
             response_format=response_format,
         )
 
-        content = response.choices[0].message.content
+        content = self._extract_response_text(response)
         # Einige Modelle kapseln Reasoning in <think>…</think>.
         # Das wird entfernt, damit Aufrufer nur die eigentliche Antwort erhalten.
         content = re.sub(r'<think>[\s\S]*?</think>', '', content).strip()
