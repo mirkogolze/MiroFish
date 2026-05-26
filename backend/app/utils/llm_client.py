@@ -12,6 +12,10 @@ from typing import Optional, Dict, Any, Iterator, List
 from openai import OpenAI
 
 from ..config import Config
+from .logger import get_logger
+
+
+logger = get_logger("mirofish.llm")
 
 
 class LLMClient:
@@ -256,10 +260,26 @@ class LLMClient:
         """Extract textual content from the first completion choice."""
         choices = getattr(response, "choices", None)
         if not choices:
+            logger.error(
+                "LLM response has no choices",
+                extra={
+                    "model": self.model,
+                    "base_url": self.base_url,
+                    "response_type": type(response).__name__,
+                },
+            )
             raise ValueError("LLM-Antwort enthält keine Choices")
 
         message = getattr(choices[0], "message", None)
         if message is None:
+            logger.error(
+                "LLM response first choice has no message",
+                extra={
+                    "model": self.model,
+                    "base_url": self.base_url,
+                    "finish_reason": getattr(choices[0], "finish_reason", None),
+                },
+            )
             raise ValueError("LLM-Antwort enthält keine Message im ersten Choice")
 
         content = self._coerce_message_content(getattr(message, "content", None))
@@ -268,9 +288,40 @@ class LLMClient:
 
         refusal = getattr(message, "refusal", None)
         if isinstance(refusal, str) and refusal.strip():
+            logger.error(
+                "LLM request refused: %s",
+                refusal.strip(),
+                extra={
+                    "model": self.model,
+                    "base_url": self.base_url,
+                    "finish_reason": getattr(choices[0], "finish_reason", None),
+                },
+            )
             raise ValueError(f"LLM hat die Anfrage abgelehnt: {refusal.strip()}")
 
+        logger.error(
+            "LLM response contains no textual content",
+            extra={
+                "model": self.model,
+                "base_url": self.base_url,
+                "finish_reason": getattr(choices[0], "finish_reason", None),
+                "message_type": type(message).__name__,
+                "content_type": type(getattr(message, "content", None)).__name__,
+            },
+        )
         raise ValueError("LLM-Antwort enthält keinen Textinhalt")
+
+    @staticmethod
+    def _is_empty_response_error(error: Exception) -> bool:
+        if not isinstance(error, ValueError):
+            return False
+
+        message = str(error)
+        return message in {
+            "LLM-Antwort enthält keine Choices",
+            "LLM-Antwort enthält keine Message im ersten Choice",
+            "LLM-Antwort enthält keinen Textinhalt",
+        }
     
     def chat(
         self,
@@ -321,12 +372,30 @@ class LLMClient:
         Returns:
             Verarbeitetes JSON-Objekt.
         """
-        response = self.chat(
-            messages=messages,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            response_format={"type": "json_object"}
-        )
+        try:
+            response = self.chat(
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens,
+                response_format={"type": "json_object"}
+            )
+        except Exception as error:
+            if not self._is_empty_response_error(error):
+                raise
+
+            logger.warning(
+                "LLM JSON mode returned no textual content; retrying without response_format",
+                extra={
+                    "model": self.model,
+                    "base_url": self.base_url,
+                },
+            )
+            response = self.chat(
+                messages=messages,
+                temperature=temperature,
+                max_tokens=max_tokens,
+            )
+
         # Bereinigung der Markdown-Codeblock-Markierungen
         cleaned_response = response.strip()
         cleaned_response = re.sub(r'^```(?:json)?\s*\n?', '', cleaned_response, flags=re.IGNORECASE)
