@@ -35,6 +35,7 @@ from typing import Any, Literal, Optional
 
 from ...config import Config
 from ...utils.logger import get_logger
+from ...utils.llm_client import LLMClient as ThrottledLLMClient
 from .base import (
     Edge,
     EpisodeInput,
@@ -181,7 +182,8 @@ def _make_llm_client_wrapper(inner: Any, *, debug: bool = False) -> Any:
                     self._log.debug("LLM REQUEST (could not serialise messages)")
 
             try:
-                result = await self._inner.generate_response(messages, response_model, **kwargs)
+                with ThrottledLLMClient.request_slot(getattr(self.config, "base_url", None)):
+                    result = await self._inner.generate_response(messages, response_model, **kwargs)
             except Exception as exc:
                 self._log.error(
                     "LLM ERROR — %s: %s", type(exc).__name__, exc, exc_info=True

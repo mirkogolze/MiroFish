@@ -16,10 +16,9 @@ from typing import Dict, Any, List, Optional, Callable
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
-from openai import OpenAI
-
 from ..config import Config
 from ..utils.logger import get_logger
+from ..utils.llm_client import LLMClient
 from ..utils.locale import get_language_instruction, t
 from .zep_entity_reader import EntityNode, ZepEntityReader
 
@@ -232,9 +231,10 @@ Verwendet eine Schritt-für-Schritt-Generierungsstrategie:
         if not self.api_key:
             raise ValueError("LLM_API_KEY nicht konfiguriert")
         
-        self.client = OpenAI(
+        self.client = LLMClient(
             api_key=self.api_key,
-            base_url=self.base_url
+            base_url=self.base_url,
+            model=self.model_name,
         )
     
     def generate_config(
@@ -437,8 +437,7 @@ Returns:
         
         for attempt in range(max_attempts):
             try:
-                response = self.client.chat.completions.create(
-                    model=self.model_name,
+                response = self.client.create_chat_completion(
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": prompt}

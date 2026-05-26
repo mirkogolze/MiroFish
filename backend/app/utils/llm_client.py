@@ -1,8 +1,12 @@
 """LLM-Client-Wrapper mit integriertem Usage-Tracking."""
 
 import json
+import hashlib
+import os
 import re
+import tempfile
 import threading
+import time
 from contextlib import contextmanager
 from typing import Optional, Dict, Any, Iterator, List
 from openai import OpenAI
@@ -52,19 +56,127 @@ class LLMClient:
             return cls._request_semaphore
 
     @classmethod
+    def _process_slot_root(cls) -> str:
+        configured_root = os.environ.get("LLM_PARALLEL_REQUEST_SLOT_DIR", "").strip()
+        if configured_root:
+            return configured_root
+        return os.path.join(tempfile.gettempdir(), "mirofish-llm-slots")
+
+    @classmethod
+    def _process_slot_scope_dir(cls, base_url: Optional[str]) -> str:
+        scope = (base_url or Config.LLM_BASE_URL or "default").strip().lower()
+        digest = hashlib.sha256(scope.encode("utf-8")).hexdigest()[:16]
+        return os.path.join(cls._process_slot_root(), digest)
+
+    @staticmethod
+    def _pid_is_alive(pid: int) -> bool:
+        if pid <= 0:
+            return False
+        try:
+            os.kill(pid, 0)
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            return True
+        except OSError:
+            return True
+        return True
+
+    @classmethod
+    def _lock_file_is_stale(cls, lock_path: str) -> bool:
+        try:
+            with open(lock_path, "r", encoding="utf-8") as handle:
+                first_line = handle.readline().strip()
+        except OSError:
+            return False
+
+        if not first_line.isdigit():
+            return False
+        return not cls._pid_is_alive(int(first_line))
+
+    @classmethod
+    def _try_acquire_process_slot(cls, base_url: Optional[str]) -> Optional[str]:
+        limit = Config.LLM_MAX_PARALLEL_REQUESTS
+        if limit <= 0:
+            return None
+
+        scope_dir = cls._process_slot_scope_dir(base_url)
+        os.makedirs(scope_dir, exist_ok=True)
+        owner = f"{os.getpid()}\n{threading.get_ident()}\n{time.time()}\n"
+
+        for slot_index in range(limit):
+            lock_path = os.path.join(scope_dir, f"slot-{slot_index}.lock")
+            try:
+                descriptor = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            except FileExistsError:
+                if cls._lock_file_is_stale(lock_path):
+                    try:
+                        os.remove(lock_path)
+                    except OSError:
+                        pass
+                continue
+
+            try:
+                with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+                    handle.write(owner)
+                return lock_path
+            except Exception:
+                try:
+                    os.remove(lock_path)
+                except OSError:
+                    pass
+                raise
+
+        return None
+
+    @classmethod
     @contextmanager
-    def _request_slot(cls) -> Iterator[None]:
-        """Throttle outbound LLM requests inside this backend process."""
-        semaphore = cls._get_request_semaphore()
-        if semaphore is None:
+    def _process_request_slot(cls, base_url: Optional[str]) -> Iterator[None]:
+        limit = Config.LLM_MAX_PARALLEL_REQUESTS
+        if limit <= 0:
             yield
             return
 
-        semaphore.acquire()
+        poll_interval = max(
+            0.01,
+            float(os.environ.get("LLM_PARALLEL_REQUEST_POLL_INTERVAL_SECONDS", "0.05")),
+        )
+        lock_path = None
+        while lock_path is None:
+            lock_path = cls._try_acquire_process_slot(base_url)
+            if lock_path is None:
+                time.sleep(poll_interval)
+
         try:
             yield
         finally:
-            semaphore.release()
+            if lock_path is not None:
+                try:
+                    os.remove(lock_path)
+                except OSError:
+                    pass
+
+    @classmethod
+    @contextmanager
+    def request_slot(cls, base_url: Optional[str] = None) -> Iterator[None]:
+        """Throttle outbound LLM requests across threads and sibling processes."""
+        semaphore = cls._get_request_semaphore()
+        if semaphore is not None:
+            semaphore.acquire()
+
+        try:
+            with cls._process_request_slot(base_url):
+                yield
+        finally:
+            if semaphore is not None:
+                semaphore.release()
+
+    @classmethod
+    @contextmanager
+    def _request_slot(cls) -> Iterator[None]:
+        """Throttle outbound LLM requests inside this backend process."""
+        with cls.request_slot():
+            yield
 
     def bind_simulation(self, simulation_id: Optional[str]) -> None:
         """Attach (or clear) a simulation id for usage attribution."""
@@ -83,6 +195,33 @@ class LLMClient:
         except Exception:  # noqa: BLE001
             # Tracking is observational; never break a real call for it.
             pass
+
+    def create_chat_completion(
+        self,
+        messages: List[Dict[str, str]],
+        temperature: float = 0.7,
+        max_tokens: int = 4096,
+        response_format: Optional[Dict] = None,
+        **kwargs: Any,
+    ) -> Any:
+        """Send a raw chat completion request through the shared LLM throttle."""
+        request_kwargs: Dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+        }
+
+        if response_format:
+            request_kwargs["response_format"] = response_format
+
+        request_kwargs.update(kwargs)
+
+        with self.request_slot(self.base_url):
+            response = self.client.chat.completions.create(**request_kwargs)
+
+        self._record_usage(response)
+        return response
     
     def chat(
         self,
@@ -103,21 +242,12 @@ class LLMClient:
         Returns:
             Modellantworttext.
         """
-        kwargs = {
-            "model": self.model,
-            "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        }
-        
-        if response_format:
-            kwargs["response_format"] = response_format
-
-        with self._request_slot():
-            response = self.client.chat.completions.create(**kwargs)
-        # Record usage before any parsing so transient parse errors
-        # do not lose cost attribution.
-        self._record_usage(response)
+        response = self.create_chat_completion(
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            response_format=response_format,
+        )
 
         content = response.choices[0].message.content
         # Einige Modelle kapseln Reasoning in <think>…</think>.
