@@ -1,0 +1,40 @@
+{
+  "batch_id": "batch_0035",
+  "kind": "error_message",
+  "system_prompt": "Du übersetzt Python-Fehlermeldungen vom Chinesischen ins Deutsche. Regeln: Präzise und klar. Platzhalter {…} EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 3,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_config_generator.py:481:38:STRING",
+      "kind": "error_message",
+      "source_text": "LLM调用失败",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:375:33:STRING",
+      "kind": "error_message",
+      "source_text": "启用图谱记忆更新时必须提供 graph_id"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:102:30:STRING",
+      "kind": "error_message",
+      "source_text": "需要安装PyMuPDF: pip install PyMuPDF",
+      "protected_terms": [
+        "pip"
+      ]
+    }
+  ]
+}

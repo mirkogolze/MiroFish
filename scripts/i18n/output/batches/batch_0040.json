@@ -1,0 +1,185 @@
+{
+  "batch_id": "batch_0040",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/ontology_generator.py:250:24:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n## 文档内容\n\n",
+      "context": "message = f\"\"\"## 模拟需求"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:258:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n## 额外说明\n\n",
+      "context": "if additional_context:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1058:25:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "未知工具: ",
+      "context": "else:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1058:42:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "。请使用以下工具之一: insight_forge, panorama_search, quick_search",
+      "context": "else:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1062:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "工具执行失败: ",
+      "context": "except Exception as e:\n            logger.error(t('report.toolExecFailed', toolName=tool_name, error=str(e)))"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1134:36:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "  参数: ",
+      "context": "desc_parts.append(f\"- {name}: {tool['description']}\")\n            if params_desc:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1294:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "章节标题: ",
+      "context": "# 报告上下文，用于InsightForge的子问题生成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1294:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n模拟需求: ",
+      "context": "# 报告上下文，用于InsightForge的子问题生成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1322:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "LLM响应: ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "break"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1380:36:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "（这些工具还未使用，推荐用一下他们: ",
+      "context": "messages.append({\"role\": \"assistant\", \"content\": response})\n                    unused_tools = all_tools - used_tools"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1861:51:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "结果]\\n",
+      "context": "# 将结果添加到消息\n            messages.append({\"role\": \"assistant\", \"content\": response})"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:272:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "开始智能生成模拟配置: simulation_id=",
+      "context": "SimulationParameters: 完整的模拟参数\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:272:63:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 实体数=",
+      "context": "SimulationParameters: 完整的模拟参数\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:377:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟配置生成完成: ",
+      "context": ")"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:377:59:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 个Agent配置",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": ")"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:394:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "## 模拟需求\\n",
+      "context": "# 构建上下文\n        context_parts = ["
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:395:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n## 实体信息 (",
+      "context": "context_parts = [\n            f\"## 模拟需求\\n{simulation_requirement}\","
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:395:40:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "个)\\n",
+      "context": "context_parts = [\n            f\"## 模拟需求\\n{simulation_requirement}\","
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:405:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n## 原始文档内容\\n",
+      "context": "if len(document_text) > remaining_length:\n                doc_text += \"\\n...(文档已截断)\""
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:422:68:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "个)",
+      "context": "for entity_type, type_entities in by_type.items():"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:430:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "  ... 还有 ",
+      "context": "lines.append(f\"- {e.name}: {summary_preview}\")\n            if len(type_entities) > display_count:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:430:76:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 个",
+      "context": "lines.append(f\"- {e.name}: {summary_preview}\")\n            if len(type_entities) > display_count:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:459:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "LLM输出被截断 (attempt ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "# 检查是否被截断\n                if finish_reason == 'length':"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:466:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "JSON解析失败 (attempt ",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "return json.loads(content)\n                except json.JSONDecodeError as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:476:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "LLM调用失败 (attempt ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "except Exception as e:"
+    }
+  ]
+}

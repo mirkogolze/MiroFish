@@ -1,0 +1,103 @@
+{
+  "batch_id": "batch_0050",
+  "kind": "llm_prompt",
+  "system_prompt": "Du übersetzt LLM-System-Prompts vom Chinesischen ins Deutsche. WICHTIG: Instruktions-Struktur exakt beibehalten (Nummerierung, Aufzählungen, 【】-Marker). Platzhalter {…} EXAKT beibehalten. Technische Begriffe nicht übersetzen. Nicht zu frei umformulieren — die Prompt-Logik muss erhalten bleiben. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 5,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:361:4:STRING",
+      "kind": "llm_prompt",
+      "source_text": "\n    准备模拟环境（异步任务，LLM智能生成所有参数）\n    \n    这是一个耗时操作，接口会立即返回task_id，\n    使用 GET /api/simulation/prepare/status 查询进度\n    \n    特性：\n    - 自动检测已完成的准备工作，避免重复生成\n    - 如果已准备完成，直接返回已有结果\n    - 支持强制重新生成（force_regenerate=true）\n    \n    步骤：\n    1. 检查是否已有完成的准备工作\n    2. 从Zep图谱读取并过滤实体\n    3. 为每个实体生成OASIS Agent Profile（带重试机制）\n    4. LLM智能生成模拟配置（带重试机制）\n    5. 保存配置文件和预设脚本\n    \n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",                   // 必填，模拟ID\n            \"entity_types\": [\"Student\", \"PublicFigure\"],  // 可选，指定实体类型\n            \"use_llm_for_profiles\": true,                 // 可选，是否用LLM生成人设\n            \"parallel_profile_count\": 5,                  // 可选，并行生成人设数量，默认5\n            \"force_regenerate\": false                     // 可选，强制重新生成，默认false\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"task_id\": \"task_xxxx\",           // 新任务时返回\n                \"status\": \"preparing|ready\",\n                \"message\": \"准备任务已启动|已有完成的准备工作\",\n                \"already_prepared\": true|false    // 是否已准备完成\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"task_id\": \"task_xxxx\",           // 新任务时返回\n                \"status\": \"preparing|ready\",\n                \"message\": \"准备任务已启动|已有完成的准备工作\",\n                \"already_prepared\": true|false    // 是否已准备完成\n            }",
+        "{\n            \"simulation_id\": \"sim_xxxx\",                   // 必填，模拟ID\n            \"entity_types\": [\"Student\", \"PublicFigure\"],  // 可选，指定实体类型\n            \"use_llm_for_profiles\": true,                 // 可选，是否用LLM生成人设\n            \"parallel_profile_count\": 5,                  // 可选，并行生成人设数量，默认5\n            \"force_regenerate\": false                     // 可选，强制重新生成，默认false\n        }"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON",
+        "LLM",
+        "OASIS",
+        "Zep"
+      ],
+      "context": "@simulation_bp.route('/prepare', methods=['POST'])\ndef prepare_simulation():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2144:4:STRING",
+      "kind": "llm_prompt",
+      "source_text": "\n    采访单个Agent\n\n    注意：此功能需要模拟环境处于运行状态（完成模拟循环后进入等待命令模式）\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",       // 必填，模拟ID\n            \"agent_id\": 0,                     // 必填，Agent ID\n            \"prompt\": \"你对这件事有什么看法？\",  // 必填，采访问题\n            \"platform\": \"twitter\",             // 可选，指定平台（twitter/reddit）\n                                               // 不指定时：双平台模拟同时采访两个平台\n            \"timeout\": 60                      // 可选，超时时间（秒），默认60\n        }\n\n    返回（不指定platform，双平台模式）：\n        {\n            \"success\": true,\n            \"data\": {\n                \"agent_id\": 0,\n                \"prompt\": \"你对这件事有什么看法？\",\n                \"result\": {\n                    \"agent_id\": 0,\n                    \"prompt\": \"...\",\n                    \"platforms\": {\n                        \"twitter\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"},\n                        \"reddit\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"}\n                    }\n                },\n                \"timestamp\": \"2025-12-08T10:00:01\"\n            }\n        }\n\n    返回（指定platform）：\n        {\n            \"success\": true,\n            \"data\": {\n                \"agent_id\": 0,\n                \"prompt\": \"你对这件事有什么看法？\",\n                \"result\": {\n                    \"agent_id\": 0,\n                    \"response\": \"我认为...\",\n                    \"platform\": \"twitter\",\n                    \"timestamp\": \"2025-12-08T10:00:00\"\n                },\n                \"timestamp\": \"2025-12-08T10:00:01\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                    \"agent_id\": 0,\n                    \"response\": \"我认为...\",\n                    \"platform\": \"twitter\",\n                    \"timestamp\": \"2025-12-08T10:00:00\"\n                }",
+        "{\n            \"simulation_id\": \"sim_xxxx\",       // 必填，模拟ID\n            \"agent_id\": 0,                     // 必填，Agent ID\n            \"prompt\": \"你对这件事有什么看法？\",  // 必填，采访问题\n            \"platform\": \"twitter\",             // 可选，指定平台（twitter/reddit）\n                                               // 不指定时：双平台模拟同时采访两个平台\n            \"timeout\": 60                      // 可选，超时时间（秒），默认60\n        }",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"}",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/interview', methods=['POST'])\ndef interview_agent():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2273:4:STRING",
+      "kind": "llm_prompt",
+      "source_text": "\n    批量采访多个Agent\n\n    注意：此功能需要模拟环境处于运行状态\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",       // 必填，模拟ID\n            \"interviews\": [                    // 必填，采访列表\n                {\n                    \"agent_id\": 0,\n                    \"prompt\": \"你对A有什么看法？\",\n                    \"platform\": \"twitter\"      // 可选，指定该Agent的采访平台\n                },\n                {\n                    \"agent_id\": 1,\n                    \"prompt\": \"你对B有什么看法？\"  // 不指定platform则使用默认值\n                }\n            ],\n            \"platform\": \"reddit\",              // 可选，默认平台（被每项的platform覆盖）\n                                               // 不指定时：双平台模拟每个Agent同时采访两个平台\n            \"timeout\": 120                     // 可选，超时时间（秒），默认120\n        }\n\n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"interviews_count\": 2,\n                \"result\": {\n                    \"interviews_count\": 4,\n                    \"results\": {\n                        \"twitter_0\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"},\n                        \"reddit_0\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"},\n                        \"twitter_1\": {\"agent_id\": 1, \"response\": \"...\", \"platform\": \"twitter\"},\n                        \"reddit_1\": {\"agent_id\": 1, \"response\": \"...\", \"platform\": \"reddit\"}\n                    }\n                },\n                \"timestamp\": \"2025-12-08T10:00:01\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                    \"agent_id\": 0,\n                    \"prompt\": \"你对A有什么看法？\",\n                    \"platform\": \"twitter\"      // 可选，指定该Agent的采访平台\n                }",
+        "{\n                    \"agent_id\": 1,\n                    \"prompt\": \"你对B有什么看法？\"  // 不指定platform则使用默认值\n                }",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"}",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"}",
+        "{\"agent_id\": 1, \"response\": \"...\", \"platform\": \"reddit\"}",
+        "{\"agent_id\": 1, \"response\": \"...\", \"platform\": \"twitter\"}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/interview/batch', methods=['POST'])\ndef interview_agents_batch():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2411:4:STRING",
+      "kind": "llm_prompt",
+      "source_text": "\n    全局采访 - 使用相同问题采访所有Agent\n\n    注意：此功能需要模拟环境处于运行状态\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",            // 必填，模拟ID\n            \"prompt\": \"你对这件事整体有什么看法？\",  // 必填，采访问题（所有Agent使用相同问题）\n            \"platform\": \"reddit\",                   // 可选，指定平台（twitter/reddit）\n                                                    // 不指定时：双平台模拟每个Agent同时采访两个平台\n            \"timeout\": 180                          // 可选，超时时间（秒），默认180\n        }\n\n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"interviews_count\": 50,\n                \"result\": {\n                    \"interviews_count\": 100,\n                    \"results\": {\n                        \"twitter_0\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"},\n                        \"reddit_0\": {\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"},\n                        ...\n                    }\n                },\n                \"timestamp\": \"2025-12-08T10:00:01\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n            \"simulation_id\": \"sim_xxxx\",            // 必填，模拟ID\n            \"prompt\": \"你对这件事整体有什么看法？\",  // 必填，采访问题（所有Agent使用相同问题）\n            \"platform\": \"reddit\",                   // 可选，指定平台（twitter/reddit）\n                                                    // 不指定时：双平台模拟每个Agent同时采访两个平台\n            \"timeout\": 180                          // 可选，超时时间（秒），默认180\n        }",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"reddit\"}",
+        "{\"agent_id\": 0, \"response\": \"...\", \"platform\": \"twitter\"}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/interview/all', methods=['POST'])\ndef interview_all_agents():"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:30:25:STRING",
+      "kind": "llm_prompt",
+      "source_text": "你是一个专业的知识图谱本体设计专家。你的任务是分析给定的文本内容和模拟需求，设计适合**社交媒体舆论模拟**的实体类型和关系类型。\n\n**重要：你必须输出有效的JSON格式数据，不要输出任何其他内容。**\n\n## 核心任务背景\n\n我们正在构建一个**社交媒体舆论模拟系统**。在这个系统中：\n- 每个实体都是一个可以在社交媒体上发声、互动、传播信息的\"账号\"或\"主体\"\n- 实体之间会相互影响、转发、评论、回应\n- 我们需要模拟舆论事件中各方的反应和信息传播路径\n\n因此，**实体必须是现实中真实存在的、可以在社媒上发声和互动的主体**：\n\n**可以是**：\n- 具体的个人（公众人物、当事人、意见领袖、专家学者、普通人）\n- 公司、企业（包括其官方账号）\n- 组织机构（大学、协会、NGO、工会等）\n- 政府部门、监管机构\n- 媒体机构（报纸、电视台、自媒体、网站）\n- 社交媒体平台本身\n- 特定群体代表（如校友会、粉丝团、维权群体等）\n\n**不可以是**：\n- 抽象概念（如\"舆论\"、\"情绪\"、\"趋势\"）\n- 主题/话题（如\"学术诚信\"、\"教育改革\"）\n- 观点/态度（如\"支持方\"、\"反对方\"）\n\n## 输出格式\n\n请输出JSON格式，包含以下结构：\n\n```json\n{\n    \"entity_types\": [\n        {\n            \"name\": \"实体类型名称（英文，PascalCase）\",\n            \"description\": \"简短描述（英文，不超过100字符）\",\n            \"attributes\": [\n                {\n                    \"name\": \"属性名（英文，snake_case）\",\n                    \"type\": \"text\",\n                    \"description\": \"属性描述\"\n                }\n            ],\n            \"examples\": [\"示例实体1\", \"示例实体2\"]\n        }\n    ],\n    \"edge_types\": [\n        {\n            \"name\": \"关系类型名称（英文，UPPER_SNAKE_CASE）\",\n            \"description\": \"简短描述（英文，不超过100字符）\",\n            \"source_targets\": [\n                {\"source\": \"源实体类型\", \"target\": \"目标实体类型\"}\n            ],\n            \"attributes\": []\n        }\n    ],\n    \"analysis_summary\": \"对文本内容的简要分析说明\"\n}\n```\n\n## 设计指南（极其重要！）\n\n### 1. 实体类型设计 - 必须严格遵守\n\n**数量要求：必须正好10个实体类型**\n\n**层次结构要求（必须同时包含具体类型和兜底类型）**：\n\n你的10个实体类型必须包含以下层次：\n\nA. **兜底类型（必须包含，放在列表最后2个）**：\n   - `Person`: 任何自然人个体的兜底类型。当一个人不属于其他更具体的人物类型时，归入此类。\n   - `Organization`: 任何组织机构的兜底类型。当一个组织不属于其他更具体的组织类型时，归入此类。\n\nB. **具体类型（8个，根据文本内容设计）**：\n   - 针对文本中出现的主要角色，设计更具体的类型\n   - 例如：如果文本涉及学术事件，可以有 `Student`, `Professor`, `University`\n   - 例如：如果文本涉及商业事件，可以有 `Company`, `CEO`, `Employee`\n\n**为什么需要兜底类型**：\n- 文本中会出现各种人物，如\"中小学教师\"、\"路人甲\"、\"某位网友\"\n- 如果没有专门的类型匹配，他们应该被归入 `Person`\n- 同理，小型组织、临时团体等应该归入 `Organization`\n\n**具体类型的设计原则**：\n- 从文本中识别出高频出现或关键的角色类型\n- 每个具体类型应该有明确的边界，避免重叠\n- description 必须清晰说明这个类型和兜底类型的区别\n\n### 2. 关系类型设计\n\n- 数量：6-10个\n- 关系应该反映社媒互动中的真实联系\n- 确保关系的 source_targets 涵盖你定义的实体类型\n\n### 3. 属性设计\n\n- 每个实体类型1-3个关键属性\n- **注意**：属性名不能使用 `name`、`uuid`、`group_id`、`created_at`、`summary`（这些是系统保留字）\n- 推荐使用：`full_name`, `title`, `role`, `position`, `location`, `description` 等\n\n## 实体类型参考\n\n**个人类（具体）**：\n- Student: 学生\n- Professor: 教授/学者\n- Journalist: 记者\n- Celebrity: 明星/网红\n- Executive: 高管\n- Official: 政府官员\n- Lawyer: 律师\n- Doctor: 医生\n\n**个人类（兜底）**：\n- Person: 任何自然人（不属于上述具体类型时使用）\n\n**组织类（具体）**：\n- University: 高校\n- Company: 公司企业\n- GovernmentAgency: 政府机构\n- MediaOutlet: 媒体机构\n- Hospital: 医院\n- School: 中小学\n- NGO: 非政府组织\n\n**组织类（兜底）**：\n- Organization: 任何组织机构（不属于上述具体类型时使用）\n\n## 关系类型参考\n\n- WORKS_FOR: 工作于\n- STUDIES_AT: 就读于\n- AFFILIATED_WITH: 隶属于\n- REPRESENTS: 代表\n- REGULATES: 监管\n- REPORTS_ON: 报道\n- COMMENTS_ON: 评论\n- RESPONDS_TO: 回应\n- SUPPORTS: 支持\n- OPPOSES: 反对\n- COLLABORATES_WITH: 合作\n- COMPETES_WITH: 竞争\n",
+      "placeholders": [
+        "{\n                    \"name\": \"属性名（英文，snake_case）\",\n                    \"type\": \"text\",\n                    \"description\": \"属性描述\"\n                }",
+        "{\"source\": \"源实体类型\", \"target\": \"目标实体类型\"}"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "# 本体生成的系统提示词"
+    }
+  ]
+}

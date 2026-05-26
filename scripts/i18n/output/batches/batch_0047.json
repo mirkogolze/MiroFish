@@ -1,0 +1,194 @@
+{
+  "batch_id": "batch_0047",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/zep_tools.py:389:36:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n#### 采访 #",
+      "context": "if self.interviews:\n            for i, interview in enumerate(self.interviews, 1):"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1112:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟需求背景：\n",
+      "context": "4. 返回JSON格式：{\"sub_queries\": [\"子问题1\", \"子问题2\", ...]}\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1115:3:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "报告上下文：",
+      "context": "{simulation_requirement}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1115:59:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n请将以下问题分解为",
+      "context": "{simulation_requirement}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1117:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "个子问题：\n",
+      "context": "{f\"报告上下文：{report_context[:500]}\" if report_context else \"\"}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1118:7:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n返回JSON格式的子问题列表。",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "请将以下问题分解为{max_queries}个子问题："
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1140:25:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的主要参与者",
+      "context": "return [\n                query,"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1141:25:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的原因和影响",
+      "context": "query,\n                f\"{query} 的主要参与者\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1142:25:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的发展过程",
+      "context": "f\"{query} 的主要参与者\",\n                f\"{query} 的原因和影响\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1392:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "采访API调用失败：",
+      "protected_terms": [
+        "API"
+      ],
+      "context": "error_msg = api_result.get(\"error\", \"未知错误\")\n                logger.warning(t(\"console.interviewApiReturnedFailure\", error=error_msg))"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1392:56:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "。请检查OASIS模拟环境状态。",
+      "protected_terms": [
+        "OASIS"
+      ],
+      "context": "error_msg = api_result.get(\"error\", \"未知错误\")\n                logger.warning(t(\"console.interviewApiReturnedFailure\", error=error_msg))"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1420:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "【Twitter平台回答】\\n",
+      "protected_terms": [
+        "Twitter"
+      ],
+      "context": "twitter_text = twitter_response if twitter_response else \"（该平台未获得回复）\"\n                reddit_text = reddit_response if reddit_response else \"（该平台未获得回复）\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1420:63:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n\\n【Reddit平台回答】\\n",
+      "protected_terms": [
+        "Reddit"
+      ],
+      "context": "twitter_text = twitter_response if twitter_response else \"（该平台未获得回复）\"\n                reddit_text = reddit_response if reddit_response else \"（该平台未获得回复）\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1465:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "采访失败：",
+      "context": "# 模拟环境未运行\n            logger.warning(t(\"console.interviewApiCallFailed\", error=e))"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1465:44:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "。模拟环境可能已关闭，请确保OASIS环境正在运行。",
+      "protected_terms": [
+        "OASIS"
+      ],
+      "context": "# 模拟环境未运行\n            logger.warning(t(\"console.interviewApiCallFailed\", error=e))"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1471:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "采访过程发生错误：",
+      "context": "import traceback\n            logger.error(traceback.format_exc())"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1594:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "采访需求：\n",
+      "context": "}\"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1595:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n模拟背景：\n",
+      "context": "user_prompt = f\"\"\"采访需求："
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1598:61:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n可选择的Agent列表（共",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "模拟背景："
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1600:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "个）：\n",
+      "context": "{simulation_requirement if simulation_requirement else \"未提供\"}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1601:59:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n请选择最多",
+      "context": "可选择的Agent列表（共{len(agent_summaries)}个）："
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1603:17:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "个最适合采访的Agent，并说明选择理由。",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "{json.dumps(agent_summaries, ensure_ascii=False, indent=2)}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1658:66:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n采访对象角色：",
+      "context": "user_prompt = f\"\"\"采访需求：{interview_requirement}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1660:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n请生成3-5个采访问题。",
+      "context": "模拟背景：{simulation_requirement if simulation_requirement else \"未提供\"}"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1673:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "关于",
+      "context": ")"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "batch_id": "batch_0030",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_ipc.py:230:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送批量采访命令\n        \n        Args:\n            interviews: 采访列表，每个元素包含 {\"agent_id\": int, \"prompt\": str, \"platform\": str(可选)}\n            platform: 默认平台（可选，会被每个采访项的platform覆盖）\n                - \"twitter\": 默认只采访Twitter平台\n                - \"reddit\": 默认只采访Reddit平台\n                - None: 双平台模拟时每个Agent同时采访两个平台\n            timeout: 超时时间\n            \n        Returns:\n            IPCResponse，result字段包含所有采访结果\n        ",
+      "placeholders": [
+        "{\"agent_id\": int, \"prompt\": str, \"platform\": str(可选)}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "Reddit",
+        "Twitter"
+      ],
+      "context": "timeout: float = 120.0\n    ) -> IPCResponse:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:255:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送关闭环境命令\n        \n        Args:\n            timeout: 超时时间\n            \n        Returns:\n            IPCResponse\n        ",
+      "context": "def send_close_env(self, timeout: float = 30.0) -> IPCResponse:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:271:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        检查模拟环境是否存活\n        \n        通过检查 env_status.json 文件来判断\n        ",
+      "context": "def check_env_alive(self) -> bool:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:289:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟IPC服务器（模拟脚本端使用）\n    \n    轮询命令目录，执行命令并返回响应\n    ",
+      "context": "class SimulationIPCServer:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:296:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        初始化IPC服务器\n        \n        Args:\n            simulation_dir: 模拟数据目录\n        ",
+      "context": "def __init__(self, simulation_dir: str):"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:333:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        轮询命令目录，返回第一个待处理的命令\n        \n        Returns:\n            IPCCommand 或 None\n        ",
+      "context": "def poll_commands(self) -> Optional[IPCCommand]:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:363:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送响应\n        \n        Args:\n            response: IPC响应\n        ",
+      "context": "def send_response(self, response: IPCResponse):"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nOASIS模拟管理器\n管理Twitter和Reddit双平台并行模拟\n使用预设脚本 + LLM智能生成配置参数\n",
+      "protected_terms": [
+        "LLM",
+        "OASIS",
+        "Reddit",
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:116:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟管理器\n    \n    核心功能：\n    1. 从Zep图谱读取实体并过滤\n    2. 生成OASIS Agent Profile\n    3. 使用LLM智能生成模拟配置参数\n    4. 准备预设脚本所需的所有文件\n    ",
+      "protected_terms": [
+        "Agent",
+        "LLM",
+        "OASIS",
+        "Zep"
+      ],
+      "context": "class SimulationManager:"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:201:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        创建新的模拟\n        \n        Args:\n            project_id: 项目ID\n            graph_id: Zep图谱ID\n            enable_twitter: 是否启用Twitter模拟\n            enable_reddit: 是否启用Reddit模拟\n            \n        Returns:\n            SimulationState\n        ",
+      "protected_terms": [
+        "Reddit",
+        "Simulation",
+        "Twitter",
+        "Zep"
+      ],
+      "context": "enable_reddit: bool = True,\n    ) -> SimulationState:"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:240:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        准备模拟环境（全程自动化）\n        \n        步骤：\n        1. 从Zep图谱读取并过滤实体\n        2. 为每个实体生成OASIS Agent Profile（可选LLM增强，支持并行）\n        3. 使用LLM智能生成模拟配置参数（时间、活跃度、发言频率等）\n        4. 保存配置文件和Profile文件\n        5. 复制预设脚本到模拟目录\n        \n        Args:\n            simulation_id: 模拟ID\n            simulation_requirement: 模拟需求描述（用于LLM生成配置）\n            document_text: 原始文档内容（用于LLM理解背景）\n            defined_entity_types: 预定义的实体类型（可选）\n            use_llm_for_profiles: 是否使用LLM生成详细人设\n            progress_callback: 进度回调函数 (stage, progress, message)\n            parallel_profile_count: 并行生成人设的数量，默认3\n            \n        Returns:\n            SimulationState\n        ",
+      "protected_terms": [
+        "Agent",
+        "LLM",
+        "OASIS",
+        "Simulation",
+        "Zep"
+      ],
+      "context": "parallel_profile_count: int = 3\n    ) -> SimulationState:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nOASIS模拟运行器\n在后台运行模拟并记录每个Agent的动作，支持实时状态监控\n",
+      "protected_terms": [
+        "Agent",
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:197:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟运行器\n    \n    负责：\n    1. 在后台进程中运行OASIS模拟\n    2. 解析运行日志，记录每个Agent的动作\n    3. 提供实时状态查询接口\n    4. 支持暂停/停止/恢复操作\n    ",
+      "protected_terms": [
+        "Agent",
+        "OASIS"
+      ],
+      "context": "class SimulationRunner:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:321:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        启动模拟\n        \n        Args:\n            simulation_id: 模拟ID\n            platform: 运行平台 (twitter/reddit/parallel)\n            max_rounds: 最大模拟轮数（可选，用于截断过长的模拟）\n            enable_graph_memory_update: 是否将Agent活动动态更新到Zep图谱\n            graph_id: Zep图谱ID（启用图谱更新时必需）\n            \n        Returns:\n            SimulationRunState\n        ",
+      "protected_terms": [
+        "Agent",
+        "Simulation",
+        "Zep"
+      ],
+      "context": "graph_id: str = None  # Zep图谱ID（启用图谱更新时必需）\n    ) -> SimulationRunState:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:591:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        读取动作日志文件\n        \n        Args:\n            log_path: 日志文件路径\n            position: 上次读取位置\n            state: 运行状态对象\n            platform: 平台名称 (twitter/reddit)\n            \n        Returns:\n            新的读取位置\n        ",
+      "context": "platform: str\n    ) -> int:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:695:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        检查所有启用的平台是否都已完成模拟\n        \n        通过检查对应的 actions.jsonl 文件是否存在来判断平台是否被启用\n        \n        Returns:\n            True 如果所有启用的平台都已完成\n        ",
+      "context": "@classmethod\n    def _check_all_platforms_completed(cls, state: SimulationRunState) -> bool:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:722:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        跨平台终止进程及其子进程\n        \n        Args:\n            process: 要终止的进程\n            simulation_id: 模拟ID（用于日志）\n            timeout: 等待进程退出的超时时间（秒）\n        ",
+      "context": "@classmethod\n    def _terminate_process(cls, process: subprocess.Popen, simulation_id: str, timeout: int = 10):"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:833:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        从单个动作文件中读取动作\n        \n        Args:\n            file_path: 动作日志文件路径\n            default_platform: 默认平台（当动作记录中没有 platform 字段时使用）\n            platform_filter: 过滤平台\n            agent_id: 过滤 Agent ID\n            round_num: 过滤轮次\n        ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "round_num: Optional[int] = None\n    ) -> List[AgentAction]:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:901:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取所有平台的完整动作历史（无分页限制）\n        \n        Args:\n            simulation_id: 模拟ID\n            platform: 过滤平台（twitter/reddit）\n            agent_id: 过滤Agent\n            round_num: 过滤轮次\n            \n        Returns:\n            完整的动作列表（按时间戳排序，新的在前）\n        ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "round_num: Optional[int] = None\n    ) -> List[AgentAction]:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:964:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取动作历史（带分页）\n        \n        Args:\n            simulation_id: 模拟ID\n            limit: 返回数量限制\n            offset: 偏移量\n            platform: 过滤平台\n            agent_id: 过滤Agent\n            round_num: 过滤轮次\n            \n        Returns:\n            动作列表\n        ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "round_num: Optional[int] = None\n    ) -> List[AgentAction]:"
+    }
+  ]
+}

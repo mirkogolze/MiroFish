@@ -1,0 +1,172 @@
+{
+  "batch_id": "batch_0044",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_runner.py:1220:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "终止模拟进程: ",
+      "context": "try:\n                if process.poll() is None:  # 进程仍在运行"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1247:38:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "尝试更新 state.json: ",
+      "context": "sim_dir = os.path.join(cls.RUN_STATE_DIR, simulation_id)\n                        state_file = os.path.join(sim_dir, \"state.json\")"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1255:42:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "已更新 state.json 状态为 stopped: ",
+      "context": "with open(state_file, 'w', encoding='utf-8') as f:\n                                json.dump(state_data, f, indent=2, ensure_ascii=False)"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1257:45:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "state.json 不存在: ",
+      "context": "logger.info(f\"已更新 state.json 状态为 stopped: {simulation_id}\")\n                        else:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1259:41:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "更新 state.json 失败: ",
+      "context": "logger.warning(f\"state.json 不存在: {state_file}\")\n                    except Exception as state_err:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1262:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "清理进程失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1323:30:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "收到信号 ",
+      "context": "# 只有在有进程需要清理时才打印日志\n            if cls._processes or cls._graph_memory_enabled:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1323:43:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "，开始清理...",
+      "context": "# 只有在有进程需要清理时才打印日志\n            if cls._processes or cls._graph_memory_enabled:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1463:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟环境未运行或已关闭，无法执行Interview: ",
+      "context": "if not ipc_client.check_env_alive():"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1465:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "发送Interview命令: simulation_id=",
+      "context": "raise ValueError(f\"模拟环境未运行或已关闭，无法执行Interview: {simulation_id}\")"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1527:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "发送批量Interview命令: simulation_id=",
+      "context": "raise ValueError(f\"模拟环境未运行或已关闭，无法执行Interview: {simulation_id}\")"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1582:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟配置不存在: ",
+      "context": "config_path = os.path.join(sim_dir, \"simulation_config.json\")\n        if not os.path.exists(config_path):"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1589:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟配置中没有Agent: ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "agent_configs = config.get(\"agent_configs\", [])\n        if not agent_configs:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1601:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "发送全局Interview命令: simulation_id=",
+      "context": "})"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1640:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "发送关闭环境命令: simulation_id=",
+      "context": "}"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1712:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取Interview历史失败 (",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:117:46:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 第 ",
+      "context": "if attempt < max_retries - 1:\n                    logger.warning("
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:117:62:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 次尝试失败: ",
+      "context": "if attempt < max_retries - 1:\n                    logger.warning("
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:118:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "秒后重试...",
+      "context": "logger.warning(\n                        f\"Zep {operation_name} 第 {attempt + 1} 次尝试失败: {str(e)[:100]}, \""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:123:55:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 在 ",
+      "context": "delay *= 2  # 指数退避\n                else:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:123:71:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 次尝试后仍失败: ",
+      "context": "delay *= 2  # 指数退避\n                else:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:137:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取图谱 ",
+      "context": "节点列表\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:137:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 的所有节点...",
+      "context": "节点列表\n        \"\"\""
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:151:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "共获取 ",
+      "context": "})"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:151:43:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 个节点",
+      "context": "})"
+    }
+  ]
+}

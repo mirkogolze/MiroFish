@@ -1,0 +1,225 @@
+{
+  "batch_id": "batch_0004",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:770:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果模拟已准备好，附加运行说明"
+    },
+    {
+      "id": "backend/app/api/simulation.py:833:4:COMMENT",
+      "kind": "comment",
+      "source_text": "reports 目录路径：backend/uploads/reports"
+    },
+    {
+      "id": "backend/app/api/simulation.py:834:4:COMMENT",
+      "kind": "comment",
+      "source_text": "__file__ 是 app/api/simulation.py，需要向上两级到 backend/"
+    },
+    {
+      "id": "backend/app/api/simulation.py:867:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按创建时间倒序排序，返回最新的"
+    },
+    {
+      "id": "backend/app/api/simulation.py:917:8:COMMENT",
+      "kind": "comment",
+      "source_text": "增强模拟数据，只从 Simulation 文件读取",
+      "protected_terms": [
+        "Simulation"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:922:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取模拟配置信息（从 simulation_config.json 读取 simulation_requirement）",
+      "protected_terms": [
+        "config"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:928:16:COMMENT",
+      "kind": "comment",
+      "source_text": "推荐轮数（后备值）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:938:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取运行状态（从 run_state.json 读取用户设置的实际轮数）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:943:16:COMMENT",
+      "kind": "comment",
+      "source_text": "使用用户设置的 total_rounds，若无则使用推荐轮数"
+    },
+    {
+      "id": "backend/app/api/simulation.py:950:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取关联项目的文件列表（最多3个）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:960:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取关联的 report_id（查找该 simulation 最新的 report）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:963:12:COMMENT",
+      "kind": "comment",
+      "source_text": "添加版本号"
+    },
+    {
+      "id": "backend/app/api/simulation.py:966:12:COMMENT",
+      "kind": "comment",
+      "source_text": "格式化日期"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1063:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取模拟目录"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1072:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确定文件路径"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1084:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取文件修改时间"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1100:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否正在生成（通过 state.json 判断）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1175:8:COMMENT",
+      "kind": "comment",
+      "source_text": "配置文件路径"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1209:20:COMMENT",
+      "kind": "comment",
+      "source_text": "判断当前阶段"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1220:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建返回数据"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1231:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果配置存在，提取一些关键统计信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1335:8:COMMENT",
+      "kind": "comment",
+      "source_text": "脚本位于 backend/scripts/ 目录"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1338:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证脚本名称"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1375:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== Profile生成接口（独立使用） =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:1449:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 模拟运行控制接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:1503:45:COMMENT",
+      "kind": "comment",
+      "source_text": "可选：最大模拟轮数"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1504:84:COMMENT",
+      "kind": "comment",
+      "source_text": "可选：是否启用图谱记忆更新"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1505:42:COMMENT",
+      "kind": "comment",
+      "source_text": "可选：强制重新开始"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1507:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证 max_rounds 参数"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1528:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查模拟是否已准备好"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1540:8:COMMENT",
+      "kind": "comment",
+      "source_text": "智能处理状态：如果准备工作已完成，允许重新启动"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1542:12:COMMENT",
+      "kind": "comment",
+      "source_text": "检查准备工作是否已完成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1546:16:COMMENT",
+      "kind": "comment",
+      "source_text": "准备工作已完成，检查是否有正在运行的进程"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1548:20:COMMENT",
+      "kind": "comment",
+      "source_text": "检查模拟进程是否真的在运行"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1551:24:COMMENT",
+      "kind": "comment",
+      "source_text": "进程确实在运行"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1553:28:COMMENT",
+      "kind": "comment",
+      "source_text": "强制模式：停止运行中的模拟"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1565:16:COMMENT",
+      "kind": "comment",
+      "source_text": "如果是强制模式，清理运行日志"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1573:16:COMMENT",
+      "kind": "comment",
+      "source_text": "进程不存在或已结束，重置状态为 ready"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1578:16:COMMENT",
+      "kind": "comment",
+      "source_text": "准备工作未完成"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1584:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取图谱ID（用于图谱记忆更新）"
+    }
+  ]
+}

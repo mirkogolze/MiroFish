@@ -1,0 +1,194 @@
+{
+  "batch_id": "batch_0060",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/services/zep_tools.py:83:4:STRING",
+      "kind": "string_constant",
+      "source_text": "边信息"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:119:40:STRING",
+      "kind": "string_constant",
+      "source_text": "未知"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:120:44:STRING",
+      "kind": "string_constant",
+      "source_text": "至今"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:129:8:STRING",
+      "kind": "string_constant",
+      "source_text": "是否已过期"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:134:8:STRING",
+      "kind": "string_constant",
+      "source_text": "是否已失效"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:172:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为详细的文本格式，供LLM理解",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:199:90:STRING",
+      "kind": "string_constant",
+      "source_text": "实体"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:251:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为文本格式（完整版本，不截断）"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:286:4:STRING",
+      "kind": "string_constant",
+      "source_text": "单个Agent的采访结果",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:311:20:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n**关键引言:**\\n"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:376:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为详细的文本格式，供LLM理解和报告引用",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:378:12:STRING",
+      "kind": "string_constant",
+      "source_text": "## 深度采访报告"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:381:12:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n### 采访对象选择理由"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:382:40:STRING",
+      "kind": "string_constant",
+      "source_text": "（自动选择）"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:384:12:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n### 采访实录"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:393:30:STRING",
+      "kind": "string_constant",
+      "source_text": "（无采访记录）\\n\\n---"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:395:26:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n### 采访摘要与核心观点"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:396:42:STRING",
+      "kind": "string_constant",
+      "source_text": "（无摘要）"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:437:8:STRING",
+      "kind": "string_constant",
+      "source_text": "延迟初始化LLM客户端",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:443:8:STRING",
+      "kind": "string_constant",
+      "source_text": "带重试机制的API调用",
+      "protected_terms": [
+        "API"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:578:12:STRING",
+      "kind": "string_constant",
+      "source_text": "计算文本与查询的匹配分数"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1321:29:STRING",
+      "kind": "string_constant",
+      "source_text": "未找到可采访的Agent人设文件",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1353:12:STRING",
+      "kind": "string_constant",
+      "source_text": "你正在接受一次采访。请结合你的人设、所有的过往记忆与行动，"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1354:12:STRING",
+      "kind": "string_constant",
+      "source_text": "以纯文本方式直接回答以下问题。\\n"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1355:12:STRING",
+      "kind": "string_constant",
+      "source_text": "回复要求：\\n"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1356:12:STRING",
+      "kind": "string_constant",
+      "source_text": "1. 直接用自然语言回答，不要调用任何工具\\n"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1357:12:STRING",
+      "kind": "string_constant",
+      "source_text": "2. 不要返回JSON格式或工具调用格式\\n",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1358:12:STRING",
+      "kind": "string_constant",
+      "source_text": "3. 不要使用Markdown标题（如#、##、###）\\n",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1359:12:STRING",
+      "kind": "string_constant",
+      "source_text": "4. 按问题编号逐一回答，每个回答以「问题X：」开头（X为问题编号）\\n"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1360:12:STRING",
+      "kind": "string_constant",
+      "source_text": "5. 每个问题的回答之间用空行分隔\\n"
+    }
+  ]
+}

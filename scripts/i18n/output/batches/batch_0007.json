@@ -1,0 +1,247 @@
+{
+  "batch_id": "batch_0007",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/graph_builder.py:273:12:COMMENT",
+      "kind": "comment",
+      "source_text": "构建source_targets"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:286:8:COMMENT",
+      "kind": "comment",
+      "source_text": "调用Zep API设置本体",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:317:12:COMMENT",
+      "kind": "comment",
+      "source_text": "构建episode数据"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:323:12:COMMENT",
+      "kind": "comment",
+      "source_text": "发送到Zep",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:330:16:COMMENT",
+      "kind": "comment",
+      "source_text": "收集返回的 episode uuid"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:337:16:COMMENT",
+      "kind": "comment",
+      "source_text": "避免请求过快"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:376:12:COMMENT",
+      "kind": "comment",
+      "source_text": "检查每个 episode 的处理状态"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:387:20:COMMENT",
+      "kind": "comment",
+      "source_text": "忽略单个查询错误，继续"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:398:31:COMMENT",
+      "kind": "comment",
+      "source_text": "每3秒检查一次"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:405:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取节点（分页）"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:408:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取边（分页）"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:411:8:COMMENT",
+      "kind": "comment",
+      "source_text": "统计实体类型"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:439:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建节点映射用于获取节点名称"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:446:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取创建时间"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:462:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取时间信息"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:468:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取 episodes"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:475:12:COMMENT",
+      "kind": "comment",
+      "source_text": "获取 fact_type"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:18:4:COMMENT",
+      "kind": "comment",
+      "source_text": "按非字母数字字符分割"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:20:4:COMMENT",
+      "kind": "comment",
+      "source_text": "再按 camelCase 边界分割（如 'camelCase' -> ['camel', 'Case']）"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:24:4:COMMENT",
+      "kind": "comment",
+      "source_text": "每个词首字母大写，过滤空串"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:29:0:COMMENT",
+      "kind": "comment",
+      "source_text": "本体生成的系统提示词"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:202:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建用户消息"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:216:8:COMMENT",
+      "kind": "comment",
+      "source_text": "调用LLM",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:223:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证和后处理"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:228:4:COMMENT",
+      "kind": "comment",
+      "source_text": "传给 LLM 的文本最大长度（5万字）",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:239:8:COMMENT",
+      "kind": "comment",
+      "source_text": "合并文本"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:243:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果文本超过5万字，截断（仅影响传给LLM的内容，不影响图谱构建）",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:280:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确保必要字段存在"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:288:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证实体类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:289:8:COMMENT",
+      "kind": "comment",
+      "source_text": "记录原始名称到 PascalCase 的映射，用于后续修正 edge 的 source_targets 引用"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:292:12:COMMENT",
+      "kind": "comment",
+      "source_text": "强制将 entity name 转为 PascalCase（Zep API 要求）",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:303:12:COMMENT",
+      "kind": "comment",
+      "source_text": "确保description不超过100字符"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:307:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证关系类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:309:12:COMMENT",
+      "kind": "comment",
+      "source_text": "强制将 edge name 转为 SCREAMING_SNAKE_CASE（Zep API 要求）",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:315:12:COMMENT",
+      "kind": "comment",
+      "source_text": "修正 source_targets 中的实体名称引用，与转换后的 PascalCase 保持一致"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:328:8:COMMENT",
+      "kind": "comment",
+      "source_text": "Zep API 限制：最多 10 个自定义实体类型，最多 10 个自定义边类型",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:332:8:COMMENT",
+      "kind": "comment",
+      "source_text": "去重：按 name 去重，保留首次出现的"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:344:8:COMMENT",
+      "kind": "comment",
+      "source_text": "兜底类型定义"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:365:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否已有兜底类型"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:370:8:COMMENT",
+      "kind": "comment",
+      "source_text": "需要添加的兜底类型"
+    }
+  ]
+}

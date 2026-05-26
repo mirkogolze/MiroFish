@@ -1,0 +1,178 @@
+{
+  "batch_id": "batch_0032",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/services/zep_entity_reader.py:155:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取图谱的所有边（分页获取）\n\n        Args:\n            graph_id: 图谱ID\n\n        Returns:\n            边列表\n        ",
+      "context": "def get_all_edges(self, graph_id: str) -> List[Dict[str, Any]]:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:183:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取指定节点的所有相关边（带重试机制）\n        \n        Args:\n            node_uuid: 节点UUID\n            \n        Returns:\n            边列表\n        ",
+      "protected_terms": [
+        "UUID"
+      ],
+      "context": "def get_node_edges(self, node_uuid: str) -> List[Dict[str, Any]]:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:221:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        筛选出符合预定义实体类型的节点\n        \n        筛选逻辑：\n        - 如果节点的Labels只有一个\"Entity\"，说明这个实体不符合我们预定义的类型，跳过\n        - 如果节点的Labels包含除\"Entity\"和\"Node\"之外的标签，说明符合预定义类型，保留\n        \n        Args:\n            graph_id: 图谱ID\n            defined_entity_types: 预定义的实体类型列表（可选，如果提供则只保留这些类型）\n            enrich_with_edges: 是否获取每个实体的相关边信息\n            \n        Returns:\n            FilteredEntities: 过滤后的实体集合\n        ",
+      "protected_terms": [
+        "Entity",
+        "Node"
+      ],
+      "context": "enrich_with_edges: bool = True\n    ) -> FilteredEntities:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:338:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取单个实体及其完整上下文（边和关联节点，带重试机制）\n        \n        Args:\n            graph_id: 图谱ID\n            entity_uuid: 实体UUID\n            \n        Returns:\n            EntityNode或None\n        ",
+      "protected_terms": [
+        "Entity",
+        "Node",
+        "UUID"
+      ],
+      "context": "entity_uuid: str\n    ) -> Optional[EntityNode]:"
+    },
+    {
+      "id": "backend/app/services/zep_entity_reader.py:419:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取指定类型的所有实体\n        \n        Args:\n            graph_id: 图谱ID\n            entity_type: 实体类型（如 \"Student\", \"PublicFigure\" 等）\n            enrich_with_edges: 是否获取相关边信息\n            \n        Returns:\n            实体列表\n        ",
+      "context": "enrich_with_edges: bool = True\n    ) -> List[EntityNode]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nZep检索工具服务\n封装图谱搜索、节点读取、边查询等工具，供Report Agent使用\n\n核心检索工具（优化后）：\n1. InsightForge（深度洞察检索）- 最强大的混合检索，自动生成子问题并多维度检索\n2. PanoramaSearch（广度搜索）- 获取全貌，包括过期内容\n3. QuickSearch（简单搜索）- 快速检索\n",
+      "protected_terms": [
+        "Agent",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:140:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    深度洞察检索结果 (InsightForge)\n    包含多个子问题的检索结果，以及综合分析\n    ",
+      "context": "@dataclass\nclass InsightForgeResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:216:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    广度搜索结果 (Panorama)\n    包含所有相关信息，包括过期内容\n    ",
+      "context": "@dataclass\nclass PanoramaResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:342:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    采访结果 (Interview)\n    包含多个模拟Agent的采访回答\n    ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@dataclass\nclass InterviewResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:402:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    Zep检索工具服务\n    \n    【核心检索工具 - 优化后】\n    1. insight_forge - 深度洞察检索（最强大，自动生成子问题，多维度检索）\n    2. panorama_search - 广度搜索（获取全貌，包括过期内容）\n    3. quick_search - 简单搜索（快速检索）\n    4. interview_agents - 深度采访（采访模拟Agent，获取多视角观点）\n    \n    【基础工具】\n    - search_graph - 图谱语义搜索\n    - get_all_nodes - 获取图谱所有节点\n    - get_all_edges - 获取图谱所有边（含时间信息）\n    - get_node_detail - 获取节点详细信息\n    - get_node_edges - 获取节点相关的边\n    - get_entities_by_type - 按类型获取实体\n    - get_entity_summary - 获取实体的关系摘要\n    ",
+      "protected_terms": [
+        "Agent",
+        "Zep"
+      ],
+      "context": "class ZepToolsService:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:471:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        图谱语义搜索\n        \n        使用混合搜索（语义+BM25）在图谱中搜索相关信息。\n        如果Zep Cloud的search API不可用，则降级为本地关键词匹配。\n        \n        Args:\n            graph_id: 图谱ID (Standalone Graph)\n            query: 搜索查询\n            limit: 返回结果数量\n            scope: 搜索范围，\"edges\" 或 \"nodes\"\n            \n        Returns:\n            SearchResult: 搜索结果\n        ",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ],
+      "context": "scope: str = \"edges\"\n    ) -> SearchResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:553:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        本地关键词匹配搜索（作为Zep Search API的降级方案）\n        \n        获取所有边/节点，然后在本地进行关键词匹配\n        \n        Args:\n            graph_id: 图谱ID\n            query: 搜索查询\n            limit: 返回结果数量\n            scope: 搜索范围\n            \n        Returns:\n            SearchResult: 搜索结果\n        ",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ],
+      "context": "scope: str = \"edges\"\n    ) -> SearchResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:679:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取图谱的所有边（分页获取，包含时间信息）\n\n        Args:\n            graph_id: 图谱ID\n            include_temporal: 是否包含时间信息（默认True）\n\n        Returns:\n            边列表（包含created_at, valid_at, invalid_at, expired_at）\n        ",
+      "context": "def get_all_edges(self, graph_id: str, include_temporal: bool = True) -> List[EdgeInfo]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:717:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取单个节点的详细信息\n        \n        Args:\n            node_uuid: 节点UUID\n            \n        Returns:\n            节点信息或None\n        ",
+      "protected_terms": [
+        "UUID"
+      ],
+      "context": "def get_node_detail(self, node_uuid: str) -> Optional[NodeInfo]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:749:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取节点相关的所有边\n        \n        通过获取图谱所有边，然后过滤出与指定节点相关的边\n        \n        Args:\n            graph_id: 图谱ID\n            node_uuid: 节点UUID\n            \n        Returns:\n            边列表\n        ",
+      "protected_terms": [
+        "UUID"
+      ],
+      "context": "def get_node_edges(self, graph_id: str, node_uuid: str) -> List[EdgeInfo]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:785:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        按类型获取实体\n        \n        Args:\n            graph_id: 图谱ID\n            entity_type: 实体类型（如 Student, PublicFigure 等）\n            \n        Returns:\n            符合类型的实体列表\n        ",
+      "context": "entity_type: str\n    ) -> List[NodeInfo]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:813:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取指定实体的关系摘要\n        \n        搜索与该实体相关的所有信息，并生成摘要\n        \n        Args:\n            graph_id: 图谱ID\n            entity_name: 实体名称\n            \n        Returns:\n            实体摘要信息\n        ",
+      "context": "entity_name: str\n    ) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:856:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取图谱的统计信息\n        \n        Args:\n            graph_id: 图谱ID\n            \n        Returns:\n            统计信息\n        ",
+      "context": "def get_graph_statistics(self, graph_id: str) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:896:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取模拟相关的上下文信息\n        \n        综合搜索与模拟需求相关的所有信息\n        \n        Args:\n            graph_id: 图谱ID\n            simulation_requirement: 模拟需求描述\n            limit: 每类信息的数量限制\n            \n        Returns:\n            模拟上下文信息\n        ",
+      "context": "limit: int = 30\n    ) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:953:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        【InsightForge - 深度洞察检索】\n        \n        最强大的混合检索函数，自动分解问题并多维度检索：\n        1. 使用LLM将问题分解为多个子问题\n        2. 对每个子问题进行语义搜索\n        3. 提取相关实体并获取其详细信息\n        4. 追踪关系链\n        5. 整合所有结果，生成深度洞察\n        \n        Args:\n            graph_id: 图谱ID\n            query: 用户问题\n            simulation_requirement: 模拟需求描述\n            report_context: 报告上下文（可选，用于更精准的子问题生成）\n            max_sub_queries: 最大子问题数量\n            \n        Returns:\n            InsightForgeResult: 深度洞察检索结果\n        ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "max_sub_queries: int = 5\n    ) -> InsightForgeResult:"
+    }
+  ]
+}

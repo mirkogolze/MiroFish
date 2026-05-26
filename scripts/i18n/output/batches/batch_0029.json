@@ -1,0 +1,179 @@
+{
+  "batch_id": "batch_0029",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:1959:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取控制台日志内容\n        \n        这是报告生成过程中的控制台输出日志（INFO、WARNING等），\n        与 agent_log.jsonl 的结构化日志不同。\n        \n        Args:\n            report_id: 报告ID\n            from_line: 从第几行开始读取（用于增量获取，0 表示从头开始）\n            \n        Returns:\n            {\n                \"logs\": [日志行列表],\n                \"total_lines\": 总行数,\n                \"from_line\": 起始行号,\n                \"has_more\": 是否还有更多日志\n            }\n        ",
+      "placeholders": [
+        "{\n                \"logs\": [日志行列表],\n                \"total_lines\": 总行数,\n                \"from_line\": 起始行号,\n                \"has_more\": 是否还有更多日志\n            }"
+      ],
+      "context": "@classmethod\n    def get_console_log(cls, report_id: str, from_line: int = 0) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2006:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取完整的控制台日志（一次性获取全部）\n        \n        Args:\n            report_id: 报告ID\n            \n        Returns:\n            日志行列表\n        ",
+      "context": "@classmethod\n    def get_console_log_stream(cls, report_id: str) -> List[str]:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2020:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取 Agent 日志内容\n        \n        Args:\n            report_id: 报告ID\n            from_line: 从第几行开始读取（用于增量获取，0 表示从头开始）\n            \n        Returns:\n            {\n                \"logs\": [日志条目列表],\n                \"total_lines\": 总行数,\n                \"from_line\": 起始行号,\n                \"has_more\": 是否还有更多日志\n            }\n        ",
+      "placeholders": [
+        "{\n                \"logs\": [日志条目列表],\n                \"total_lines\": 总行数,\n                \"from_line\": 起始行号,\n                \"has_more\": 是否还有更多日志\n            }"
+      ],
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@classmethod\n    def get_agent_log(cls, report_id: str, from_line: int = 0) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2068:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取完整的 Agent 日志（用于一次性获取全部）\n        \n        Args:\n            report_id: 报告ID\n            \n        Returns:\n            日志条目列表\n        ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@classmethod\n    def get_agent_log_stream(cls, report_id: str) -> List[Dict[str, Any]]:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2082:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        保存报告大纲\n        \n        在规划阶段完成后立即调用\n        ",
+      "context": "@classmethod\n    def save_outline(cls, report_id: str, outline: ReportOutline) -> None:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2101:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        保存单个章节\n\n        在每个章节生成完成后立即调用，实现分章节输出\n\n        Args:\n            report_id: 报告ID\n            section_index: 章节索引（从1开始）\n            section: 章节对象\n\n        Returns:\n            保存的文件路径\n        ",
+      "context": "section: ReportSection\n    ) -> str:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2133:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        清理章节内容\n        \n        1. 移除内容开头与章节标题重复的Markdown标题行\n        2. 将所有 ### 及以下级别的标题转换为粗体文本\n        \n        Args:\n            content: 原始内容\n            section_title: 章节标题\n            \n        Returns:\n            清理后的内容\n        ",
+      "protected_terms": [
+        "Markdown"
+      ],
+      "context": "@classmethod\n    def _clean_section_content(cls, content: str, section_title: str) -> str:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2209:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        更新报告生成进度\n        \n        前端可以通过读取progress.json获取实时进度\n        ",
+      "context": "completed_sections: List[str] = None\n    ) -> None:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2241:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        获取已生成的章节列表\n        \n        返回所有已保存的章节文件信息\n        ",
+      "context": "@classmethod\n    def get_generated_sections(cls, report_id: str) -> List[Dict[str, Any]]:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2272:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        组装完整报告\n        \n        从已保存的章节文件组装完整报告，并进行标题清理\n        ",
+      "context": "@classmethod\n    def assemble_full_report(cls, report_id: str, outline: ReportOutline) -> str:"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2302:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        后处理报告内容\n        \n        1. 移除重复的标题\n        2. 保留报告主标题(#)和章节标题(##)，移除其他级别的标题(###, ####等)\n        3. 清理多余的空行和分隔线\n        \n        Args:\n            content: 原始报告内容\n            outline: 报告大纲\n            \n        Returns:\n            处理后的内容\n        ",
+      "context": "@classmethod\n    def _post_process_report(cls, content: str, outline: ReportOutline) -> str:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n模拟配置智能生成器\n使用LLM根据模拟需求、文档内容、图谱信息自动生成细致的模拟参数\n实现全程自动化，无需人工设置参数\n\n采用分步生成策略，避免一次性生成过长内容导致失败：\n1. 生成时间配置\n2. 生成事件配置\n3. 分批生成Agent配置\n4. 生成平台配置\n",
+      "protected_terms": [
+        "Agent",
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:201:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟配置智能生成器\n    \n    使用LLM分析模拟需求、文档内容、图谱实体信息，\n    自动生成最佳的模拟参数配置\n    \n    采用分步生成策略：\n    1. 生成时间配置和事件配置（轻量级）\n    2. 分批生成Agent配置（每批10-20个）\n    3. 生成平台配置\n    ",
+      "protected_terms": [
+        "Agent",
+        "LLM"
+      ],
+      "context": "class SimulationConfigGenerator:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:255:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        智能生成完整的模拟配置（分步生成）\n        \n        Args:\n            simulation_id: 模拟ID\n            project_id: 项目ID\n            graph_id: 图谱ID\n            simulation_requirement: 模拟需求描述\n            document_text: 原始文档内容\n            entities: 过滤后的实体列表\n            enable_twitter: 是否启用Twitter\n            enable_reddit: 是否启用Reddit\n            progress_callback: 进度回调函数(current_step, total_steps, message)\n            \n        Returns:\n            SimulationParameters: 完整的模拟参数\n        ",
+      "protected_terms": [
+        "Reddit",
+        "Simulation",
+        "Twitter"
+      ],
+      "context": "progress_callback: Optional[Callable[[int, int, str], None]] = None,\n    ) -> SimulationParameters:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:733:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        为初始帖子分配合适的发布者 Agent\n        \n        根据每个帖子的 poster_type 匹配最合适的 agent_id\n        ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "agent_configs: List[AgentActivityConfig]\n    ) -> EventConfig:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n模拟IPC通信模块\n用于Flask后端和模拟脚本之间的进程间通信\n\n通过文件系统实现简单的命令/响应模式：\n1. Flask写入命令到 commands/ 目录\n2. 模拟脚本轮询命令目录，执行命令并写入响应到 responses/ 目录\n3. Flask轮询响应目录获取结果\n",
+      "protected_terms": [
+        "Flask"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:96:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    模拟IPC客户端（Flask端使用）\n    \n    用于向模拟进程发送命令并等待响应\n    ",
+      "protected_terms": [
+        "Flask"
+      ],
+      "context": "class SimulationIPCClient:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:103:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        初始化IPC客户端\n        \n        Args:\n            simulation_dir: 模拟数据目录\n        ",
+      "context": "def __init__(self, simulation_dir: str):"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:124:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送命令并等待响应\n        \n        Args:\n            command_type: 命令类型\n            args: 命令参数\n            timeout: 超时时间（秒）\n            poll_interval: 轮询间隔（秒）\n            \n        Returns:\n            IPCResponse\n            \n        Raises:\n            TimeoutError: 等待响应超时\n        ",
+      "context": "poll_interval: float = 0.5\n    ) -> IPCResponse:"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:196:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送单个Agent采访命令\n        \n        Args:\n            agent_id: Agent ID\n            prompt: 采访问题\n            platform: 指定平台（可选）\n                - \"twitter\": 只采访Twitter平台\n                - \"reddit\": 只采访Reddit平台  \n                - None: 双平台模拟时同时采访两个平台，单平台模拟时采访该平台\n            timeout: 超时时间\n            \n        Returns:\n            IPCResponse，result字段包含采访结果\n        ",
+      "protected_terms": [
+        "Agent",
+        "Reddit",
+        "Twitter"
+      ],
+      "context": "timeout: float = 60.0\n    ) -> IPCResponse:"
+    }
+  ]
+}

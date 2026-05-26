@@ -1,0 +1,437 @@
+{
+  "保存提取的文本": [
+    "backend/app/api/graph.py:210:8:COMMENT",
+    "backend/app/models/project.py:276:8:STRING"
+  ],
+  "配置错误:": [
+    "backend/app/api/graph.py:291:27:FSTRING_MIDDLE",
+    "backend/run.py:30:14:STRING"
+  ],
+  "获取提取的文本": [
+    "backend/app/api/graph.py:348:8:COMMENT",
+    "backend/app/models/project.py:283:8:STRING"
+  ],
+  "创建异步任务": [
+    "backend/app/api/graph.py:364:8:COMMENT",
+    "backend/app/api/report.py:113:8:COMMENT",
+    "backend/app/api/simulation.py:490:8:COMMENT"
+  ],
+  "更新项目状态": [
+    "backend/app/api/graph.py:369:8:COMMENT",
+    "backend/app/api/graph.py:472:16:COMMENT"
+  ],
+  "完成": [
+    "backend/app/api/graph.py:480:16:COMMENT",
+    "backend/app/services/graph_builder.py:181:12:COMMENT"
+  ],
+  "启动后台线程": [
+    "backend/app/api/graph.py:511:8:COMMENT",
+    "backend/app/api/report.py:178:8:COMMENT",
+    "backend/app/api/simulation.py:610:8:COMMENT"
+  ],
+  "定义后台任务": [
+    "backend/app/api/report.py:127:8:COMMENT",
+    "backend/app/api/simulation.py:507:8:COMMENT"
+  ],
+  "查询任务状态失败:": [
+    "backend/app/api/report.py:268:23:FSTRING_MIDDLE",
+    "backend/app/api/simulation.py:748:23:FSTRING_MIDDLE"
+  ],
+  "获取报告失败:": [
+    "backend/app/api/report.py:311:23:FSTRING_MIDDLE",
+    "backend/app/api/report.py:350:23:FSTRING_MIDDLE"
+  ],
+  "获取Agent日志失败:": [
+    "backend/app/api/report.py:809:23:FSTRING_MIDDLE",
+    "backend/app/api/report.py:843:23:FSTRING_MIDDLE"
+  ],
+  "获取控制台日志失败:": [
+    "backend/app/api/report.py:891:23:FSTRING_MIDDLE",
+    "backend/app/api/report.py:925:23:FSTRING_MIDDLE"
+  ],
+  "检查文件是否存在": [
+    "backend/app/api/simulation.py:273:4:COMMENT",
+    "backend/app/api/simulation.py:1078:8:COMMENT",
+    "backend/app/api/simulation.py:1178:8:COMMENT"
+  ],
+  "模拟": [
+    "backend/app/api/simulation.py:336:26:FSTRING_MIDDLE",
+    "backend/app/api/simulation.py:348:29:FSTRING_MIDDLE",
+    "backend/app/api/simulation.py:434:30:FSTRING_MIDDLE",
+    "backend/app/api/simulation.py:446:30:FSTRING_MIDDLE",
+    "backend/app/api/simulation.py:1574:30:FSTRING_MIDDLE"
+  ],
+  "构建详细进度信息": [
+    "backend/app/api/simulation.py:534:20:COMMENT",
+    "backend/app/api/simulation.py:554:20:COMMENT"
+  ],
+  "获取模拟状态": [
+    "backend/app/api/simulation.py:757:4:STRING",
+    "backend/app/services/simulation_manager.py:460:8:STRING"
+  ],
+  "获取模拟目录": [
+    "backend/app/api/simulation.py:1063:8:COMMENT",
+    "backend/app/api/simulation.py:1166:8:COMMENT"
+  ],
+  "获取文件修改时间": [
+    "backend/app/api/simulation.py:1084:12:COMMENT",
+    "backend/app/api/simulation.py:1184:12:COMMENT"
+  ],
+  "检查是否正在生成（通过 state.json 判断）": [
+    "backend/app/api/simulation.py:1100:8:COMMENT",
+    "backend/app/api/simulation.py:1195:8:COMMENT"
+  ],
+  "强制模式：停止运行中的模拟": [
+    "backend/app/api/simulation.py:1553:28:COMMENT",
+    "backend/app/api/simulation.py:1554:42:FSTRING_MIDDLE"
+  ],
+  "更新模拟状态": [
+    "backend/app/api/simulation.py:1612:8:COMMENT",
+    "backend/app/api/simulation.py:1676:8:COMMENT",
+    "backend/app/api/simulation.py:2692:8:COMMENT"
+  ],
+  "可选：twitter/reddit/None": [
+    "backend/app/api/simulation.py:2199:41:COMMENT",
+    "backend/app/api/simulation.py:2320:41:COMMENT",
+    "backend/app/api/simulation.py:2447:41:COMMENT"
+  ],
+  "验证platform参数": [
+    "backend/app/api/simulation.py:2220:8:COMMENT",
+    "backend/app/api/simulation.py:2335:8:COMMENT",
+    "backend/app/api/simulation.py:2462:8:COMMENT"
+  ],
+  "检查环境状态": [
+    "backend/app/api/simulation.py:2227:8:COMMENT",
+    "backend/app/api/simulation.py:2362:8:COMMENT",
+    "backend/app/api/simulation.py:2469:8:COMMENT"
+  ],
+  "优化prompt，添加前缀避免Agent调用工具": [
+    "backend/app/api/simulation.py:2234:8:COMMENT",
+    "backend/app/api/simulation.py:2476:8:COMMENT"
+  ],
+  "LLM_API_KEY 未配置": [
+    "backend/app/config.py:71:26:STRING",
+    "backend/app/services/simulation_config_generator.py:236:29:STRING",
+    "backend/app/utils/llm_client.py:28:29:STRING"
+  ],
+  "ZEP_API_KEY 未配置": [
+    "backend/app/config.py:73:26:STRING",
+    "backend/app/services/graph_builder.py:49:29:STRING",
+    "backend/app/services/zep_entity_reader.py:84:29:STRING",
+    "backend/app/services/zep_tools.py:428:29:STRING"
+  ],
+  "失败": [
+    "backend/app/models/project.py:23:37:COMMENT",
+    "backend/app/models/task.py:21:33:COMMENT"
+  ],
+  "错误信息": [
+    "backend/app/models/project.py:52:4:COMMENT",
+    "backend/app/models/task.py:35:35:COMMENT",
+    "backend/app/services/simulation_manager.py:75:4:COMMENT",
+    "backend/app/services/simulation_runner.py:141:4:COMMENT"
+  ],
+  "转换为字典": [
+    "backend/app/models/project.py:56:8:STRING",
+    "backend/app/models/task.py:40:8:STRING",
+    "backend/app/services/simulation_config_generator.py:177:8:STRING"
+  ],
+  "保存项目元数据": [
+    "backend/app/models/project.py:162:8:COMMENT",
+    "backend/app/models/project.py:169:8:STRING"
+  ],
+  "保存文件": [
+    "backend/app/models/project.py:261:8:COMMENT",
+    "backend/app/services/report_agent.py:2122:8:COMMENT"
+  ],
+  "使用安全名称": [
+    "backend/app/services/graph_builder.py:236:62:COMMENT",
+    "backend/app/services/graph_builder.py:260:62:COMMENT"
+  ],
+  "Zep API 需要 Field 的 description，这是必需的": [
+    "backend/app/services/graph_builder.py:238:16:COMMENT",
+    "backend/app/services/graph_builder.py:262:16:COMMENT"
+  ],
+  "动态创建类": [
+    "backend/app/services/graph_builder.py:244:12:COMMENT",
+    "backend/app/services/graph_builder.py:268:12:COMMENT"
+  ],
+  "构建用户消息": [
+    "backend/app/services/ontology_generator.py:202:8:COMMENT",
+    "backend/app/services/ontology_generator.py:237:8:STRING"
+  ],
+  "调用LLM": [
+    "backend/app/services/ontology_generator.py:216:8:COMMENT",
+    "backend/app/services/report_agent.py:1304:12:COMMENT"
+  ],
+  "确保日志文件所在目录存在": [
+    "backend/app/services/report_agent.py:59:8:STRING",
+    "backend/app/services/report_agent.py:331:8:STRING"
+  ],
+  "转换为Markdown格式": [
+    "backend/app/services/report_agent.py:411:8:STRING",
+    "backend/app/services/report_agent.py:433:8:STRING"
+  ],
+  "（这些工具还未使用，推荐用一下他们:": [
+    "backend/app/services/report_agent.py:1380:36:FSTRING_MIDDLE",
+    "backend/app/services/report_agent.py:1476:32:FSTRING_MIDDLE"
+  ],
+  "更新进度": [
+    "backend/app/services/report_agent.py:1640:16:COMMENT",
+    "backend/app/services/report_agent.py:1688:16:COMMENT"
+  ],
+  "关闭控制台日志记录器": [
+    "backend/app/services/report_agent.py:1733:12:COMMENT",
+    "backend/app/services/report_agent.py:1759:12:COMMENT"
+  ],
+  "已读取到末尾": [
+    "backend/app/services/report_agent.py:2001:31:COMMENT",
+    "backend/app/services/report_agent.py:2063:31:COMMENT"
+  ],
+  "新格式：文件夹": [
+    "backend/app/services/report_agent.py:2506:12:COMMENT",
+    "backend/app/services/report_agent.py:2528:12:COMMENT"
+  ],
+  "兼容旧格式：JSON文件": [
+    "backend/app/services/report_agent.py:2511:12:COMMENT",
+    "backend/app/services/report_agent.py:2534:12:COMMENT"
+  ],
+  "工作时段": [
+    "backend/app/services/simulation_config_generator.py:34:4:COMMENT",
+    "backend/app/services/simulation_config_generator.py:108:4:COMMENT"
+  ],
+  "凌晨几乎无人": [
+    "backend/app/services/simulation_config_generator.py:42:27:COMMENT",
+    "backend/app/services/simulation_config_generator.py:638:48:COMMENT"
+  ],
+  "事件配置": [
+    "backend/app/services/simulation_config_generator.py:115:4:STRING",
+    "backend/app/services/simulation_config_generator.py:161:4:COMMENT",
+    "backend/app/services/simulation_config_generator.py:220:41:COMMENT"
+  ],
+  "时间配置": [
+    "backend/app/services/simulation_config_generator.py:155:4:COMMENT",
+    "backend/app/services/simulation_config_generator.py:219:41:COMMENT"
+  ],
+  "实体摘要": [
+    "backend/app/services/simulation_config_generator.py:221:41:COMMENT",
+    "backend/app/services/simulation_config_generator.py:389:8:COMMENT"
+  ],
+  "个": [
+    "backend/app/services/simulation_config_generator.py:430:76:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:179:43:FSTRING_MIDDLE"
+  ],
+  "使用配置的上下文截断长度": [
+    "backend/app/services/simulation_config_generator.py:537:8:COMMENT",
+    "backend/app/services/simulation_config_generator.py:673:8:COMMENT"
+  ],
+  ", 使用默认配置": [
+    "backend/app/services/simulation_config_generator.py:594:45:FSTRING_MIDDLE",
+    "backend/app/services/simulation_config_generator.py:711:45:FSTRING_MIDDLE"
+  ],
+  ") 超过总Agent数 (": [
+    "backend/app/services/simulation_config_generator.py:619:71:FSTRING_MIDDLE",
+    "backend/app/services/simulation_config_generator.py:623:71:FSTRING_MIDDLE"
+  ],
+  ")，已修正": [
+    "backend/app/services/simulation_config_generator.py:619:98:FSTRING_MIDDLE",
+    "backend/app/services/simulation_config_generator.py:623:98:FSTRING_MIDDLE"
+  ],
+  "确保目录存在": [
+    "backend/app/services/simulation_ipc.py:113:8:COMMENT",
+    "backend/app/services/simulation_ipc.py:306:8:COMMENT",
+    "backend/app/services/simulation_manager.py:133:8:COMMENT",
+    "backend/scripts/action_logger.py:40:8:STRING"
+  ],
+  "模拟状态": [
+    "backend/app/services/simulation_manager.py:26:4:STRING",
+    "backend/app/services/simulation_manager.py:45:4:STRING"
+  ],
+  "时间戳": [
+    "backend/app/services/simulation_manager.py:71:4:COMMENT",
+    "backend/app/services/simulation_runner.py:136:4:COMMENT"
+  ],
+  "模拟不存在:": [
+    "backend/app/services/simulation_manager.py:264:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_manager.py:485:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:781:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1458:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1520:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1577:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1630:31:FSTRING_MIDDLE"
+  ],
+  "更新状态": [
+    "backend/app/services/simulation_manager.py:441:12:COMMENT",
+    "backend/app/services/simulation_runner.py:514:16:COMMENT"
+  ],
+  "每轮摘要": [
+    "backend/app/services/simulation_runner.py:77:4:STRING",
+    "backend/app/services/simulation_runner.py:129:4:COMMENT"
+  ],
+  "各平台独立轮次和时间": [
+    "backend/app/services/simulation_runner.py:169:12:COMMENT",
+    "backend/app/services/simulation_runner.py:260:16:COMMENT"
+  ],
+  "进程仍在运行": [
+    "backend/app/services/simulation_runner.py:501:43:COMMENT",
+    "backend/app/services/simulation_runner.py:1219:44:COMMENT"
+  ],
+  "停止图谱记忆更新器": [
+    "backend/app/services/simulation_runner.py:556:12:COMMENT",
+    "backend/app/services/simulation_runner.py:812:8:COMMENT"
+  ],
+  "已停止图谱记忆更新: simulation_id=": [
+    "backend/app/services/simulation_runner.py:560:34:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:816:30:FSTRING_MIDDLE"
+  ],
+  "停止图谱记忆更新器失败:": [
+    "backend/app/services/simulation_runner.py:562:35:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:818:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1211:27:FSTRING_MIDDLE"
+  ],
+  "自动填充 platform 字段": [
+    "backend/app/services/simulation_runner.py:921:45:COMMENT",
+    "backend/app/services/simulation_runner.py:932:44:COMMENT"
+  ],
+  "删除": [
+    "backend/app/services/simulation_runner.py:1157:36:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1169:40:FSTRING_MIDDLE"
+  ],
+  "失败:": [
+    "backend/app/services/simulation_runner.py:1157:49:FSTRING_MIDDLE",
+    "backend/app/services/zep_entity_reader.py:410:45:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:1065:42:FSTRING_MIDDLE"
+  ],
+  "模拟环境未运行或已关闭，无法执行Interview:": [
+    "backend/app/services/simulation_runner.py:1463:31:FSTRING_MIDDLE",
+    "backend/app/services/simulation_runner.py:1525:31:FSTRING_MIDDLE"
+  ],
+  "第": [
+    "backend/app/services/zep_entity_reader.py:117:46:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:64:44:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:116:46:FSTRING_MIDDLE"
+  ],
+  "次尝试失败:": [
+    "backend/app/services/zep_entity_reader.py:117:62:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:64:60:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:116:62:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:186:42:FSTRING_MIDDLE"
+  ],
+  "秒后重试...": [
+    "backend/app/services/zep_entity_reader.py:118:37:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:65:45:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:117:45:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:187:41:FSTRING_MIDDLE"
+  ],
+  "在": [
+    "backend/app/services/zep_entity_reader.py:123:55:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:55:57:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:108:59:FSTRING_MIDDLE"
+  ],
+  "获取图谱的所有节点（分页获取）\n\n        Args:\n            graph_id: 图谱ID\n\n        Returns:\n            节点列表": [
+    "backend/app/services/zep_entity_reader.py:128:8:STRING",
+    "backend/app/services/zep_tools.py:651:8:STRING"
+  ],
+  "获取图谱": [
+    "backend/app/services/zep_entity_reader.py:137:22:FSTRING_MIDDLE",
+    "backend/app/services/zep_entity_reader.py:164:22:FSTRING_MIDDLE"
+  ],
+  "共获取": [
+    "backend/app/services/zep_entity_reader.py:151:22:FSTRING_MIDDLE",
+    "backend/app/services/zep_entity_reader.py:179:22:FSTRING_MIDDLE"
+  ],
+  "获取节点": [
+    "backend/app/services/zep_entity_reader.py:212:29:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:1065:31:FSTRING_MIDDLE"
+  ],
+  "获取所有节点": [
+    "backend/app/services/zep_entity_reader.py:238:8:COMMENT",
+    "backend/app/services/zep_tools.py:1175:8:COMMENT"
+  ],
+  "转换为文本格式": [
+    "backend/app/services/zep_tools.py:76:8:STRING",
+    "backend/app/services/zep_tools.py:113:8:STRING"
+  ],
+  "未知": [
+    "backend/app/services/zep_tools.py:119:40:STRING",
+    "backend/app/services/zep_tools.py:199:60:STRING",
+    "backend/app/services/zep_tools.py:1203:44:STRING",
+    "backend/app/services/zep_tools.py:1204:67:STRING",
+    "backend/app/services/zep_tools.py:1403:53:STRING",
+    "backend/app/services/zep_tools.py:1542:42:STRING",
+    "backend/app/services/zep_tools.py:1574:56:STRING",
+    "backend/app/services/zep_tools.py:1642:43:STRING"
+  ],
+  "语义搜索结果": [
+    "backend/app/services/zep_tools.py:149:61:COMMENT",
+    "backend/app/services/zep_tools.py:189:8:COMMENT"
+  ],
+  "实体洞察": [
+    "backend/app/services/zep_tools.py:150:73:COMMENT",
+    "backend/app/services/zep_tools.py:195:8:COMMENT"
+  ],
+  "关系链": [
+    "backend/app/services/zep_tools.py:151:66:COMMENT",
+    "backend/app/services/zep_tools.py:205:8:COMMENT"
+  ],
+  "条": [
+    "backend/app/services/zep_tools.py:178:42:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:180:47:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:203:86:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:258:43:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:259:48:FSTRING_MIDDLE"
+  ],
+  "实体": [
+    "backend/app/services/zep_tools.py:199:90:STRING",
+    "backend/app/services/zep_tools.py:278:92:STRING",
+    "backend/app/services/zep_tools.py:1049:96:STRING"
+  ],
+  "统计": [
+    "backend/app/services/zep_tools.py:231:4:COMMENT",
+    "backend/app/services/zep_tools.py:359:4:COMMENT"
+  ],
+  "（该平台未获得回复）": [
+    "backend/app/services/zep_tools.py:1418:73:STRING",
+    "backend/app/services/zep_tools.py:1419:70:STRING"
+  ],
+  "采访需求：": [
+    "backend/app/services/zep_tools.py:1594:26:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:1656:26:FSTRING_MIDDLE"
+  ],
+  "模拟背景：": [
+    "backend/app/services/zep_tools.py:1595:23:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:1656:54:FSTRING_MIDDLE"
+  ],
+  "未提供": [
+    "backend/app/services/zep_tools.py:1598:55:STRING",
+    "backend/app/services/zep_tools.py:1658:60:STRING"
+  ],
+  "关于": [
+    "backend/app/services/zep_tools.py:1673:48:FSTRING_MIDDLE",
+    "backend/app/services/zep_tools.py:1678:18:FSTRING_MIDDLE"
+  ],
+  "=== 文档": [
+    "backend/app/utils/file_parser.py:140:35:FSTRING_MIDDLE",
+    "backend/app/utils/file_parser.py:142:35:FSTRING_MIDDLE"
+  ],
+  "函数": [
+    "backend/app/utils/retry.py:55:39:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:64:26:FSTRING_MIDDLE"
+  ],
+  "次重试后仍失败:": [
+    "backend/app/utils/retry.py:55:73:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:108:75:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:179:60:FSTRING_MIDDLE"
+  ],
+  "异步函数": [
+    "backend/app/utils/retry.py:108:39:FSTRING_MIDDLE",
+    "backend/app/utils/retry.py:116:26:FSTRING_MIDDLE"
+  ],
+  "文件:": [
+    "backend/scripts/test_profile_format.py:81:16:FSTRING_MIDDLE",
+    "backend/scripts/test_profile_format.py:106:16:FSTRING_MIDDLE"
+  ],
+  "\\n   [通过] 所有必需字段都存在": [
+    "backend/scripts/test_profile_format.py:95:20:FSTRING_MIDDLE",
+    "backend/scripts/test_profile_format.py:120:20:FSTRING_MIDDLE"
+  ]
+}

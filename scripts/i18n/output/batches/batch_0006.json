@@ -1,0 +1,238 @@
+{
+  "batch_id": "batch_0006",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/models/project.py:35:4:COMMENT",
+      "kind": "comment",
+      "source_text": "文件信息"
+    },
+    {
+      "id": "backend/app/models/project.py:39:4:COMMENT",
+      "kind": "comment",
+      "source_text": "本体信息（接口1生成后填充）"
+    },
+    {
+      "id": "backend/app/models/project.py:43:4:COMMENT",
+      "kind": "comment",
+      "source_text": "图谱信息（接口2完成后填充）"
+    },
+    {
+      "id": "backend/app/models/project.py:47:4:COMMENT",
+      "kind": "comment",
+      "source_text": "配置"
+    },
+    {
+      "id": "backend/app/models/project.py:52:4:COMMENT",
+      "kind": "comment",
+      "source_text": "错误信息"
+    },
+    {
+      "id": "backend/app/models/project.py:104:4:COMMENT",
+      "kind": "comment",
+      "source_text": "项目存储根目录"
+    },
+    {
+      "id": "backend/app/models/project.py:156:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建项目目录结构"
+    },
+    {
+      "id": "backend/app/models/project.py:162:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存项目元数据"
+    },
+    {
+      "id": "backend/app/models/project.py:216:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按创建时间倒序排序"
+    },
+    {
+      "id": "backend/app/models/project.py:256:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成安全的文件名"
+    },
+    {
+      "id": "backend/app/models/project.py:261:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存文件"
+    },
+    {
+      "id": "backend/app/models/project.py:264:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取文件大小"
+    },
+    {
+      "id": "backend/app/models/task.py:18:33:COMMENT",
+      "kind": "comment",
+      "source_text": "等待中"
+    },
+    {
+      "id": "backend/app/models/task.py:19:33:COMMENT",
+      "kind": "comment",
+      "source_text": "处理中"
+    },
+    {
+      "id": "backend/app/models/task.py:20:33:COMMENT",
+      "kind": "comment",
+      "source_text": "已完成"
+    },
+    {
+      "id": "backend/app/models/task.py:32:35:COMMENT",
+      "kind": "comment",
+      "source_text": "总进度百分比 0-100"
+    },
+    {
+      "id": "backend/app/models/task.py:33:35:COMMENT",
+      "kind": "comment",
+      "source_text": "状态消息"
+    },
+    {
+      "id": "backend/app/models/task.py:34:35:COMMENT",
+      "kind": "comment",
+      "source_text": "任务结果"
+    },
+    {
+      "id": "backend/app/models/task.py:36:50:COMMENT",
+      "kind": "comment",
+      "source_text": "额外元数据"
+    },
+    {
+      "id": "backend/app/models/task.py:37:57:COMMENT",
+      "kind": "comment",
+      "source_text": "详细进度信息"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:77:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建任务"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:90:8:COMMENT",
+      "kind": "comment",
+      "source_text": "在后台线程中执行构建"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:121:12:COMMENT",
+      "kind": "comment",
+      "source_text": "1. 创建图谱"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:129:12:COMMENT",
+      "kind": "comment",
+      "source_text": "2. 设置本体"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:137:12:COMMENT",
+      "kind": "comment",
+      "source_text": "3. 文本分块"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:146:12:COMMENT",
+      "kind": "comment",
+      "source_text": "4. 分批发送数据"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:156:12:COMMENT",
+      "kind": "comment",
+      "source_text": "5. 等待Zep处理完成",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:172:12:COMMENT",
+      "kind": "comment",
+      "source_text": "6. 获取图谱信息"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:212:8:COMMENT",
+      "kind": "comment",
+      "source_text": "抑制 Pydantic v2 关于 Field(default=None) 的警告",
+      "protected_terms": [
+        "Pydantic"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:213:8:COMMENT",
+      "kind": "comment",
+      "source_text": "这是 Zep SDK 要求的用法，警告来自动态类创建，可以安全忽略",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:216:8:COMMENT",
+      "kind": "comment",
+      "source_text": "Zep 保留名称，不能作为属性名",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:225:8:COMMENT",
+      "kind": "comment",
+      "source_text": "动态创建实体类型"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:231:12:COMMENT",
+      "kind": "comment",
+      "source_text": "创建属性字典和类型注解（Pydantic v2 需要）",
+      "protected_terms": [
+        "Pydantic"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:236:62:COMMENT",
+      "kind": "comment",
+      "source_text": "使用安全名称"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:238:16:COMMENT",
+      "kind": "comment",
+      "source_text": "Zep API 需要 Field 的 description，这是必需的",
+      "protected_terms": [
+        "API",
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:240:63:COMMENT",
+      "kind": "comment",
+      "source_text": "类型注解"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:244:12:COMMENT",
+      "kind": "comment",
+      "source_text": "动态创建类"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:249:8:COMMENT",
+      "kind": "comment",
+      "source_text": "动态创建边类型"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:255:12:COMMENT",
+      "kind": "comment",
+      "source_text": "创建属性字典和类型注解"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:264:56:COMMENT",
+      "kind": "comment",
+      "source_text": "边属性用str类型"
+    }
+  ]
+}

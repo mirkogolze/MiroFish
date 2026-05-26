@@ -1,0 +1,258 @@
+{
+  "batch_id": "batch_0013",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_config_generator.py:139:4:COMMENT",
+      "kind": "comment",
+      "source_text": "病毒传播阈值（达到多少互动后触发扩散）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:142:4:COMMENT",
+      "kind": "comment",
+      "source_text": "回声室效应强度（相似观点聚集程度）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:149:4:COMMENT",
+      "kind": "comment",
+      "source_text": "基础信息"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:155:4:COMMENT",
+      "kind": "comment",
+      "source_text": "时间配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:158:4:COMMENT",
+      "kind": "comment",
+      "source_text": "Agent配置列表",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:164:4:COMMENT",
+      "kind": "comment",
+      "source_text": "平台配置"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:168:4:COMMENT",
+      "kind": "comment",
+      "source_text": "LLM配置",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:172:4:COMMENT",
+      "kind": "comment",
+      "source_text": "生成元数据"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:174:36:COMMENT",
+      "kind": "comment",
+      "source_text": "LLM的推理说明",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:213:4:COMMENT",
+      "kind": "comment",
+      "source_text": "上下文最大字符数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:215:4:COMMENT",
+      "kind": "comment",
+      "source_text": "每批生成的Agent数量",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:218:4:COMMENT",
+      "kind": "comment",
+      "source_text": "各步骤的上下文截断长度（字符数）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:221:41:COMMENT",
+      "kind": "comment",
+      "source_text": "实体摘要"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:222:41:COMMENT",
+      "kind": "comment",
+      "source_text": "Agent配置中的实体摘要",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:223:41:COMMENT",
+      "kind": "comment",
+      "source_text": "每类实体显示数量"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:274:8:COMMENT",
+      "kind": "comment",
+      "source_text": "计算总步骤数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:276:39:COMMENT",
+      "kind": "comment",
+      "source_text": "时间配置 + 事件配置 + N批Agent + 平台配置",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:286:8:COMMENT",
+      "kind": "comment",
+      "source_text": "1. 构建基础上下文信息"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:295:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 步骤1: 生成时间配置 =========="
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:302:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 步骤2: 生成事件配置 =========="
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:308:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 步骤3-N: 分批生成Agent配置 ==========",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:330:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 为初始帖子分配发布者 Agent ==========",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:336:8:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 最后一步: 生成平台配置 =========="
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:361:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建最终参数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:392:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建上下文"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:399:75:COMMENT",
+      "kind": "comment",
+      "source_text": "留500字符余量"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:413:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按类型分组"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:423:12:COMMENT",
+      "kind": "comment",
+      "source_text": "使用配置的显示数量和摘要长度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:450:55:COMMENT",
+      "kind": "comment",
+      "source_text": "每次重试降低温度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:451:20:COMMENT",
+      "kind": "comment",
+      "source_text": "不设置max_tokens，让LLM自由发挥",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:457:16:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否被截断"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:462:16:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试解析JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:468:20:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试修复JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:487:8:COMMENT",
+      "kind": "comment",
+      "source_text": "计算未闭合的括号"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:491:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否有未闭合的字符串"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:495:8:COMMENT",
+      "kind": "comment",
+      "source_text": "闭合括号"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:505:8:COMMENT",
+      "kind": "comment",
+      "source_text": "修复被截断的情况"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:508:8:COMMENT",
+      "kind": "comment",
+      "source_text": "提取JSON部分",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:513:12:COMMENT",
+      "kind": "comment",
+      "source_text": "移除字符串中的换行符"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:525:16:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试移除所有控制字符"
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "batch_id": "batch_0001",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/__init__.py:8:0:COMMENT",
+      "kind": "comment",
+      "source_text": "抑制 multiprocessing resource_tracker 的警告（来自第三方库如 transformers）"
+    },
+    {
+      "id": "backend/app/__init__.py:9:0:COMMENT",
+      "kind": "comment",
+      "source_text": "需要在所有其他导入之前设置"
+    },
+    {
+      "id": "backend/app/__init__.py:24:4:COMMENT",
+      "kind": "comment",
+      "source_text": "设置JSON编码：确保中文直接显示（而不是 \\uXXXX 格式）",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/__init__.py:25:4:COMMENT",
+      "kind": "comment",
+      "source_text": "Flask >= 2.3 使用 app.json.ensure_ascii，旧版本使用 JSON_AS_ASCII 配置",
+      "protected_terms": [
+        "Flask",
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/__init__.py:29:4:COMMENT",
+      "kind": "comment",
+      "source_text": "设置日志"
+    },
+    {
+      "id": "backend/app/__init__.py:32:4:COMMENT",
+      "kind": "comment",
+      "source_text": "只在 reloader 子进程中打印启动信息（避免 debug 模式下打印两次）"
+    },
+    {
+      "id": "backend/app/__init__.py:42:4:COMMENT",
+      "kind": "comment",
+      "source_text": "启用CORS"
+    },
+    {
+      "id": "backend/app/__init__.py:45:4:COMMENT",
+      "kind": "comment",
+      "source_text": "注册模拟进程清理函数（确保服务器关闭时终止所有模拟进程）"
+    },
+    {
+      "id": "backend/app/__init__.py:51:4:COMMENT",
+      "kind": "comment",
+      "source_text": "请求日志中间件"
+    },
+    {
+      "id": "backend/app/__init__.py:65:4:COMMENT",
+      "kind": "comment",
+      "source_text": "注册蓝图"
+    },
+    {
+      "id": "backend/app/__init__.py:71:4:COMMENT",
+      "kind": "comment",
+      "source_text": "健康检查"
+    },
+    {
+      "id": "backend/app/api/graph.py:22:0:COMMENT",
+      "kind": "comment",
+      "source_text": "获取日志器"
+    },
+    {
+      "id": "backend/app/api/graph.py:34:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 项目管理接口 =============="
+    },
+    {
+      "id": "backend/app/api/graph.py:102:4:COMMENT",
+      "kind": "comment",
+      "source_text": "重置到本体已生成状态"
+    },
+    {
+      "id": "backend/app/api/graph.py:120:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 接口1：上传文件并生成本体 =============="
+    },
+    {
+      "id": "backend/app/api/graph.py:153:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取参数"
+    },
+    {
+      "id": "backend/app/api/graph.py:167:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取上传的文件"
+    },
+    {
+      "id": "backend/app/api/graph.py:175:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建项目"
+    },
+    {
+      "id": "backend/app/api/graph.py:180:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存文件并提取文本"
+    },
+    {
+      "id": "backend/app/api/graph.py:186:16:COMMENT",
+      "kind": "comment",
+      "source_text": "保存文件到项目目录"
+    },
+    {
+      "id": "backend/app/api/graph.py:197:16:COMMENT",
+      "kind": "comment",
+      "source_text": "提取文本"
+    },
+    {
+      "id": "backend/app/api/graph.py:210:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存提取的文本"
+    },
+    {
+      "id": "backend/app/api/graph.py:215:8:COMMENT",
+      "kind": "comment",
+      "source_text": "生成本体"
+    },
+    {
+      "id": "backend/app/api/graph.py:224:8:COMMENT",
+      "kind": "comment",
+      "source_text": "保存本体到项目"
+    },
+    {
+      "id": "backend/app/api/graph.py:258:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 接口2：构建图谱 =============="
+    },
+    {
+      "id": "backend/app/api/graph.py:286:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查配置"
+    },
+    {
+      "id": "backend/app/api/graph.py:297:8:COMMENT",
+      "kind": "comment",
+      "source_text": "解析请求"
+    },
+    {
+      "id": "backend/app/api/graph.py:308:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取项目"
+    },
+    {
+      "id": "backend/app/api/graph.py:316:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查项目状态"
+    },
+    {
+      "id": "backend/app/api/graph.py:317:42:COMMENT",
+      "kind": "comment",
+      "source_text": "强制重新构建"
+    },
+    {
+      "id": "backend/app/api/graph.py:332:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果强制重建，重置状态"
+    },
+    {
+      "id": "backend/app/api/graph.py:339:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取配置"
+    },
+    {
+      "id": "backend/app/api/graph.py:344:8:COMMENT",
+      "kind": "comment",
+      "source_text": "更新项目配置"
+    },
+    {
+      "id": "backend/app/api/graph.py:348:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取提取的文本"
+    },
+    {
+      "id": "backend/app/api/graph.py:356:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取本体"
+    },
+    {
+      "id": "backend/app/api/graph.py:364:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建异步任务"
+    },
+    {
+      "id": "backend/app/api/graph.py:369:8:COMMENT",
+      "kind": "comment",
+      "source_text": "更新项目状态"
+    },
+    {
+      "id": "backend/app/api/graph.py:377:8:COMMENT",
+      "kind": "comment",
+      "source_text": "启动后台任务"
+    },
+    {
+      "id": "backend/app/api/graph.py:389:16:COMMENT",
+      "kind": "comment",
+      "source_text": "创建图谱构建服务"
+    },
+    {
+      "id": "backend/app/api/graph.py:392:16:COMMENT",
+      "kind": "comment",
+      "source_text": "分块"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "batch_id": "batch_0054",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/models/project.py:129:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取项目提取文本存储路径"
+    },
+    {
+      "id": "backend/app/models/project.py:294:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取项目的所有文件路径"
+    },
+    {
+      "id": "backend/app/models/task.py:17:4:STRING",
+      "kind": "string_constant",
+      "source_text": "任务状态枚举"
+    },
+    {
+      "id": "backend/app/models/task.py:26:4:STRING",
+      "kind": "string_constant",
+      "source_text": "任务数据类"
+    },
+    {
+      "id": "backend/app/models/task.py:66:8:STRING",
+      "kind": "string_constant",
+      "source_text": "单例模式"
+    },
+    {
+      "id": "backend/app/models/task.py:104:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取任务"
+    },
+    {
+      "id": "backend/app/models/task.py:148:8:STRING",
+      "kind": "string_constant",
+      "source_text": "标记任务完成"
+    },
+    {
+      "id": "backend/app/models/task.py:158:8:STRING",
+      "kind": "string_constant",
+      "source_text": "标记任务失败"
+    },
+    {
+      "id": "backend/app/models/task.py:167:8:STRING",
+      "kind": "string_constant",
+      "source_text": "列出任务"
+    },
+    {
+      "id": "backend/app/models/task.py:175:8:STRING",
+      "kind": "string_constant",
+      "source_text": "清理旧任务"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:25:4:STRING",
+      "kind": "string_constant",
+      "source_text": "图谱信息"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:111:8:STRING",
+      "kind": "string_constant",
+      "source_text": "图谱构建工作线程"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:194:8:STRING",
+      "kind": "string_constant",
+      "source_text": "创建Zep图谱（公开方法）",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:206:8:STRING",
+      "kind": "string_constant",
+      "source_text": "设置图谱本体（公开方法）"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:220:12:STRING",
+      "kind": "string_constant",
+      "source_text": "将保留名称转换为安全名称"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:301:8:STRING",
+      "kind": "string_constant",
+      "source_text": "分批添加文本到图谱，返回所有 episode 的 uuid 列表"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:353:8:STRING",
+      "kind": "string_constant",
+      "source_text": "等待所有 episode 处理完成（通过查询每个 episode 的 processed 状态）"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:404:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取图谱信息"
+    },
+    {
+      "id": "backend/app/services/graph_builder.py:504:8:STRING",
+      "kind": "string_constant",
+      "source_text": "删除图谱"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:17:4:STRING",
+      "kind": "string_constant",
+      "source_text": "将任意格式的名称转换为 PascalCase（如 'works_for' -> 'WorksFor', 'person' -> 'Person'）"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:278:8:STRING",
+      "kind": "string_constant",
+      "source_text": "验证和后处理结果"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:412:12:STRING",
+      "kind": "string_constant",
+      "source_text": "自定义实体类型定义"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:413:12:STRING",
+      "kind": "string_constant",
+      "source_text": "由MiroFish自动生成，用于社会舆论模拟",
+      "protected_terms": [
+        "Miro",
+        "MiroFish"
+      ]
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:420:12:STRING",
+      "kind": "string_constant",
+      "source_text": "# ============== 实体类型定义 =============="
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:447:26:STRING",
+      "kind": "string_constant",
+      "source_text": "# ============== 关系类型定义 =============="
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:476:26:STRING",
+      "kind": "string_constant",
+      "source_text": "# ============== 类型配置 =============="
+    },
+    {
+      "id": "backend/app/services/report_agent.py:59:8:STRING",
+      "kind": "string_constant",
+      "source_text": "确保日志文件所在目录存在"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:64:8:STRING",
+      "kind": "string_constant",
+      "source_text": "获取从开始到现在的耗时（秒）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:101:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录报告生成开始"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:114:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录大纲规划开始"
+    }
+  ]
+}

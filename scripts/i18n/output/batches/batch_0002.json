@@ -1,0 +1,237 @@
+{
+  "batch_id": "batch_0002",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/api/graph.py:405:16:COMMENT",
+      "kind": "comment",
+      "source_text": "创建图谱"
+    },
+    {
+      "id": "backend/app/api/graph.py:413:16:COMMENT",
+      "kind": "comment",
+      "source_text": "更新项目的graph_id"
+    },
+    {
+      "id": "backend/app/api/graph.py:417:16:COMMENT",
+      "kind": "comment",
+      "source_text": "设置本体"
+    },
+    {
+      "id": "backend/app/api/graph.py:425:16:COMMENT",
+      "kind": "comment",
+      "source_text": "添加文本（progress_callback 签名是 (msg, progress_ratio)）"
+    },
+    {
+      "id": "backend/app/api/graph.py:447:16:COMMENT",
+      "kind": "comment",
+      "source_text": "等待Zep处理完成（查询每个episode的processed状态）",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/api/graph.py:464:16:COMMENT",
+      "kind": "comment",
+      "source_text": "获取图谱数据"
+    },
+    {
+      "id": "backend/app/api/graph.py:480:16:COMMENT",
+      "kind": "comment",
+      "source_text": "完成"
+    },
+    {
+      "id": "backend/app/api/graph.py:496:16:COMMENT",
+      "kind": "comment",
+      "source_text": "更新项目状态为失败"
+    },
+    {
+      "id": "backend/app/api/graph.py:511:8:COMMENT",
+      "kind": "comment",
+      "source_text": "启动后台线程"
+    },
+    {
+      "id": "backend/app/api/graph.py:532:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 任务查询接口 =============="
+    },
+    {
+      "id": "backend/app/api/graph.py:567:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 图谱数据接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:23:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 报告生成接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:62:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取模拟信息"
+    },
+    {
+      "id": "backend/app/api/report.py:72:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查是否已有报告"
+    },
+    {
+      "id": "backend/app/api/report.py:87:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取项目信息"
+    },
+    {
+      "id": "backend/app/api/report.py:109:8:COMMENT",
+      "kind": "comment",
+      "source_text": "提前生成 report_id，以便立即返回给前端"
+    },
+    {
+      "id": "backend/app/api/report.py:127:8:COMMENT",
+      "kind": "comment",
+      "source_text": "定义后台任务"
+    },
+    {
+      "id": "backend/app/api/report.py:138:16:COMMENT",
+      "kind": "comment",
+      "source_text": "创建Report Agent",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/report.py:145:16:COMMENT",
+      "kind": "comment",
+      "source_text": "进度回调"
+    },
+    {
+      "id": "backend/app/api/report.py:153:16:COMMENT",
+      "kind": "comment",
+      "source_text": "生成报告（传入预先生成的 report_id）"
+    },
+    {
+      "id": "backend/app/api/report.py:159:16:COMMENT",
+      "kind": "comment",
+      "source_text": "保存报告"
+    },
+    {
+      "id": "backend/app/api/report.py:231:8:COMMENT",
+      "kind": "comment",
+      "source_text": "如果提供了simulation_id，先检查是否已有完成的报告"
+    },
+    {
+      "id": "backend/app/api/report.py:275:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 报告获取接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:417:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果MD文件不存在，生成一个临时文件"
+    },
+    {
+      "id": "backend/app/api/report.py:470:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== Report Agent对话接口 ==============",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/report.py:518:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取模拟和项目信息"
+    },
+    {
+      "id": "backend/app/api/report.py:544:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建Agent并进行对话",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/report.py:567:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 报告进度与分章节接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:638:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取报告状态"
+    },
+    {
+      "id": "backend/app/api/report.py:705:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 报告状态检查接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:733:8:COMMENT",
+      "kind": "comment",
+      "source_text": "只有报告完成后才解锁interview"
+    },
+    {
+      "id": "backend/app/api/report.py:756:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== Agent 日志接口 ==============",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/report.py:851:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 控制台日志接口 =============="
+    },
+    {
+      "id": "backend/app/api/report.py:933:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 工具调用接口（供调试使用）=============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:23:0:COMMENT",
+      "kind": "comment",
+      "source_text": "Interview prompt 优化前缀"
+    },
+    {
+      "id": "backend/app/api/simulation.py:24:0:COMMENT",
+      "kind": "comment",
+      "source_text": "添加此前缀可以避免Agent调用工具，直接用文本回复",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:40:4:COMMENT",
+      "kind": "comment",
+      "source_text": "避免重复添加前缀"
+    },
+    {
+      "id": "backend/app/api/simulation.py:46:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 实体读取接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:163:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 模拟管理接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:261:4:COMMENT",
+      "kind": "comment",
+      "source_text": "检查目录是否存在"
+    }
+  ]
+}

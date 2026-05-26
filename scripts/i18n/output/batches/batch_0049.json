@@ -1,0 +1,67 @@
+{
+  "batch_id": "batch_0049",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 8,
+  "items": [
+    {
+      "id": "backend/scripts/test_profile_format.py:84:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n   示例数据 (第1行):",
+      "context": "print(f\"   行数: {len(rows)}\")\n        print(f\"   表头: {list(rows[0].keys())}\")"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:93:20:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n   [错误] 缺少字段: ",
+      "context": "missing = set(required_twitter_fields) - set(rows[0].keys())\n        if missing:"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:95:20:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n   [通过] 所有必需字段都存在",
+      "context": "print(f\"\\n   [错误] 缺少字段: {missing}\")\n        else:"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:107:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   条目数: ",
+      "context": "print(f\"   文件: {reddit_path}\")"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:108:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   字段: ",
+      "context": "print(f\"   文件: {reddit_path}\")\n        print(f\"   条目数: {len(reddit_data)}\")"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:109:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n   示例数据 (第1条):",
+      "context": "print(f\"   条目数: {len(reddit_data)}\")\n        print(f\"   字段: {list(reddit_data[0].keys())}\")"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:118:20:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n   [错误] 缺少必需字段: ",
+      "context": "missing = set(required_reddit_fields) - set(reddit_data[0].keys())\n        if missing:"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:123:16:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "   [信息] 可选字段: ",
+      "context": "present_optional = set(optional_reddit_fields) & set(reddit_data[0].keys())"
+    }
+  ]
+}

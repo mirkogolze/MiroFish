@@ -1,0 +1,175 @@
+{
+  "batch_id": "batch_0043",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_runner.py:471:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟启动成功: ",
+      "context": "cls._monitor_threads[simulation_id] = monitor_thread"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:530:30:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟完成: ",
+      "context": "state.runner_status = RunnerStatus.COMPLETED\n                state.completed_at = datetime.now().isoformat()"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:542:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "进程退出码: ",
+      "context": "except Exception:\n                    pass"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:542:50:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 错误: ",
+      "context": "except Exception:\n                    pass"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:543:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟失败: ",
+      "context": "pass\n                state.error = f\"进程退出码: {exit_code}, 错误: {error_info}\""
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:550:27:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "监控线程异常: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:560:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "已停止图谱记忆更新: simulation_id=",
+      "context": "try:\n                    ZepGraphMemoryManager.stop_updater(simulation_id)"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:562:35:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "停止图谱记忆更新器失败: ",
+      "context": "logger.info(f\"已停止图谱记忆更新: simulation_id={simulation_id}\")\n                except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:627:54:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "Twitter 模拟已完成: ",
+      "protected_terms": [
+        "Twitter"
+      ],
+      "context": "state.twitter_completed = True\n                                        state.twitter_running = False"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:631:54:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "Reddit 模拟已完成: ",
+      "protected_terms": [
+        "Reddit"
+      ],
+      "context": "state.reddit_completed = True\n                                        state.reddit_running = False"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:640:54:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "所有平台模拟已完成: ",
+      "context": "state.runner_status = RunnerStatus.COMPLETED\n                                        state.completed_at = datetime.now().isoformat()"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:690:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "读取动作日志失败: ",
+      "context": "return f.tell()\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:733:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "终止进程树 (Windows): simulation=",
+      "context": "# Windows: 使用 taskkill 命令终止进程树\n            # /F = 强制终止, /T = 终止进程树（包括子进程）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:745:37:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "进程未响应，强制终止: ",
+      "context": "except subprocess.TimeoutExpired:\n                    # 强制终止"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:753:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "taskkill 失败，尝试 terminate: ",
+      "context": "process.wait(timeout=5)\n            except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:763:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "终止进程组 (Unix): simulation=",
+      "context": "# 由于使用了 start_new_session=True，进程组 ID 等于主进程 PID\n            pgid = os.getpgid(process.pid)"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:772:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "进程组未响应 SIGTERM，强制终止: ",
+      "context": "except subprocess.TimeoutExpired:\n                # 如果超时后还没结束，强制发送 SIGKILL"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:784:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟未在运行: ",
+      "context": "if state.runner_status not in [RunnerStatus.RUNNING, RunnerStatus.PAUSED]:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:798:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "终止进程组失败: ",
+      "context": "pass\n            except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:821:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "模拟已停止: ",
+      "context": "cls._graph_memory_enabled.pop(simulation_id, None)"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1157:36:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "删除 ",
+      "context": "cleaned_files.append(filename)\n                except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1157:49:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 失败: ",
+      "context": "cleaned_files.append(filename)\n                except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1169:53:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "/actions.jsonl 失败: ",
+      "context": "cleaned_files.append(f\"{dir_name}/actions.jsonl\")\n                    except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1175:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "清理模拟日志完成: ",
+      "context": "del cls._run_states[simulation_id]"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:1175:47:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 删除文件: ",
+      "context": "del cls._run_states[simulation_id]"
+    }
+  ]
+}

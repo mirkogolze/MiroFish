@@ -1,0 +1,222 @@
+{
+  "batch_id": "batch_0010",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:1581:12:COMMENT",
+      "kind": "comment",
+      "source_text": "初始化日志记录器（结构化日志 agent_log.jsonl）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1589:12:COMMENT",
+      "kind": "comment",
+      "source_text": "初始化控制台日志记录器（console_log.txt）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1598:12:COMMENT",
+      "kind": "comment",
+      "source_text": "阶段1: 规划大纲"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1605:12:COMMENT",
+      "kind": "comment",
+      "source_text": "记录规划开始日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1617:12:COMMENT",
+      "kind": "comment",
+      "source_text": "记录规划完成日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1620:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存大纲到文件"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1630:12:COMMENT",
+      "kind": "comment",
+      "source_text": "阶段2: 逐章节生成（分章节保存）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1634:37:COMMENT",
+      "kind": "comment",
+      "source_text": "保存内容用于上下文"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1640:16:COMMENT",
+      "kind": "comment",
+      "source_text": "更新进度"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1655:16:COMMENT",
+      "kind": "comment",
+      "source_text": "生成主章节内容"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1672:16:COMMENT",
+      "kind": "comment",
+      "source_text": "保存章节"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1676:16:COMMENT",
+      "kind": "comment",
+      "source_text": "记录章节完成日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1697:12:COMMENT",
+      "kind": "comment",
+      "source_text": "阶段3: 组装完整报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1706:12:COMMENT",
+      "kind": "comment",
+      "source_text": "使用ReportManager组装完整报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1711:12:COMMENT",
+      "kind": "comment",
+      "source_text": "计算总耗时"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1714:12:COMMENT",
+      "kind": "comment",
+      "source_text": "记录报告完成日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1721:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存最终报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1733:12:COMMENT",
+      "kind": "comment",
+      "source_text": "关闭控制台日志记录器"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1745:12:COMMENT",
+      "kind": "comment",
+      "source_text": "记录错误日志"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1749:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存失败状态"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1757:22:COMMENT",
+      "kind": "comment",
+      "source_text": "忽略保存失败的错误"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1791:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取已生成的报告内容"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1796:16:COMMENT",
+      "kind": "comment",
+      "source_text": "限制报告长度，避免上下文过长"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1810:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建消息"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1813:8:COMMENT",
+      "kind": "comment",
+      "source_text": "添加历史对话"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1814:38:COMMENT",
+      "kind": "comment",
+      "source_text": "限制历史长度"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1817:8:COMMENT",
+      "kind": "comment",
+      "source_text": "添加用户消息"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1823:8:COMMENT",
+      "kind": "comment",
+      "source_text": "ReACT循环（简化版）",
+      "protected_terms": [
+        "ReACT"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1825:28:COMMENT",
+      "kind": "comment",
+      "source_text": "减少迭代轮数"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1833:12:COMMENT",
+      "kind": "comment",
+      "source_text": "解析工具调用"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1837:16:COMMENT",
+      "kind": "comment",
+      "source_text": "没有工具调用，直接返回响应"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1847:12:COMMENT",
+      "kind": "comment",
+      "source_text": "执行工具调用（限制数量）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1849:41:COMMENT",
+      "kind": "comment",
+      "source_text": "每轮最多执行1次工具调用"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1855:45:COMMENT",
+      "kind": "comment",
+      "source_text": "限制结果长度"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1859:12:COMMENT",
+      "kind": "comment",
+      "source_text": "将结果添加到消息"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1867:8:COMMENT",
+      "kind": "comment",
+      "source_text": "达到最大迭代，获取最终响应"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1873:8:COMMENT",
+      "kind": "comment",
+      "source_text": "清理响应"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1902:4:COMMENT",
+      "kind": "comment",
+      "source_text": "报告存储目录"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:1994:20:COMMENT",
+      "kind": "comment",
+      "source_text": "保留原始日志行，去掉末尾换行符"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:2001:31:COMMENT",
+      "kind": "comment",
+      "source_text": "已读取到末尾"
+    }
+  ]
+}

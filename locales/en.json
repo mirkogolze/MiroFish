@@ -75,7 +75,13 @@
     "layoutGraph": "Graph",
     "layoutSplit": "Split",
     "layoutWorkbench": "Workbench",
-    "stepNames": ["Graph Build", "Env Setup", "Run Simulation", "Report Generation", "Deep Interaction"]
+    "stepNames": [
+      "Graph Build",
+      "Env Setup",
+      "Run Simulation",
+      "Report Generation",
+      "Deep Interaction"
+    ]
   },
   "step1": {
     "ontologyGeneration": "Ontology Generation",
@@ -661,5 +667,136 @@
     "llmSelectAgentFailed": "LLM agent selection failed, using default selection: {error}",
     "generateInterviewQuestionsFailed": "Failed to generate interview questions: {error}",
     "generateInterviewSummaryFailed": "Failed to generate interview summary: {error}"
+  },
+  "process": {
+    "stepName": "Graph Build",
+    "realtimeGraph": "Real-time Knowledge Graph",
+    "nodes": "Nodes",
+    "relations": "Relations",
+    "refreshGraph": "Refresh Graph",
+    "exitFullscreen": "Exit Fullscreen",
+    "enterFullscreen": "Fullscreen",
+    "realtimeUpdating": "Updating in real-time...",
+    "graphDataLoading": "Loading graph data...",
+    "waitingOntology": "Waiting for ontology generation",
+    "autoStartHint": "Graph build will start automatically after completion",
+    "graphBuilding": "Building graph",
+    "dataShowingSoon": "Data will appear shortly...",
+    "buildProcess": "Build Process",
+    "ontologyGeneration": "Ontology Generation",
+    "apiDescription": "API Description",
+    "ontologyApiDesc": "After document upload, the LLM analyzes content and automatically generates a suitable ontology structure (entity types + relation types)",
+    "generationProgress": "Generation Progress",
+    "generatedEntityTypes": "Generated Entity Types",
+    "generatedRelationTypes": "Generated Relation Types",
+    "moreRelations": "more relations...",
+    "waitingOntologyHint": "Waiting for ontology generation...",
+    "graphBuild": "Graph Build",
+    "graphApiDesc": "Based on the generated ontology, documents are chunked and a knowledge graph is built via the Zep API",
+    "waitingOntologyComplete": "Waiting for ontology generation to complete...",
+    "buildProgress": "Build Progress",
+    "buildResult": "Build Result",
+    "entityNodes": "Entity Nodes",
+    "relationEdges": "Relation Edges",
+    "entityTypes": "Entity Types",
+    "buildComplete": "Build Complete",
+    "readyForNextStep": "Ready for next step",
+    "enterEnvSetup": "Enter Environment Setup",
+    "projectInfo": "Project Information",
+    "projectName": "Project Name",
+    "projectId": "Project ID",
+    "graphId": "Graph ID",
+    "simRequirement": "Simulation Requirement",
+    "statusFailed": "Build Failed",
+    "statusComplete": "Build Complete",
+    "statusGraphBuilding": "Building Graph",
+    "statusOntologyGen": "Generating Ontology",
+    "statusInitializing": "Initializing",
+    "envSetupWip": "Environment setup in development...",
+    "phaseCompleted": "Completed",
+    "phaseInProgress": "In Progress",
+    "phasePending": "Pending",
+    "noFilesError": "No files to upload. Please go back to the home page.",
+    "uploadingAnalyzing": "Uploading files and analyzing documents...",
+    "ontologyFailed": "Ontology generation failed",
+    "projectInitFailed": "Project initialization failed",
+    "loadProjectFailed": "Failed to load project",
+    "processingFailed": "Processing failed",
+    "startingGraphBuild": "Starting graph build...",
+    "graphBuildTaskStarted": "Graph build task started...",
+    "graphBuildStartFailed": "Failed to start graph build",
+    "processing": "Processing...",
+    "buildCompleteLoading": "Build complete, loading graph...",
+    "graphBuildFailed": "Graph build failed",
+    "waitingGraphData": "Waiting for graph data...",
+    "unnamed": "Unnamed",
+    "unknown": "Unknown"
+  },
+  "step2extra": {
+    "stageGeneratePersona": "Generate Agent Personas",
+    "stageGenerateConfig": "Generate Simulation Config",
+    "stagePrepareScripts": "Prepare Simulation Scripts"
+  },
+  "step3extra": {
+    "startFailed": "Start failed"
+  },
+  "step5extra": {
+    "questioner": "Questioner",
+    "you": "You",
+    "chatHistoryPrompt": "Here is our previous conversation:\\n{history}\\nMy new question is: {question}"
+  },
+  "homeExtra": {
+    "selectLanguage": "Select Language"
+  },
+  "graphExtra": {
+    "entityType": "Entity Type",
+    "factType": "Fact Type"
+  },
+  "historyExtra": {
+    "loading": "Loading...",
+    "noHistory": "No simulation history available",
+    "created": "Created",
+    "status": "Status",
+    "deleteConfirm": "Are you sure you want to delete this simulation?",
+    "deleteFailed": "Delete failed",
+    "deleted": "Successfully deleted",
+    "loadFailed": "Failed to load history",
+    "untitled": "Untitled Simulation",
+    "simulationStatus": {
+      "created": "Created",
+      "ontology_generated": "Ontology Generated",
+      "graph_building": "Building Graph",
+      "graph_completed": "Graph Completed",
+      "preparing": "Preparing",
+      "prepared": "Prepared",
+      "running": "Running",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  },
+  "step4extra": {
+    "reasonLabel": "Reasoning",
+    "waitingStart": "Waiting to start",
+    "noReplyPlatform": "(No reply received from this platform)",
+    "errorLevel": "Error",
+    "warningLevel": "Warning",
+    "reportLoading": "Loading report...",
+    "reportEmpty": "No report content available",
+    "generatingHint": "Generating report...",
+    "sectionTitle": "Section",
+    "toolCallLabel": "Tool Call",
+    "toolResultLabel": "Tool Result",
+    "thinkingLabel": "Thinking...",
+    "writingLabel": "Writing..."
+  },
+  "backendExtra": {
+    "configError": "Configuration error",
+    "checkEnvFile": "Please check the .env file",
+    "fileNotExist": "File does not exist",
+    "unsupportedFormat": "Unsupported file format",
+    "unprocessableFormat": "Unprocessable file format",
+    "pymuPdfRequired": "PyMuPDF needs to be installed",
+    "documentLabel": "Document {i}: {filename}",
+    "extractionFailed": "Extraction failed"
   }
 }

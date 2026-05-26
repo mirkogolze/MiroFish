@@ -1,0 +1,200 @@
+{
+  "batch_id": "batch_0041",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_config_generator.py:543:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "基于以下模拟需求，生成时间模拟配置。\n\n",
+      "context": "max_agents_allowed = max(1, int(num_entities * 0.9))"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:545:19:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n## 任务\n请生成时间配置JSON。\n\n### 基本原则（仅供参考，需根据具体事件和参与群体灵活调整）：\n- 请根据模拟场景推断目标用户群体所在时区和作息习惯，以下为东八区(UTC+8)的参考示例\n- 凌晨0-5点几乎无人活动（活跃度系数0.05）\n- 早上6-8点逐渐活跃（活跃度系数0.4）\n- 工作时间9-18点中等活跃（活跃度系数0.7）\n- 晚间19-22点是高峰期（活跃度系数1.5）\n- 23点后活跃度下降（活跃度系数0.5）\n- 一般规律：凌晨低活跃、早间渐增、工作时段中等、晚间高峰\n- **重要**：以下示例值仅供参考，你需要根据事件性质、参与群体特点来调整具体时段\n  - 例如：学生群体高峰可能是21-23点；媒体全天活跃；官方机构只在工作时间\n  - 例如：突发热点可能导致深夜也有讨论，off_peak_hours 可适当缩短\n\n### 返回JSON格式（不要markdown）\n\n示例：\n{",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "prompt = f\"\"\"基于以下模拟需求，生成时间模拟配置。"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:565:2:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n    \"total_simulation_hours\": 72,\n    \"minutes_per_round\": 60,\n    \"agents_per_hour_min\": 5,\n    \"agents_per_hour_max\": 50,\n    \"peak_hours\": [19, 20, 21, 22],\n    \"off_peak_hours\": [0, 1, 2, 3, 4, 5],\n    \"morning_hours\": [6, 7, 8],\n    \"work_hours\": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18],\n    \"reasoning\": \"针对该事件的时间配置说明\"\n}",
+      "context": "示例："
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:575:2:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n字段说明：\n- total_simulation_hours (int): 模拟总时长，24-168小时，突发事件短、持续话题长\n- minutes_per_round (int): 每轮时长，30-120分钟，建议60分钟\n- agents_per_hour_min (int): 每小时最少激活Agent数（取值范围: 1-",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "\"work_hours\": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18],\n    \"reasoning\": \"针对该事件的时间配置说明\""
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:580:71:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "）\n- agents_per_hour_max (int): 每小时最多激活Agent数（取值范围: 1-",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "- total_simulation_hours (int): 模拟总时长，24-168小时，突发事件短、持续话题长\n- minutes_per_round (int): 每轮时长，30-120分钟，建议60分钟"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:581:71:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "）\n- peak_hours (int数组): 高峰时段，根据事件参与群体调整\n- off_peak_hours (int数组): 低谷时段，通常深夜凌晨\n- morning_hours (int数组): 早间时段\n- work_hours (int数组): 工作时段\n- reasoning (string): 简要说明为什么这样配置",
+      "context": "- minutes_per_round (int): 每轮时长，30-120分钟，建议60分钟\n- agents_per_hour_min (int): 每小时最少激活Agent数（取值范围: 1-{max_agents_allowed}）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:594:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "时间配置LLM生成失败: ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "return self._call_llm_with_retry(prompt, system_prompt)\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:594:45:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ", 使用默认配置",
+      "context": "return self._call_llm_with_retry(prompt, system_prompt)\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:619:71:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ") 超过总Agent数 (",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "# 验证并修正：确保不超过总agent数\n        if agents_per_hour_min > num_entities:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:619:98:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ")，已修正",
+      "context": "# 验证并修正：确保不超过总agent数\n        if agents_per_hour_min > num_entities:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:629:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "agents_per_hour_min >= max，已修正为 ",
+      "context": "if agents_per_hour_min >= agents_per_hour_max:\n            agents_per_hour_min = max(1, agents_per_hour_max // 2)"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:676:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "基于以下模拟需求，生成事件配置。\n\n模拟需求: ",
+      "context": "context_truncated = context[:self.EVENT_CONFIG_CONTEXT_LENGTH]"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:680:19:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n## 可用实体类型及示例\n",
+      "context": "模拟需求: {simulation_requirement}"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:683:11:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n## 任务\n请生成事件配置JSON：\n- 提取热点话题关键词\n- 描述舆论发展方向\n- 设计初始帖子内容，**每个帖子必须指定 poster_type（发布者类型）**\n\n**重要**: poster_type 必须从上面的\"可用实体类型\"中选择，这样初始帖子才能分配给合适的 Agent 发布。\n例如：官方声明应由 Official/University 类型发布，新闻由 MediaOutlet 发布，学生观点由 Student 发布。\n\n返回JSON格式（不要markdown）：\n{",
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "## 可用实体类型及示例"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:695:2:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n    \"hot_topics\": [\"关键词1\", \"关键词2\", ...],\n    \"narrative_direction\": \"<舆论发展方向描述>\",\n    \"initial_posts\": [\n        {",
+      "context": "返回JSON格式（不要markdown）："
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:699:10:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\"content\": \"帖子内容\", \"poster_type\": \"实体类型（必须从可用类型中选择）\"}",
+      "context": "\"narrative_direction\": \"<舆论发展方向描述>\",\n    \"initial_posts\": ["
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:699:64:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": ",\n        ...\n    ],\n    \"reasoning\": \"<简要说明>\"\n}",
+      "context": "\"narrative_direction\": \"<舆论发展方向描述>\",\n    \"initial_posts\": ["
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:711:29:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "事件配置LLM生成失败: ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "return self._call_llm_with_retry(prompt, system_prompt)\n        except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:794:33:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "未找到类型 '",
+      "context": "# 3. 如果仍未找到，使用影响力最高的 agent\n            if matched_agent_id is None:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:794:53:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "' 的匹配 Agent，使用影响力最高的 Agent",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "# 3. 如果仍未找到，使用影响力最高的 agent\n            if matched_agent_id is None:"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:808:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "初始帖子分配: poster_type='",
+      "context": "})"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:833:21:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "基于以下信息，为每个实体生成社交媒体活动配置。\n\n模拟需求: ",
+      "context": "})"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:835:30:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n\n## 实体列表\n```json\n",
+      "context": "prompt = f\"\"\"基于以下信息，为每个实体生成社交媒体活动配置。"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:839:55:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n```\n\n## 任务\n为每个实体生成活动配置，注意：\n- **时间符合目标用户群体作息**：以下为参考（东八区），请根据模拟场景调整\n- **官方机构**（University/GovernmentAgency）：活跃度低(0.1-0.3)，工作时间(9-17)活动，响应慢(60-240分钟)，影响力高(2.5-3.0)\n- **媒体**（MediaOutlet）：活跃度中(0.4-0.6)，全天活动(8-23)，响应快(5-30分钟)，影响力高(2.0-2.5)\n- **个人**（Student/Person/Alumni）：活跃度高(0.6-0.9)，主要晚间活动(18-23)，响应快(1-15分钟)，影响力低(0.8-1.2)\n- **公众人物/专家**：活跃度中(0.4-0.6)，影响力中高(1.5-2.0)\n\n返回JSON格式（不要markdown）：\n{",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "## 实体列表\n```json"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:853:10:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\n            \"agent_id\": <必须与输入一致>,\n            \"activity_level\": <0.0-1.0>,\n            \"posts_per_hour\": <发帖频率>,\n            \"comments_per_hour\": <评论频率>,\n            \"active_hours\": [<活跃小时列表，考虑中国人作息>],\n            \"response_delay_min\": <最小响应延迟分钟>,\n            \"response_delay_max\": <最大响应延迟分钟>,\n            \"sentiment_bias\": <-1.0到1.0>,\n            \"stance\": \"<supportive/opposing/neutral/observer>\",\n            \"influence_weight\": <影响力权重>\n        }",
+      "context": "{{\n    \"agent_configs\": ["
+    }
+  ]
+}

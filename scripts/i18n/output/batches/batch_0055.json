@@ -1,0 +1,202 @@
+{
+  "batch_id": "batch_0055",
+  "kind": "string_constant",
+  "system_prompt": "Du übersetzt Python-String-Konstanten vom Chinesischen ins Deutsche. Regeln: Natürliches Deutsch, aber prägnant. Platzhalter {…}, %s, %(name)s EXAKT beibehalten. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 30,
+  "items": [
+    {
+      "id": "backend/app/services/report_agent.py:122:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录规划时获取的上下文信息"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:133:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录大纲规划完成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:144:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录章节生成开始"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:154:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录 ReACT 思考过程",
+      "protected_terms": [
+        "ReACT"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:175:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录工具调用"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:197:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录工具调用结果（完整内容，不截断）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:221:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录 LLM 响应（完整内容，不截断）",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:244:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录章节内容生成完成（仅记录内容，不代表整个章节完成）"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:282:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录报告生成完成"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:294:8:STRING",
+      "kind": "string_constant",
+      "source_text": "记录错误"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:336:8:STRING",
+      "kind": "string_constant",
+      "source_text": "设置文件处理器，将日志同时写入文件"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:367:8:STRING",
+      "kind": "string_constant",
+      "source_text": "关闭文件处理器并从 logger 中移除",
+      "protected_terms": [
+        "logger"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:385:8:STRING",
+      "kind": "string_constant",
+      "source_text": "析构时确保关闭文件处理器"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:390:4:STRING",
+      "kind": "string_constant",
+      "source_text": "报告状态"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:400:4:STRING",
+      "kind": "string_constant",
+      "source_text": "报告章节"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:411:8:STRING",
+      "kind": "string_constant",
+      "source_text": "转换为Markdown格式",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:420:4:STRING",
+      "kind": "string_constant",
+      "source_text": "报告大纲"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:443:4:STRING",
+      "kind": "string_constant",
+      "source_text": "完整报告"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:809:4:STRING",
+      "kind": "string_constant",
+      "source_text": "【注意】你只调用了{tool_calls_count}次工具，至少需要{min_tool_calls}次。",
+      "placeholders": [
+        "{min_tool_calls}",
+        "{tool_calls_count}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:810:4:STRING",
+      "kind": "string_constant",
+      "source_text": "请再调用工具获取更多模拟数据，然后再输出 Final Answer。{unused_hint}",
+      "placeholders": [
+        "{unused_hint}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:814:4:STRING",
+      "kind": "string_constant",
+      "source_text": "当前只调用了 {tool_calls_count} 次工具，至少需要 {min_tool_calls} 次。",
+      "placeholders": [
+        "{min_tool_calls}",
+        "{tool_calls_count}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:815:4:STRING",
+      "kind": "string_constant",
+      "source_text": "请调用工具获取模拟数据。{unused_hint}",
+      "placeholders": [
+        "{unused_hint}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:819:4:STRING",
+      "kind": "string_constant",
+      "source_text": "工具调用次数已达上限（{tool_calls_count}/{max_tool_calls}），不能再调用工具。",
+      "placeholders": [
+        "{max_tool_calls}",
+        "{tool_calls_count}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:820:4:STRING",
+      "kind": "string_constant",
+      "source_text": "请立即基于已获取的信息，以 \"Final Answer:\" 开头输出章节内容。"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:823:26:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n💡 你还没有使用过: {unused_list}，建议尝试不同工具获取多角度信息",
+      "placeholders": [
+        "{unused_list}"
+      ]
+    },
+    {
+      "id": "backend/app/services/report_agent.py:825:24:STRING",
+      "kind": "string_constant",
+      "source_text": "已达到工具调用限制，请直接输出 Final Answer: 并生成章节内容。"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:857:26:STRING",
+      "kind": "string_constant",
+      "source_text": "\\n\\n请简洁回答问题。"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:920:8:STRING",
+      "kind": "string_constant",
+      "source_text": "定义可用工具"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:926:29:STRING",
+      "kind": "string_constant",
+      "source_text": "你想深入分析的问题或话题"
+    },
+    {
+      "id": "backend/app/services/report_agent.py:927:38:STRING",
+      "kind": "string_constant",
+      "source_text": "当前报告章节的上下文（可选，有助于生成更精准的子问题）"
+    }
+  ]
+}

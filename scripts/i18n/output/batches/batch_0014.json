@@ -1,0 +1,234 @@
+{
+  "batch_id": "batch_0014",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_config_generator.py:537:8:COMMENT",
+      "kind": "comment",
+      "source_text": "使用配置的上下文截断长度"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:540:8:COMMENT",
+      "kind": "comment",
+      "source_text": "计算最大允许值（80%的agent数）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:601:38:COMMENT",
+      "kind": "comment",
+      "source_text": "每轮1小时，加快时间流速"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:613:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取原始值"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:617:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证并修正：确保不超过总agent数"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:626:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确保 min < max"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:633:68:COMMENT",
+      "kind": "comment",
+      "source_text": "默认每轮1小时"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:654:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取可用的实体类型列表，供 LLM 参考",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:659:8:COMMENT",
+      "kind": "comment",
+      "source_text": "为每种类型列出代表性实体名称"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:741:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按实体类型建立 agent 索引"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:749:8:COMMENT",
+      "kind": "comment",
+      "source_text": "类型映射表（处理 LLM 可能输出的不同格式）",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:761:8:COMMENT",
+      "kind": "comment",
+      "source_text": "记录每种类型已使用的 agent 索引，避免重复使用同一个 agent"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:769:12:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试找到匹配的 agent"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:772:12:COMMENT",
+      "kind": "comment",
+      "source_text": "1. 直接匹配"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:779:16:COMMENT",
+      "kind": "comment",
+      "source_text": "2. 使用别名匹配"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:792:12:COMMENT",
+      "kind": "comment",
+      "source_text": "3. 如果仍未找到，使用影响力最高的 agent"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:796:20:COMMENT",
+      "kind": "comment",
+      "source_text": "按影响力排序，选择影响力最高的"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:822:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建实体信息（使用配置的摘要长度）"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:879:8:COMMENT",
+      "kind": "comment",
+      "source_text": "构建AgentActivityConfig对象",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:885:12:COMMENT",
+      "kind": "comment",
+      "source_text": "如果LLM没有生成，使用规则生成",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:913:12:COMMENT",
+      "kind": "comment",
+      "source_text": "官方机构：工作时间活动，低频率，高影响力"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:926:12:COMMENT",
+      "kind": "comment",
+      "source_text": "媒体：全天活动，中等频率，高影响力"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:939:12:COMMENT",
+      "kind": "comment",
+      "source_text": "专家/教授：工作+晚间活动，中等频率"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:952:12:COMMENT",
+      "kind": "comment",
+      "source_text": "学生：晚间为主，高频率"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:957:81:COMMENT",
+      "kind": "comment",
+      "source_text": "上午+晚间"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:965:12:COMMENT",
+      "kind": "comment",
+      "source_text": "校友：晚间为主"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:970:63:COMMENT",
+      "kind": "comment",
+      "source_text": "午休+晚间"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:978:12:COMMENT",
+      "kind": "comment",
+      "source_text": "普通人：晚间高峰"
+    },
+    {
+      "id": "backend/app/services/simulation_config_generator.py:983:78:COMMENT",
+      "kind": "comment",
+      "source_text": "白天+晚间"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:27:38:COMMENT",
+      "kind": "comment",
+      "source_text": "单个Agent采访",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:28:41:COMMENT",
+      "kind": "comment",
+      "source_text": "批量采访"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:29:38:COMMENT",
+      "kind": "comment",
+      "source_text": "关闭环境"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:113:8:COMMENT",
+      "kind": "comment",
+      "source_text": "确保目录存在"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:146:8:COMMENT",
+      "kind": "comment",
+      "source_text": "写入命令文件"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:153:8:COMMENT",
+      "kind": "comment",
+      "source_text": "等待响应"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:164:20:COMMENT",
+      "kind": "comment",
+      "source_text": "清理命令和响应文件"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:178:8:COMMENT",
+      "kind": "comment",
+      "source_text": "超时"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:181:8:COMMENT",
+      "kind": "comment",
+      "source_text": "清理命令文件"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:310:8:COMMENT",
+      "kind": "comment",
+      "source_text": "环境状态"
+    },
+    {
+      "id": "backend/app/services/simulation_ipc.py:342:8:COMMENT",
+      "kind": "comment",
+      "source_text": "按时间排序获取命令文件"
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "batch_id": "batch_0005",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:1587:12:COMMENT",
+      "kind": "comment",
+      "source_text": "从模拟状态或项目中获取 graph_id"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1590:16:COMMENT",
+      "kind": "comment",
+      "source_text": "尝试从项目中获取"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1603:8:COMMENT",
+      "kind": "comment",
+      "source_text": "启动模拟"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1612:8:COMMENT",
+      "kind": "comment",
+      "source_text": "更新模拟状态"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1703:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 实时状态监控接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:1816:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取完整的动作列表"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1822:8:COMMENT",
+      "kind": "comment",
+      "source_text": "分平台获取动作"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1833:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取当前轮次的动作（recent_actions 只展示最新一轮）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1841:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取基础状态信息"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1847:8:COMMENT",
+      "kind": "comment",
+      "source_text": "recent_actions 只展示当前最新一轮两个平台的内容"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1985:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== 数据库查询接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:2140:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============== Interview 采访接口 =============="
+    },
+    {
+      "id": "backend/app/api/simulation.py:2199:41:COMMENT",
+      "kind": "comment",
+      "source_text": "可选：twitter/reddit/None"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2220:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证platform参数"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2227:8:COMMENT",
+      "kind": "comment",
+      "source_text": "检查环境状态"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2234:8:COMMENT",
+      "kind": "comment",
+      "source_text": "优化prompt，添加前缀避免Agent调用工具",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:2342:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证每个采访项"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2354:12:COMMENT",
+      "kind": "comment",
+      "source_text": "验证每项的platform（如果有）"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2369:8:COMMENT",
+      "kind": "comment",
+      "source_text": "优化每个采访项的prompt，添加前缀避免Agent调用工具",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/api/simulation.py:2550:41:COMMENT",
+      "kind": "comment",
+      "source_text": "不指定则返回两个平台的历史"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2621:8:COMMENT",
+      "kind": "comment",
+      "source_text": "获取更详细的状态信息"
+    },
+    {
+      "id": "backend/app/config.py:9:0:COMMENT",
+      "kind": "comment",
+      "source_text": "加载项目根目录的 .env 文件"
+    },
+    {
+      "id": "backend/app/config.py:10:0:COMMENT",
+      "kind": "comment",
+      "source_text": "路径: MiroFish/.env (相对于 backend/app/config.py)",
+      "protected_terms": [
+        "Miro",
+        "MiroFish",
+        "config"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:16:4:COMMENT",
+      "kind": "comment",
+      "source_text": "如果根目录没有 .env，尝试加载环境变量（用于生产环境）"
+    },
+    {
+      "id": "backend/app/config.py:23:4:COMMENT",
+      "kind": "comment",
+      "source_text": "Flask配置",
+      "protected_terms": [
+        "Flask"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:27:4:COMMENT",
+      "kind": "comment",
+      "source_text": "JSON配置 - 禁用ASCII转义，让中文直接显示（而不是 \\uXXXX 格式）",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:30:4:COMMENT",
+      "kind": "comment",
+      "source_text": "LLM配置（统一使用OpenAI格式）",
+      "protected_terms": [
+        "LLM",
+        "OpenAI"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:35:4:COMMENT",
+      "kind": "comment",
+      "source_text": "Zep配置",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:38:4:COMMENT",
+      "kind": "comment",
+      "source_text": "文件上传配置"
+    },
+    {
+      "id": "backend/app/config.py:43:4:COMMENT",
+      "kind": "comment",
+      "source_text": "文本处理配置"
+    },
+    {
+      "id": "backend/app/config.py:44:30:COMMENT",
+      "kind": "comment",
+      "source_text": "默认切块大小"
+    },
+    {
+      "id": "backend/app/config.py:45:32:COMMENT",
+      "kind": "comment",
+      "source_text": "默认重叠大小"
+    },
+    {
+      "id": "backend/app/config.py:47:4:COMMENT",
+      "kind": "comment",
+      "source_text": "OASIS模拟配置",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:51:4:COMMENT",
+      "kind": "comment",
+      "source_text": "OASIS平台可用动作配置",
+      "protected_terms": [
+        "OASIS"
+      ]
+    },
+    {
+      "id": "backend/app/config.py:61:4:COMMENT",
+      "kind": "comment",
+      "source_text": "Report Agent配置",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/models/project.py:19:37:COMMENT",
+      "kind": "comment",
+      "source_text": "刚创建，文件已上传"
+    },
+    {
+      "id": "backend/app/models/project.py:20:47:COMMENT",
+      "kind": "comment",
+      "source_text": "本体已生成"
+    },
+    {
+      "id": "backend/app/models/project.py:21:41:COMMENT",
+      "kind": "comment",
+      "source_text": "图谱构建中"
+    },
+    {
+      "id": "backend/app/models/project.py:22:41:COMMENT",
+      "kind": "comment",
+      "source_text": "图谱构建完成"
+    },
+    {
+      "id": "backend/app/models/project.py:23:37:COMMENT",
+      "kind": "comment",
+      "source_text": "失败"
+    }
+  ]
+}

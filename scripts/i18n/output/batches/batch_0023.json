@@ -1,0 +1,235 @@
+{
+  "batch_id": "batch_0023",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 39,
+  "items": [
+    {
+      "id": "backend/app/utils/llm_client.py:66:8:COMMENT",
+      "kind": "comment",
+      "source_text": "部分模型（如MiniMax M2.5）会在content中包含<think>思考内容，需要移除"
+    },
+    {
+      "id": "backend/app/utils/llm_client.py:93:8:COMMENT",
+      "kind": "comment",
+      "source_text": "清理markdown代码块标记"
+    },
+    {
+      "id": "backend/app/utils/logger.py:19:8:COMMENT",
+      "kind": "comment",
+      "source_text": "Windows 下重新配置标准输出为 UTF-8"
+    },
+    {
+      "id": "backend/app/utils/logger.py:26:0:COMMENT",
+      "kind": "comment",
+      "source_text": "日志目录"
+    },
+    {
+      "id": "backend/app/utils/logger.py:41:4:COMMENT",
+      "kind": "comment",
+      "source_text": "确保日志目录存在"
+    },
+    {
+      "id": "backend/app/utils/logger.py:44:4:COMMENT",
+      "kind": "comment",
+      "source_text": "创建日志器"
+    },
+    {
+      "id": "backend/app/utils/logger.py:48:4:COMMENT",
+      "kind": "comment",
+      "source_text": "阻止日志向上传播到根 logger，避免重复输出",
+      "protected_terms": [
+        "logger"
+      ]
+    },
+    {
+      "id": "backend/app/utils/logger.py:51:4:COMMENT",
+      "kind": "comment",
+      "source_text": "如果已经有处理器，不重复添加"
+    },
+    {
+      "id": "backend/app/utils/logger.py:55:4:COMMENT",
+      "kind": "comment",
+      "source_text": "日志格式"
+    },
+    {
+      "id": "backend/app/utils/logger.py:66:4:COMMENT",
+      "kind": "comment",
+      "source_text": "1. 文件处理器 - 详细日志（按日期命名，带轮转）"
+    },
+    {
+      "id": "backend/app/utils/logger.py:77:4:COMMENT",
+      "kind": "comment",
+      "source_text": "2. 控制台处理器 - 简洁日志（INFO及以上）"
+    },
+    {
+      "id": "backend/app/utils/logger.py:78:4:COMMENT",
+      "kind": "comment",
+      "source_text": "确保 Windows 下使用 UTF-8 编码，避免中文乱码"
+    },
+    {
+      "id": "backend/app/utils/logger.py:84:4:COMMENT",
+      "kind": "comment",
+      "source_text": "添加处理器"
+    },
+    {
+      "id": "backend/app/utils/logger.py:107:0:COMMENT",
+      "kind": "comment",
+      "source_text": "创建默认日志器"
+    },
+    {
+      "id": "backend/app/utils/logger.py:111:0:COMMENT",
+      "kind": "comment",
+      "source_text": "便捷方法"
+    },
+    {
+      "id": "backend/app/utils/retry.py:58:20:COMMENT",
+      "kind": "comment",
+      "source_text": "计算延迟"
+    },
+    {
+      "id": "backend/run.py:8:0:COMMENT",
+      "kind": "comment",
+      "source_text": "解决 Windows 控制台中文乱码问题：在所有导入之前设置 UTF-8 编码"
+    },
+    {
+      "id": "backend/run.py:10:4:COMMENT",
+      "kind": "comment",
+      "source_text": "设置环境变量确保 Python 使用 UTF-8",
+      "protected_terms": [
+        "Python"
+      ]
+    },
+    {
+      "id": "backend/run.py:12:4:COMMENT",
+      "kind": "comment",
+      "source_text": "重新配置标准输出流为 UTF-8"
+    },
+    {
+      "id": "backend/run.py:18:0:COMMENT",
+      "kind": "comment",
+      "source_text": "添加项目根目录到路径"
+    },
+    {
+      "id": "backend/run.py:27:4:COMMENT",
+      "kind": "comment",
+      "source_text": "验证配置"
+    },
+    {
+      "id": "backend/run.py:36:4:COMMENT",
+      "kind": "comment",
+      "source_text": "创建应用"
+    },
+    {
+      "id": "backend/run.py:39:4:COMMENT",
+      "kind": "comment",
+      "source_text": "获取运行配置"
+    },
+    {
+      "id": "backend/run.py:44:4:COMMENT",
+      "kind": "comment",
+      "source_text": "启动服务"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:137:8:COMMENT",
+      "kind": "comment",
+      "source_text": "设置主日志"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:144:8:COMMENT",
+      "kind": "comment",
+      "source_text": "创建 logger",
+      "protected_terms": [
+        "logger"
+      ]
+    },
+    {
+      "id": "backend/scripts/action_logger.py:149:8:COMMENT",
+      "kind": "comment",
+      "source_text": "文件处理器"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:158:8:COMMENT",
+      "kind": "comment",
+      "source_text": "控制台处理器"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:199:0:COMMENT",
+      "kind": "comment",
+      "source_text": "============ 兼容旧接口 ============"
+    },
+    {
+      "id": "backend/scripts/action_logger.py:291:0:COMMENT",
+      "kind": "comment",
+      "source_text": "全局日志实例（兼容旧接口）"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:14:0:COMMENT",
+      "kind": "comment",
+      "source_text": "添加项目路径"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:26:4:COMMENT",
+      "kind": "comment",
+      "source_text": "创建测试Profile数据"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:66:4:COMMENT",
+      "kind": "comment",
+      "source_text": "使用临时目录"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:71:8:COMMENT",
+      "kind": "comment",
+      "source_text": "测试Twitter CSV格式",
+      "protected_terms": [
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:76:8:COMMENT",
+      "kind": "comment",
+      "source_text": "读取并验证CSV"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:88:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证必需字段"
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:97:8:COMMENT",
+      "kind": "comment",
+      "source_text": "测试Reddit JSON格式",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:102:8:COMMENT",
+      "kind": "comment",
+      "source_text": "读取并验证JSON",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ]
+    },
+    {
+      "id": "backend/scripts/test_profile_format.py:112:8:COMMENT",
+      "kind": "comment",
+      "source_text": "验证详细格式字段"
+    }
+  ]
+}

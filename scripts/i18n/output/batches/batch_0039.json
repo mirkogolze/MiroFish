@@ -1,0 +1,172 @@
+{
+  "batch_id": "batch_0039",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:1441:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "生成Profile失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1558:49:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "停止模拟时出现警告: ",
+      "context": "SimulationRunner.stop_simulation(simulation_id)\n                            except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1567:34:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "强制模式：清理模拟日志 ",
+      "context": "# 如果是强制模式，清理运行日志\n                if force:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1570:41:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "清理日志时出现警告: ",
+      "context": "cleanup_result = SimulationRunner.cleanup_simulation_logs(simulation_id)\n                    if not cleanup_result.get(\"success\"):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1574:48:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 准备工作已完成，重置状态为 ready（原状态: ",
+      "context": "# 进程不存在或已结束，重置状态为 ready"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1601:26:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "启用图谱记忆更新: simulation_id=",
+      "context": "}), 400"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1636:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "启动模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1695:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "停止模拟失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1755:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取运行状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1856:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取详细状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1910:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取动作历史失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1950:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取时间线失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1977:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取Agent统计失败: ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2057:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取帖子失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2132:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取评论失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2263:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "Interview失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2401:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "批量Interview失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2504:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "全局Interview失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2576:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取Interview历史失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2641:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "获取环境状态失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2711:23:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "关闭环境失败: ",
+      "context": "except Exception as e:"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:246:31:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n\\n...(原文共",
+      "context": "if len(combined_text) > self.MAX_TEXT_LENGTH_FOR_LLM:\n            combined_text = combined_text[:self.MAX_TEXT_LENGTH_FOR_LLM]"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:246:59:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "字，已截取前",
+      "context": "if len(combined_text) > self.MAX_TEXT_LENGTH_FOR_LLM:\n            combined_text = combined_text[:self.MAX_TEXT_LENGTH_FOR_LLM]"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:246:95:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "字用于本体分析)...",
+      "context": "if len(combined_text) > self.MAX_TEXT_LENGTH_FOR_LLM:\n            combined_text = combined_text[:self.MAX_TEXT_LENGTH_FOR_LLM]"
+    },
+    {
+      "id": "backend/app/services/ontology_generator.py:248:22:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "## 模拟需求\n\n",
+      "context": "combined_text += f\"\\n\\n...(原文共{original_length}字，已截取前{self.MAX_TEXT_LENGTH_FOR_LLM}字用于本体分析)...\""
+    }
+  ]
+}

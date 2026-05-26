@@ -1,0 +1,242 @@
+{
+  "batch_id": "batch_0026",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/api/simulation.py:992:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟的Agent Profile\n    \n    Query参数：\n        platform: 平台类型（reddit/twitter，默认reddit）\n    ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/profiles', methods=['GET'])\ndef get_simulation_profiles(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1030:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    实时获取模拟的Agent Profile（用于在生成过程中实时查看进度）\n    \n    与 /profiles 接口的区别：\n    - 直接读取文件，不经过 SimulationManager\n    - 适用于生成过程中的实时查看\n    - 返回额外的元数据（如文件修改时间、是否正在生成等）\n    \n    Query参数：\n        platform: 平台类型（reddit/twitter，默认reddit）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"platform\": \"reddit\",\n                \"count\": 15,\n                \"total_expected\": 93,  // 预期总数（如果有）\n                \"is_generating\": true,  // 是否正在生成\n                \"file_exists\": true,\n                \"file_modified_at\": \"2025-12-04T18:20:00\",\n                \"profiles\": [...]\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"platform\": \"reddit\",\n                \"count\": 15,\n                \"total_expected\": 93,  // 预期总数（如果有）\n                \"is_generating\": true,  // 是否正在生成\n                \"file_exists\": true,\n                \"file_modified_at\": \"2025-12-04T18:20:00\",\n                \"profiles\": [...]\n            }"
+      ],
+      "protected_terms": [
+        "Agent",
+        "Simulation"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/profiles/realtime', methods=['GET'])\ndef get_simulation_profiles_realtime(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1140:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    实时获取模拟配置（用于在生成过程中实时查看进度）\n    \n    与 /config 接口的区别：\n    - 直接读取文件，不经过 SimulationManager\n    - 适用于生成过程中的实时查看\n    - 返回额外的元数据（如文件修改时间、是否正在生成等）\n    - 即使配置还没生成完也能返回部分信息\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"file_exists\": true,\n                \"file_modified_at\": \"2025-12-04T18:20:00\",\n                \"is_generating\": true,  // 是否正在生成\n                \"generation_stage\": \"generating_config\",  // 当前生成阶段\n                \"config\": {...}  // 配置内容（如果存在）\n            }\n        }\n    ",
+      "placeholders": [
+        "{...}"
+      ],
+      "protected_terms": [
+        "Simulation",
+        "config"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/config/realtime', methods=['GET'])\ndef get_simulation_config_realtime(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1260:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟配置（LLM智能生成的完整配置）\n    \n    返回包含：\n        - time_config: 时间配置（模拟时长、轮次、高峰/低谷时段）\n        - agent_configs: 每个Agent的活动配置（活跃度、发言频率、立场等）\n        - event_config: 事件配置（初始帖子、热点话题）\n        - platform_configs: 平台配置\n        - generation_reasoning: LLM的配置推理说明\n    ",
+      "protected_terms": [
+        "Agent",
+        "LLM",
+        "config"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/config', methods=['GET'])\ndef get_simulation_config(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1325:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    下载模拟运行脚本文件（通用脚本，位于 backend/scripts/）\n    \n    script_name可选值：\n        - run_twitter_simulation.py\n        - run_reddit_simulation.py\n        - run_parallel_simulation.py\n        - action_logger.py\n    ",
+      "protected_terms": [
+        "logger"
+      ],
+      "context": "@simulation_bp.route('/script/<script_name>/download', methods=['GET'])\ndef download_simulation_script(script_name: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1379:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    直接从图谱生成OASIS Agent Profile（不创建模拟）\n    \n    请求（JSON）：\n        {\n            \"graph_id\": \"mirofish_xxxx\",     // 必填\n            \"entity_types\": [\"Student\"],      // 可选\n            \"use_llm\": true,                  // 可选\n            \"platform\": \"reddit\"              // 可选\n        }\n    ",
+      "placeholders": [
+        "{\n            \"graph_id\": \"mirofish_xxxx\",     // 必填\n            \"entity_types\": [\"Student\"],      // 可选\n            \"use_llm\": true,                  // 可选\n            \"platform\": \"reddit\"              // 可选\n        }"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON",
+        "OASIS"
+      ],
+      "context": "@simulation_bp.route('/generate-profiles', methods=['POST'])\ndef generate_profiles():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1453:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    开始运行模拟\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",          // 必填，模拟ID\n            \"platform\": \"parallel\",                // 可选: twitter / reddit / parallel (默认)\n            \"max_rounds\": 100,                     // 可选: 最大模拟轮数，用于截断过长的模拟\n            \"enable_graph_memory_update\": false,   // 可选: 是否将Agent活动动态更新到Zep图谱记忆\n            \"force\": false                         // 可选: 强制重新开始（会停止运行中的模拟并清理日志）\n        }\n\n    关于 force 参数：\n        - 启用后，如果模拟正在运行或已完成，会先停止并清理运行日志\n        - 清理的内容包括：run_state.json, actions.jsonl, simulation.log 等\n        - 不会清理配置文件（simulation_config.json）和 profile 文件\n        - 适用于需要重新运行模拟的场景\n\n    关于 enable_graph_memory_update：\n        - 启用后，模拟中所有Agent的活动（发帖、评论、点赞等）都会实时更新到Zep图谱\n        - 这可以让图谱\"记住\"模拟过程，用于后续分析或AI对话\n        - 需要模拟关联的项目有有效的 graph_id\n        - 采用批量更新机制，减少API调用次数\n\n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"running\",\n                \"process_pid\": 12345,\n                \"twitter_running\": true,\n                \"reddit_running\": true,\n                \"started_at\": \"2025-12-01T10:00:00\",\n                \"graph_memory_update_enabled\": true,  // 是否启用了图谱记忆更新\n                \"force_restarted\": true               // 是否是强制重新开始\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"running\",\n                \"process_pid\": 12345,\n                \"twitter_running\": true,\n                \"reddit_running\": true,\n                \"started_at\": \"2025-12-01T10:00:00\",\n                \"graph_memory_update_enabled\": true,  // 是否启用了图谱记忆更新\n                \"force_restarted\": true               // 是否是强制重新开始\n            }",
+        "{\n            \"simulation_id\": \"sim_xxxx\",          // 必填，模拟ID\n            \"platform\": \"parallel\",                // 可选: twitter / reddit / parallel (默认)\n            \"max_rounds\": 100,                     // 可选: 最大模拟轮数，用于截断过长的模拟\n            \"enable_graph_memory_update\": false,   // 可选: 是否将Agent活动动态更新到Zep图谱记忆\n            \"force\": false                         // 可选: 强制重新开始（会停止运行中的模拟并清理日志）\n        }"
+      ],
+      "protected_terms": [
+        "API",
+        "Agent",
+        "JS",
+        "JSON",
+        "Zep",
+        "config"
+      ],
+      "context": "@simulation_bp.route('/start', methods=['POST'])\ndef start_simulation():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1646:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    停止模拟\n    \n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\"  // 必填，模拟ID\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"stopped\",\n                \"completed_at\": \"2025-12-01T12:00:00\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"stopped\",\n                \"completed_at\": \"2025-12-01T12:00:00\"\n            }",
+        "{\n            \"simulation_id\": \"sim_xxxx\"  // 必填，模拟ID\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/stop', methods=['POST'])\ndef stop_simulation():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1707:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟运行实时状态（用于前端轮询）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"running\",\n                \"current_round\": 5,\n                \"total_rounds\": 144,\n                \"progress_percent\": 3.5,\n                \"simulated_hours\": 2,\n                \"total_simulation_hours\": 72,\n                \"twitter_running\": true,\n                \"reddit_running\": true,\n                \"twitter_actions_count\": 150,\n                \"reddit_actions_count\": 200,\n                \"total_actions_count\": 350,\n                \"started_at\": \"2025-12-01T10:00:00\",\n                \"updated_at\": \"2025-12-01T10:30:00\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"running\",\n                \"current_round\": 5,\n                \"total_rounds\": 144,\n                \"progress_percent\": 3.5,\n                \"simulated_hours\": 2,\n                \"total_simulation_hours\": 72,\n                \"twitter_running\": true,\n                \"reddit_running\": true,\n                \"twitter_actions_count\": 150,\n                \"reddit_actions_count\": 200,\n                \"total_actions_count\": 350,\n                \"started_at\": \"2025-12-01T10:00:00\",\n                \"updated_at\": \"2025-12-01T10:30:00\"\n            }"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/run-status', methods=['GET'])\ndef get_run_status(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1765:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟运行详细状态（包含所有动作）\n    \n    用于前端展示实时动态\n    \n    Query参数：\n        platform: 过滤平台（twitter/reddit，可选）\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"runner_status\": \"running\",\n                \"current_round\": 5,\n                ...\n                \"all_actions\": [\n                    {\n                        \"round_num\": 5,\n                        \"timestamp\": \"2025-12-01T10:30:00\",\n                        \"platform\": \"twitter\",\n                        \"agent_id\": 3,\n                        \"agent_name\": \"Agent Name\",\n                        \"action_type\": \"CREATE_POST\",\n                        \"action_args\": {\"content\": \"...\"},\n                        \"result\": null,\n                        \"success\": true\n                    },\n                    ...\n                ],\n                \"twitter_actions\": [...],  # Twitter 平台的所有动作\n                \"reddit_actions\": [...]    # Reddit 平台的所有动作\n            }\n        }\n    ",
+      "placeholders": [
+        "{\"content\": \"...\"}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "Reddit",
+        "Twitter"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/run-status/detail', methods=['GET'])\ndef get_run_status_detail(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1866:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟中的Agent动作历史\n    \n    Query参数：\n        limit: 返回数量（默认100）\n        offset: 偏移量（默认0）\n        platform: 过滤平台（twitter/reddit）\n        agent_id: 过滤Agent ID\n        round_num: 过滤轮次\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"count\": 100,\n                \"actions\": [...]\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"count\": 100,\n                \"actions\": [...]\n            }"
+      ],
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/actions', methods=['GET'])\ndef get_simulation_actions(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1920:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟时间线（按轮次汇总）\n    \n    用于前端展示进度条和时间线视图\n    \n    Query参数：\n        start_round: 起始轮次（默认0）\n        end_round: 结束轮次（默认全部）\n    \n    返回每轮的汇总信息\n    ",
+      "context": "@simulation_bp.route('/<simulation_id>/timeline', methods=['GET'])\ndef get_simulation_timeline(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1960:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取每个Agent的统计信息\n    \n    用于前端展示Agent活跃度排行、动作分布等\n    ",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/agent-stats', methods=['GET'])\ndef get_agent_stats(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:1989:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟中的帖子\n    \n    Query参数：\n        platform: 平台类型（twitter/reddit）\n        limit: 返回数量（默认50）\n        offset: 偏移量\n    \n    返回帖子列表（从SQLite数据库读取）\n    ",
+      "protected_terms": [
+        "SQLite"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/posts', methods=['GET'])\ndef get_simulation_posts(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2067:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟中的评论（仅Reddit）\n    \n    Query参数：\n        post_id: 过滤帖子ID（可选）\n        limit: 返回数量\n        offset: 偏移量\n    ",
+      "protected_terms": [
+        "Reddit"
+      ],
+      "context": "@simulation_bp.route('/<simulation_id>/comments', methods=['GET'])\ndef get_simulation_comments(simulation_id: str):"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2514:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取Interview历史记录\n\n    从模拟数据库中读取所有Interview记录\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",  // 必填，模拟ID\n            \"platform\": \"reddit\",          // 可选，平台类型（reddit/twitter）\n                                           // 不指定则返回两个平台的所有历史\n            \"agent_id\": 0,                 // 可选，只获取该Agent的采访历史\n            \"limit\": 100                   // 可选，返回数量，默认100\n        }\n\n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"count\": 10,\n                \"history\": [\n                    {\n                        \"agent_id\": 0,\n                        \"response\": \"我认为...\",\n                        \"prompt\": \"你对这件事有什么看法？\",\n                        \"timestamp\": \"2025-12-08T10:00:00\",\n                        \"platform\": \"reddit\"\n                    },\n                    ...\n                ]\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                        \"agent_id\": 0,\n                        \"response\": \"我认为...\",\n                        \"prompt\": \"你对这件事有什么看法？\",\n                        \"timestamp\": \"2025-12-08T10:00:00\",\n                        \"platform\": \"reddit\"\n                    }",
+        "{\n            \"simulation_id\": \"sim_xxxx\",  // 必填，模拟ID\n            \"platform\": \"reddit\",          // 可选，平台类型（reddit/twitter）\n                                           // 不指定则返回两个平台的所有历史\n            \"agent_id\": 0,                 // 可选，只获取该Agent的采访历史\n            \"limit\": 100                   // 可选，返回数量，默认100\n        }"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/interview/history', methods=['POST'])\ndef get_interview_history():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2586:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取模拟环境状态\n\n    检查模拟环境是否存活（可以接收Interview命令）\n\n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\"  // 必填，模拟ID\n        }\n\n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"simulation_id\": \"sim_xxxx\",\n                \"env_alive\": true,\n                \"twitter_available\": true,\n                \"reddit_available\": true,\n                \"message\": \"环境正在运行，可以接收Interview命令\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n                \"simulation_id\": \"sim_xxxx\",\n                \"env_alive\": true,\n                \"twitter_available\": true,\n                \"reddit_available\": true,\n                \"message\": \"环境正在运行，可以接收Interview命令\"\n            }",
+        "{\n            \"simulation_id\": \"sim_xxxx\"  // 必填，模拟ID\n        }"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/env-status', methods=['POST'])\ndef get_env_status():"
+    },
+    {
+      "id": "backend/app/api/simulation.py:2651:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    关闭模拟环境\n    \n    向模拟发送关闭环境命令，使其优雅退出等待命令模式。\n    \n    注意：这不同于 /stop 接口，/stop 会强制终止进程，\n    而此接口会让模拟优雅地关闭环境并退出。\n    \n    请求（JSON）：\n        {\n            \"simulation_id\": \"sim_xxxx\",  // 必填，模拟ID\n            \"timeout\": 30                  // 可选，超时时间（秒），默认30\n        }\n    \n    返回：\n        {\n            \"success\": true,\n            \"data\": {\n                \"message\": \"环境关闭命令已发送\",\n                \"result\": {...},\n                \"timestamp\": \"2025-12-08T10:00:01\"\n            }\n        }\n    ",
+      "placeholders": [
+        "{\n            \"simulation_id\": \"sim_xxxx\",  // 必填，模拟ID\n            \"timeout\": 30                  // 可选，超时时间（秒），默认30\n        }",
+        "{...}"
+      ],
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "@simulation_bp.route('/close-env', methods=['POST'])\ndef close_simulation_env():"
+    },
+    {
+      "id": "backend/app/config.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n配置管理\n统一从项目根目录的 .env 文件加载配置\n"
+    },
+    {
+      "id": "backend/app/models/__init__.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n数据模型模块\n"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Resume mode: 1630 segments already translated
+Processing 62 batch files...
+API: http://localhost:1234/v1
+Model: qwen2.5-14b-instruct
+
+  batch_0023 (comment): 39 items... 

@@ -1,0 +1,178 @@
+{
+  "batch_id": "batch_0033",
+  "kind": "docstring",
+  "system_prompt": "Du übersetzt Python-Docstrings vom Chinesischen ins Deutsche. Regeln: Strukturiert und technisch korrekt. Erste Zeile = Kurzbeschreibung. Args/Returns/Raises-Abschnitte beibehalten. Platzhalter {…} und technische Begriffe aus protected_terms EXAKT beibehalten. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 20,
+  "items": [
+    {
+      "id": "backend/app/services/zep_tools.py:1099:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        使用LLM生成子问题\n        \n        将复杂问题分解为多个可以独立检索的子问题\n        ",
+      "protected_terms": [
+        "LLM"
+      ],
+      "context": "max_queries: int = 5\n    ) -> List[str]:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1152:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        【PanoramaSearch - 广度搜索】\n        \n        获取全貌视图，包括所有相关内容和历史/过期信息：\n        1. 获取所有相关节点\n        2. 获取所有边（包括已过期/失效的）\n        3. 分类整理当前有效和历史信息\n        \n        这个工具适用于需要了解事件全貌、追踪演变过程的场景。\n        \n        Args:\n            graph_id: 图谱ID\n            query: 搜索查询（用于相关性排序）\n            include_expired: 是否包含过期内容（默认True）\n            limit: 返回结果数量限制\n            \n        Returns:\n            PanoramaResult: 广度搜索结果\n        ",
+      "context": "limit: int = 50\n    ) -> PanoramaResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1243:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        【QuickSearch - 简单搜索】\n        \n        快速、轻量级的检索工具：\n        1. 直接调用Zep语义搜索\n        2. 返回最相关的结果\n        3. 适用于简单、直接的检索需求\n        \n        Args:\n            graph_id: 图谱ID\n            query: 搜索查询\n            limit: 返回结果数量\n            \n        Returns:\n            SearchResult: 搜索结果\n        ",
+      "protected_terms": [
+        "Zep"
+      ],
+      "context": "limit: int = 10\n    ) -> SearchResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1280:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        【InterviewAgents - 深度采访】\n        \n        调用真实的OASIS采访API，采访模拟中正在运行的Agent：\n        1. 自动读取人设文件，了解所有模拟Agent\n        2. 使用LLM分析采访需求，智能选择最相关的Agent\n        3. 使用LLM生成采访问题\n        4. 调用 /api/simulation/interview/batch 接口进行真实采访（双平台同时采访）\n        5. 整合所有采访结果，生成采访报告\n        \n        【重要】此功能需要模拟环境处于运行状态（OASIS环境未关闭）\n        \n        【使用场景】\n        - 需要从不同角色视角了解事件看法\n        - 需要收集多方意见和观点\n        - 需要获取模拟Agent的真实回答（非LLM模拟）\n        \n        Args:\n            simulation_id: 模拟ID（用于定位人设文件和调用采访API）\n            interview_requirement: 采访需求描述（非结构化，如\"了解学生对事件的看法\"）\n            simulation_requirement: 模拟需求背景（可选）\n            max_agents: 最多采访的Agent数量\n            custom_questions: 自定义采访问题（可选，若不提供则自动生成）\n            \n        Returns:\n            InterviewResult: 采访结果\n        ",
+      "protected_terms": [
+        "API",
+        "Agent",
+        "LLM",
+        "OASIS"
+      ],
+      "context": "custom_questions: List[str] = None\n    ) -> InterviewResult:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1558:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        使用LLM选择要采访的Agent\n        \n        Returns:\n            tuple: (selected_agents, selected_indices, reasoning)\n                - selected_agents: 选中Agent的完整信息列表\n                - selected_indices: 选中Agent的索引列表（用于API调用）\n                - reasoning: 选择理由\n        ",
+      "protected_terms": [
+        "API",
+        "Agent",
+        "LLM"
+      ],
+      "context": "max_agents: int\n    ) -> tuple:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:1580:24:STRING",
+      "kind": "docstring",
+      "source_text": "你是一个专业的采访策划专家。你的任务是根据采访需求，从模拟Agent列表中选择最适合采访的对象。\n\n选择标准：\n1. Agent的身份/职业与采访主题相关\n2. Agent可能持有独特或有价值的观点\n3. 选择多样化的视角（如：支持方、反对方、中立方、专业人士等）\n4. 优先选择与事件直接相关的角色\n\n返回JSON格式：\n{\n    \"selected_indices\": [选中Agent的索引列表],\n    \"reasoning\": \"选择理由说明\"\n}",
+      "placeholders": [
+        "{\n    \"selected_indices\": [选中Agent的索引列表],\n    \"reasoning\": \"选择理由说明\"\n}"
+      ],
+      "protected_terms": [
+        "Agent",
+        "JS",
+        "JSON"
+      ],
+      "context": "agent_summaries.append(summary)"
+    },
+    {
+      "id": "backend/app/utils/__init__.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n工具模块\n"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n文件解析工具\n支持PDF、Markdown、TXT文件的文本提取\n",
+      "protected_terms": [
+        "Markdown"
+      ]
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:12:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    读取文本文件，UTF-8失败时自动探测编码。\n    \n    采用多级回退策略：\n    1. 首先尝试 UTF-8 解码\n    2. 使用 charset_normalizer 检测编码\n    3. 回退到 chardet 检测编码\n    4. 最终使用 UTF-8 + errors='replace' 兜底\n    \n    Args:\n        file_path: 文件路径\n        \n    Returns:\n        解码后的文本内容\n    ",
+      "context": "def _read_text_with_fallback(file_path: str) -> str:"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:68:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        从文件中提取文本\n        \n        Args:\n            file_path: 文件路径\n            \n        Returns:\n            提取的文本内容\n        ",
+      "context": "@classmethod\n    def extract_text(cls, file_path: str) -> str:"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:125:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        从多个文件提取文本并合并\n        \n        Args:\n            file_paths: 文件路径列表\n            \n        Returns:\n            合并后的文本\n        ",
+      "context": "@classmethod\n    def extract_from_multiple(cls, file_paths: List[str]) -> str:"
+    },
+    {
+      "id": "backend/app/utils/file_parser.py:152:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    将文本分割成小块\n    \n    Args:\n        text: 原始文本\n        chunk_size: 每块的字符数\n        overlap: 重叠字符数\n        \n    Returns:\n        文本块列表\n    ",
+      "context": "overlap: int = 50\n) -> List[str]:"
+    },
+    {
+      "id": "backend/app/utils/llm_client.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nLLM客户端封装\n统一使用OpenAI格式调用\n",
+      "protected_terms": [
+        "LLM",
+        "OpenAI"
+      ]
+    },
+    {
+      "id": "backend/app/utils/llm_client.py:42:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送聊天请求\n        \n        Args:\n            messages: 消息列表\n            temperature: 温度参数\n            max_tokens: 最大token数\n            response_format: 响应格式（如JSON模式）\n            \n        Returns:\n            模型响应文本\n        ",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "response_format: Optional[Dict] = None\n    ) -> str:"
+    },
+    {
+      "id": "backend/app/utils/llm_client.py:76:8:STRING",
+      "kind": "docstring",
+      "source_text": "\n        发送聊天请求并返回JSON\n        \n        Args:\n            messages: 消息列表\n            temperature: 温度参数\n            max_tokens: 最大token数\n            \n        Returns:\n            解析后的JSON对象\n        ",
+      "protected_terms": [
+        "JS",
+        "JSON"
+      ],
+      "context": "max_tokens: int = 4096\n    ) -> Dict[str, Any]:"
+    },
+    {
+      "id": "backend/app/utils/logger.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\n日志配置模块\n提供统一的日志管理，同时输出到控制台和文件\n"
+    },
+    {
+      "id": "backend/app/utils/logger.py:14:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    确保 stdout/stderr 使用 UTF-8 编码\n    解决 Windows 控制台中文乱码问题\n    ",
+      "context": "def _ensure_utf8_stdout():"
+    },
+    {
+      "id": "backend/app/utils/logger.py:31:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    设置日志器\n    \n    Args:\n        name: 日志器名称\n        level: 日志级别\n        \n    Returns:\n        配置好的日志器\n    ",
+      "context": "def setup_logger(name: str = 'mirofish', level: int = logging.DEBUG) -> logging.Logger:"
+    },
+    {
+      "id": "backend/app/utils/logger.py:92:4:STRING",
+      "kind": "docstring",
+      "source_text": "\n    获取日志器（如果不存在则创建）\n    \n    Args:\n        name: 日志器名称\n        \n    Returns:\n        日志器实例\n    ",
+      "context": "def get_logger(name: str = 'mirofish') -> logging.Logger:"
+    },
+    {
+      "id": "backend/app/utils/retry.py:1:0:STRING",
+      "kind": "docstring",
+      "source_text": "\nAPI调用重试机制\n用于处理LLM等外部API调用的重试逻辑\n",
+      "protected_terms": [
+        "API",
+        "LLM"
+      ]
+    }
+  ]
+}

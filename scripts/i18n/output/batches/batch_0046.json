@@ -1,0 +1,172 @@
+{
+  "batch_id": "batch_0046",
+  "kind": "fstring_text",
+  "system_prompt": "Du übersetzt f-String-Textteile vom Chinesischen ins Deutsche. KRITISCH: Platzhalter wie {variable}, {expr!r}, {expr:fmt} MÜSSEN exakt so bleiben. Nur den chinesischen Text zwischen den Platzhaltern übersetzen. Technische Begriffe aus protected_terms nicht übersetzen. Gib NUR das JSON-Array zurück.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 25,
+  "items": [
+    {
+      "id": "backend/app/services/zep_tools.py:177:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 预测数据统计",
+      "context": "f\"分析问题: {self.query}\",\n            f\"预测场景: {self.simulation_requirement}\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:178:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 相关预测事实: ",
+      "context": "f\"预测场景: {self.simulation_requirement}\",\n            f\"\\n### 预测数据统计\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:178:42:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "条",
+      "context": "f\"预测场景: {self.simulation_requirement}\",\n            f\"\\n### 预测数据统计\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:179:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 涉及实体: ",
+      "context": "f\"\\n### 预测数据统计\",\n            f\"- 相关预测事实: {self.total_facts}条\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:180:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 关系链: ",
+      "context": "f\"- 相关预测事实: {self.total_facts}条\",\n            f\"- 涉及实体: {self.total_entities}个\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:185:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 分析的子问题",
+      "context": "# 子问题\n        if self.sub_queries:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:191:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【关键事实】(请在报告中引用这些原文)",
+      "context": "# 语义搜索结果\n        if self.semantic_facts:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:197:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【核心实体】",
+      "context": "# 实体洞察\n        if self.entity_insights:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:201:40:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "  摘要: \\\"",
+      "context": "text_parts.append(f\"- **{entity.get('name', '未知')}** ({entity.get('type', '实体')})\")\n                if entity.get('summary'):"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:203:40:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "  相关事实: ",
+      "context": "text_parts.append(f\"  摘要: \\\"{entity.get('summary')}\\\"\")\n                if entity.get('related_facts'):"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:207:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【关系链】",
+      "context": "# 关系链\n        if self.relationship_chains:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:253:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "## 广度搜索结果（未来全景视图）",
+      "context": "\"\"\"转换为文本格式（完整版本，不截断）\"\"\"\n        text_parts = ["
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:254:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "查询: ",
+      "context": "text_parts = [\n            f\"## 广度搜索结果（未来全景视图）\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:255:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 统计信息",
+      "context": "f\"## 广度搜索结果（未来全景视图）\",\n            f\"查询: {self.query}\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:256:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 总节点数: ",
+      "context": "f\"查询: {self.query}\",\n            f\"\\n### 统计信息\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:257:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 总边数: ",
+      "context": "f\"\\n### 统计信息\",\n            f\"- 总节点数: {self.total_nodes}\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:258:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 当前有效事实: ",
+      "context": "f\"- 总节点数: {self.total_nodes}\",\n            f\"- 总边数: {self.total_edges}\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:259:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "- 历史/过期事实: ",
+      "context": "f\"- 总边数: {self.total_edges}\",\n            f\"- 当前有效事实: {self.active_count}条\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:264:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【当前有效事实】(模拟结果原文)",
+      "context": "# 当前有效的事实（完整输出，不截断）\n        if self.active_facts:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:270:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【历史/过期事实】(演变过程记录)",
+      "context": "# 历史/过期事实（完整输出，不截断）\n        if self.historical_facts:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:276:32:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "\\n### 【涉及实体】",
+      "context": "# 关键实体（完整输出，不截断）\n        if self.all_nodes:"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:307:18:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "_简介: ",
+      "context": "text = f\"**{self.agent_name}** ({self.agent_role})\\n\"\n        # 显示完整的agent_bio，不截断"
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:379:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "**采访主题:** ",
+      "context": "text_parts = [\n            \"## 深度采访报告\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:380:14:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": "**采访人数:** ",
+      "context": "\"## 深度采访报告\",\n            f\"**采访主题:** {self.interview_topic}\","
+    },
+    {
+      "id": "backend/app/services/zep_tools.py:380:70:FSTRING_MIDDLE",
+      "kind": "fstring_text",
+      "source_text": " 位模拟Agent",
+      "protected_terms": [
+        "Agent"
+      ],
+      "context": "\"## 深度采访报告\",\n            f\"**采访主题:** {self.interview_topic}\","
+    }
+  ]
+}

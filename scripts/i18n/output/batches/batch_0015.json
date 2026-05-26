@@ -1,0 +1,249 @@
+{
+  "batch_id": "batch_0015",
+  "kind": "comment",
+  "system_prompt": "Du übersetzt Python-Kommentare vom Chinesischen ins Deutsche. Regeln: Kurz und prägnant. Imperativ-Stil bevorzugen. Keine Vollsätze nötig. Technische Begriffe in der protected_terms-Liste NICHT übersetzen. Gib NUR das JSON-Array zurück, keine Erklärung.",
+  "rules": [
+    "Return ONLY a valid JSON array.",
+    "Preserve every 'id' field exactly as given.",
+    "Translate only 'source_text' into German.",
+    "Preserve ALL placeholders exactly ({var}, {var!r}, {var:fmt}, %s, %(name)s).",
+    "Do NOT translate terms listed in 'protected_terms'.",
+    "Do NOT add explanations, comments, or markdown.",
+    "German should be natural but concise.",
+    "For comments, prefer short infinitive style (e.g. 'Datenbankverbindung initialisieren').",
+    "Keep 【】brackets and their structure if present."
+  ],
+  "item_count": 40,
+  "items": [
+    {
+      "id": "backend/app/services/simulation_ipc.py:373:8:COMMENT",
+      "kind": "comment",
+      "source_text": "删除命令文件"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:32:29:COMMENT",
+      "kind": "comment",
+      "source_text": "模拟被手动停止"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:33:29:COMMENT",
+      "kind": "comment",
+      "source_text": "模拟自然完成"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:50:4:COMMENT",
+      "kind": "comment",
+      "source_text": "平台启用状态"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:54:4:COMMENT",
+      "kind": "comment",
+      "source_text": "状态"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:57:4:COMMENT",
+      "kind": "comment",
+      "source_text": "准备阶段数据"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:62:4:COMMENT",
+      "kind": "comment",
+      "source_text": "配置生成信息"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:66:4:COMMENT",
+      "kind": "comment",
+      "source_text": "运行时数据"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:71:4:COMMENT",
+      "kind": "comment",
+      "source_text": "时间戳"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:126:4:COMMENT",
+      "kind": "comment",
+      "source_text": "模拟数据存储目录"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:136:8:COMMENT",
+      "kind": "comment",
+      "source_text": "内存中的模拟状态缓存"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:272:12:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 阶段1: 读取并过滤实体 =========="
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:304:12:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 阶段2: 生成Agent Profile ==========",
+      "protected_terms": [
+        "Agent"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:315:12:COMMENT",
+      "kind": "comment",
+      "source_text": "传入graph_id以启用Zep检索功能，获取更丰富的上下文",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:329:12:COMMENT",
+      "kind": "comment",
+      "source_text": "设置实时保存的文件路径（优先使用 Reddit JSON 格式）",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:343:42:COMMENT",
+      "kind": "comment",
+      "source_text": "传入graph_id用于Zep检索",
+      "protected_terms": [
+        "Zep"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:344:56:COMMENT",
+      "kind": "comment",
+      "source_text": "并行生成数量"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:345:60:COMMENT",
+      "kind": "comment",
+      "source_text": "实时保存路径"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:346:51:COMMENT",
+      "kind": "comment",
+      "source_text": "输出格式"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:351:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存Profile文件（注意：Twitter使用CSV格式，Reddit使用JSON格式）",
+      "protected_terms": [
+        "JS",
+        "JSON",
+        "Reddit",
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:352:12:COMMENT",
+      "kind": "comment",
+      "source_text": "Reddit 已经在生成过程中实时保存了，这里再保存一次确保完整性",
+      "protected_terms": [
+        "Reddit"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:369:16:COMMENT",
+      "kind": "comment",
+      "source_text": "Twitter使用CSV格式！这是OASIS的要求",
+      "protected_terms": [
+        "OASIS",
+        "Twitter"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:384:12:COMMENT",
+      "kind": "comment",
+      "source_text": "========== 阶段3: LLM智能生成模拟配置 ==========",
+      "protected_terms": [
+        "LLM"
+      ]
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:422:12:COMMENT",
+      "kind": "comment",
+      "source_text": "保存配置文件"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:438:12:COMMENT",
+      "kind": "comment",
+      "source_text": "注意：运行脚本保留在 backend/scripts/ 目录，不再复制到模拟目录"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:439:12:COMMENT",
+      "kind": "comment",
+      "source_text": "启动模拟时，simulation_runner 会从 scripts/ 目录运行脚本"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:441:12:COMMENT",
+      "kind": "comment",
+      "source_text": "更新状态"
+    },
+    {
+      "id": "backend/app/services/simulation_manager.py:469:16:COMMENT",
+      "kind": "comment",
+      "source_text": "跳过隐藏文件（如 .DS_Store）和非目录文件"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:29:0:COMMENT",
+      "kind": "comment",
+      "source_text": "标记是否已注册清理函数"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:32:0:COMMENT",
+      "kind": "comment",
+      "source_text": "平台检测"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:107:4:COMMENT",
+      "kind": "comment",
+      "source_text": "进度信息"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:113:4:COMMENT",
+      "kind": "comment",
+      "source_text": "各平台独立轮次和模拟时间（用于双平台并行显示）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:119:4:COMMENT",
+      "kind": "comment",
+      "source_text": "平台状态"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:125:4:COMMENT",
+      "kind": "comment",
+      "source_text": "平台完成状态（通过检测 actions.jsonl 中的 simulation_end 事件）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:132:4:COMMENT",
+      "kind": "comment",
+      "source_text": "最近动作（用于前端实时展示）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:144:4:COMMENT",
+      "kind": "comment",
+      "source_text": "进程ID（用于停止）"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:169:12:COMMENT",
+      "kind": "comment",
+      "source_text": "各平台独立轮次和时间"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:207:4:COMMENT",
+      "kind": "comment",
+      "source_text": "运行状态存储目录"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:213:4:COMMENT",
+      "kind": "comment",
+      "source_text": "脚本目录"
+    },
+    {
+      "id": "backend/app/services/simulation_runner.py:219:4:COMMENT",
+      "kind": "comment",
+      "source_text": "内存中的运行状态"
+    }
+  ]
+}
