@@ -204,7 +204,7 @@ class LLMClient:
         self,
         messages: List[Dict[str, str]],
         temperature: float = 0.7,
-        max_tokens: int = 4096,
+        max_tokens: Optional[int] = 4096,
         response_format: Optional[Dict] = None,
         **kwargs: Any,
     ) -> Any:
@@ -213,8 +213,10 @@ class LLMClient:
             "model": self.model,
             "messages": messages,
             "temperature": temperature,
-            "max_tokens": max_tokens,
         }
+
+        if max_tokens is not None:
+            request_kwargs["max_tokens"] = max_tokens
 
         if response_format:
             request_kwargs["response_format"] = response_format
@@ -423,7 +425,7 @@ class LLMClient:
         self,
         messages: List[Dict[str, str]],
         temperature: float = 0.7,
-        max_tokens: int = 4096,
+        max_tokens: Optional[int] = 4096,
         response_format: Optional[Dict] = None
     ) -> str:
         """
@@ -455,7 +457,7 @@ class LLMClient:
         self,
         messages: List[Dict[str, str]],
         temperature: float = 0.3,
-        max_tokens: int = 4096
+        max_tokens: Optional[int] = 4096
     ) -> Dict[str, Any]:
         """
         Senden Sie eine Chatanfrage und geben Sie JSON zurück.
